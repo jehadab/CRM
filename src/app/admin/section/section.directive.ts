@@ -1,20 +1,29 @@
-import { Directive, ElementRef, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Host, Injectable, Input, Output, Renderer2 } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Directive({
-    selector: '[replaceDataSection]'
+    selector: '[replaceDataSection]',
+    
 })
-
 export class ReplaceDataSection {
 
     constructor(private elRef: ElementRef, private render: Renderer2) {
         // elRef.nativeElement.style.backgroundColor = 'yellow';
         this.listen();
+        console.log('emitted');
+        // this.sectionNameFire.emit('hoho');
+        this._navItemSource.next('hoho3')
+        
 
     }
     private isInputapper: boolean = false;
-    private clickedoutHandler;
-    private tableCellInput ;
+    private clickedoutHandler ;
+    private tableCellInput : HTMLInputElement;
     innerData;
+    private _navItemSource = new BehaviorSubject<string>('hoho1');
+  // Observable navItem stream
+    navItem$ = this._navItemSource.asObservable();
+    @Output('onSectionNameChange') sectionNameFire :  EventEmitter<any> = new EventEmitter(); 
 
     // @HostListener ('click', ['$event']) clickInside(targetElement){
 
@@ -28,8 +37,13 @@ export class ReplaceDataSection {
 
 
     // }
+    thatsChanging(){
+        console.log('chamge');
+        
+    }
     listen() {
         this.clickedoutHandler = this.render.listen('document', "click", (event) => {
+            
 
             if (this.elRef.nativeElement.contains(event.target)) {
 
@@ -43,11 +57,11 @@ export class ReplaceDataSection {
                 this.render.setValue(this.tableCellInput , this.innerData)
                 
                 // this.elRef.nativeElement.style.display = 'none';
-                this.elRef.nativeElement.innerText = null;
-                this.render.setProperty(this.elRef.nativeElement ,'disabled', 'true' )
+                // this.elRef.nativeElement.innerText = null;
+                
+                this.render.setProperty(this.elRef.nativeElement.firstChild ,'hidden', true )
                 this.render.appendChild(this.elRef.nativeElement, this.tableCellInput);
                 this.tableCellInput.select()
-                
                 this.isInputapper = true ;
 
                 }
@@ -55,11 +69,14 @@ export class ReplaceDataSection {
             else {
                 if(this.isInputapper){
                     
+                    
                     this.innerData = this.tableCellInput.value;
-                    this.elRef.nativeElement.innerText = this.innerData
+                    this.elRef.nativeElement.firstChild.innerText = this.innerData
                     this.tableCellInput.remove();
+                    this.render.setProperty(this.elRef.nativeElement.firstChild ,'hidden', false )
+                    this.sectionNameFire.emit({value :this.innerData , span : this.elRef.nativeElement  })
                     // this.elRef.nativeElement.style.display ;
-                
+
                 }
 
                 this.isInputapper = false;

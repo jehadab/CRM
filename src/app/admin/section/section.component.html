@@ -2,7 +2,7 @@
     <h4 class="card-header mb-3">All sections</h4>
     <div class="card-body">
         <div >
-            <button class="btn add-section" (click)="createSection()">Add Department</button>
+            <button class="btn add-section" (click)="false">Add Department</button>
 
         </div>
 
@@ -17,12 +17,14 @@
             <tbody>
                 <tr *ngFor="let section of sectionArray ; ">
                     <th scope="row" class="col-1">{{ section.getSectionId() }}</th>
-                    <td scope="row" class="col-3" replaceDataSection>{{ section.getSectionName() }}</td>
+                    <td scope="row" class="col-3" replaceDataSection
+                    (onSectionNameChange)="onSeactionNameChange($event)"
+                     > <span >{{ section.getSectionName() }}</span> </td>
                     <td scope="row" class="col-4">
-                        <select class="form-select " #parent>
-                            <option *ngFor="let parent of sectionParentArray"
-                             [ngValue]='parent'
-                                [selected]="parent.id == section.getparent()">{{ parent.parentName }}
+                        <select class="form-select " #parent  (change)='onSectionparentChange($event.target)'>
+                            <option *ngFor="let parent of sectionArray"
+                             [value]="parent.getSectionId()"
+                                [selected]="parent.getSectionId() == section.getparent()" >{{ parent.getSectionName() }}
                             </option>
                         </select>
                     </td>
