@@ -3,6 +3,7 @@ import { Event } from '@angular/router';
 import { Section } from './section.model';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ReplaceDataSection } from "./section.directive";
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 
 
@@ -13,12 +14,16 @@ import { ReplaceDataSection } from "./section.directive";
 })
 export class SectionComponent implements OnInit {
 
-  section: Section
+  section: Section;
+  orginalSectionArray : Section[] = [];
   sectionArray: Section[] = [];
-  sectionParentArray: [{ id: number, parentName: string }]
-  modalRef: BsModalRef
-  @ViewChild('parent') selectParent: ElementRef
-  subscription : any
+  sectionParentArray: [{ id: number, parentName: string }] // delete this
+  sectionForm : FormGroup;
+  idCounter: number = 0;
+  ishidden : boolean = false ;
+  modalRef: BsModalRef ;
+  
+
   
 
   constructor(
@@ -40,6 +45,15 @@ export class SectionComponent implements OnInit {
     this.sectionArray.push(this.section);
     this.fillParentNameSectionArray(this.sectionArray);
     this.fillParentArray();
+    this.sectionArray.forEach((_section)=>{
+      this.orginalSectionArray.push((
+        new Section(_section.getSectionId(),_section.getSectionName(),
+        _section.getparent(),_section.getParentName())));
+    })
+    this.sectionForm = new FormGroup({
+      'sectionName': new FormControl (null, Validators.required),
+      'sectionParent': new FormControl (null , Validators.required)
+    })
     // console.log(this.sectionParentArray);
     // console.log(this.sectionParentArray);
     
@@ -103,7 +117,7 @@ export class SectionComponent implements OnInit {
       if (_section.getSectionId() == rowID) {
         
           _section.setSectionName(this.changeNameValue(event.value));
-         console.log(this.sectionArray);
+        //  console.log(this.sectionArray);
 
 
         return true;
@@ -126,12 +140,32 @@ export class SectionComponent implements OnInit {
     return name;
   }
 
-  createSection(event : string) {
+  createSection() {
+    this.idCounter = this.sectionArray.length+1;
+    let _section : Section = new Section(this.idCounter,
+      this.sectionForm.controls['sectionName'].value,
+      this.sectionForm.controls['sectionParent'].value);
+      if(!this.sectionForm.invalid){
 
-    console.log(event);
-    
+        this.sectionArray.push(_section);
+        this.sectionForm.reset()
+        this.ishidden = !this.ishidden 
+      }
+
   }
 
+  resetChanges(){
+
+    
+    this.sectionArray = []
+    this.orginalSectionArray.forEach((_section)=>{
+      this.sectionArray.push(new Section(_section.getSectionId(),_section.getSectionName()
+      , _section.getparent(),_section.getParentName()));
+    })
+    
+    console.log(this.sectionArray  );
+    console.log(this.orginalSectionArray  );
+  }
   saveChanges(template: TemplateRef<any>) {
 
     this.openModal(template)
@@ -142,7 +176,6 @@ export class SectionComponent implements OnInit {
   }
   confirm() {
 
-    console.log(this.subscription);
     this.modalRef.hide();
   }
   decline() {

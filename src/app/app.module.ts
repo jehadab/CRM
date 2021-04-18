@@ -14,6 +14,11 @@ import { ReplaceDataSection } from './admin/section/section.directive'
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { MatInputModule } from "@angular/material/input";
+import { MatSelectModule } from "@angular/material/select";
+import { MatIconModule } from '@angular/material/icon';
+
+
 
 @NgModule({
   declarations: [
@@ -35,6 +40,9 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
     BrowserAnimationsModule,
+    MatInputModule,
+    MatSelectModule,
+    MatIconModule
 
   ],
   providers: [],

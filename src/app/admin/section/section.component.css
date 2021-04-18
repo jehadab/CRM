@@ -3,11 +3,48 @@
     color: #98a6ad;
 }
 
-.add-section {
+@keyframes addsection {
+    0% {top:0px;}
+    100% {top: 200;}
+}
+.add-section-btn {
     background-color: rgb(93, 172, 236);
     color: white;
     margin-bottom: 1.2rem;
+    
+
 }
+.add-section{
+    color: rgb(255, 255, 255);
+    font-weight: normal;
+    padding-bottom: 1rem;
+    border: 1px solid white ;
+    padding: 1rem
+    
+    
+}
+.add-section>mat-icon{
+    float: right;
+    text-align: right;
+    color: red;
+    cursor: pointer;
+}
+
+.add-section-icon{
+    
+    color: rgb(231, 231, 231);   
+    text-align: right;
+    
+}
+.full-width{
+    font-size: 1.1rem;
+    color: lightgray;
+    width: 100%;
+}
+.card-footer>button{
+    margin-left: 1.2rem;
+}
+
 
 table>tbody {
     font-size: 1.1rem;
@@ -25,7 +62,7 @@ table>tbody>tr:nth-child(even)>td, table>tbody>tr:nth-child(even)>th {
 
 } */
 
-table>tbody>tr>td>select {
+.table-select {
     padding: 0;
     border: none;
     background: inherit;
@@ -36,7 +73,7 @@ table>tbody>tr>td>select {
     font-size: 1.1rem;
 }
 
-table>tbody>tr>td>select:focus {
+.table-select:focus{
     border: 2px solid #98a6ad !important;
     border-radius: 5px;
     box-shadow: none;

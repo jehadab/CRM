@@ -1,9 +1,33 @@
 <div class="card mt-3">
     <h4 class="card-header mb-3">All sections</h4>
     <div class="card-body">
-        <div >
-            <button class="btn add-section" (click)="false">Add Department</button>
+        <div>
+            <button class="btn add-section-btn" [hidden]='ishidden' (click)="ishidden = !ishidden">Add Department</button>
+            <form [formGroup]='sectionForm' class="add-section" [hidden]="!ishidden">
+                <mat-icon (click)="ishidden = !ishidden">highlight_off</mat-icon>
+                <div class="row">
+                    <div class="col-4">
+                            <label for="sectionName">Section Name</label>
+                            <input id="sectionName" class="form-control"
+                             placeholder="Set Section Name" value="" formControlName='sectionName'>
+                    </div>
+                    <div class="col-4 offset-1">
+                        <label for="sectinParent">	Under the department's administration</label>
+                        <select id="sectinParent" class="form-control" formControlName='sectionParent'>
+                           <option *ngFor="let section of sectionArray" 
+                           [value]="section.getSectionId()"
+                            > {{ section.getParentName() }} </option>
+                        </select>
 
+                        
+                    </div>
+                    <div class="  col-2">
+                        <button (click)="createSection()" class="btn add-section-btn mt-3">Done <mat-icon  class="add-section-icon">person_add</mat-icon></button>
+                        
+                    </div>
+                </div>
+                    
+            </form>
         </div>
 
         <table class="table table-dark">
@@ -21,7 +45,7 @@
                     (onSectionNameChange)="onSeactionNameChange($event)"
                      > <span >{{ section.getSectionName() }}</span> </td>
                     <td scope="row" class="col-4">
-                        <select class="form-select " #parent  (change)='onSectionparentChange($event.target)'>
+                        <select class="form-select table-select" #parent  (change)='onSectionparentChange($event.target)'>
                             <option *ngFor="let parent of sectionArray"
                              [value]="parent.getSectionId()"
                                 [selected]="parent.getSectionId() == section.getparent()" >{{ parent.getSectionName() }}
@@ -34,6 +58,7 @@
         </table>
         <div class="card-footer text-center">
             <button (click)="saveChanges(template)" class="btn btn-success ">Save</button>
+            <button (click)="resetChanges()" class="btn btn-danger ">Reset Data</button>
 
             <ng-template #template>
                 <div class="modal-body text-center">

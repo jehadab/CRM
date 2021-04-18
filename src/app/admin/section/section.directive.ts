@@ -10,9 +10,7 @@ export class ReplaceDataSection {
     constructor(private elRef: ElementRef, private render: Renderer2) {
         // elRef.nativeElement.style.backgroundColor = 'yellow';
         this.listen();
-        console.log('emitted');
         // this.sectionNameFire.emit('hoho');
-        this._navItemSource.next('hoho3')
         
 
     }
@@ -20,9 +18,7 @@ export class ReplaceDataSection {
     private clickedoutHandler ;
     private tableCellInput : HTMLInputElement;
     innerData;
-    private _navItemSource = new BehaviorSubject<string>('hoho1');
-  // Observable navItem stream
-    navItem$ = this._navItemSource.asObservable();
+
     @Output('onSectionNameChange') sectionNameFire :  EventEmitter<any> = new EventEmitter(); 
 
     // @HostListener ('click', ['$event']) clickInside(targetElement){
@@ -37,10 +33,6 @@ export class ReplaceDataSection {
 
 
     // }
-    thatsChanging(){
-        console.log('chamge');
-        
-    }
     listen() {
         this.clickedoutHandler = this.render.listen('document', "click", (event) => {
             
