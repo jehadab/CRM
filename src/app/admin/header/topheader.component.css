@@ -1,0 +1,28 @@
+nav{
+    background-color: rgba(44, 74, 204, 0.63);
+    margin-bottom: 0px !important;
+}
+.navbar-brand{
+    margin-left: 1%;
+}
+.toggle-icon{
+    font-size: 28px;
+    color: rgb(255, 240, 240);
+}
+.btn{
+    padding:0px;
+    
+    
+}
+.logout{
+    
+    margin-right: 25px;
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    justify-self: right;
+    cursor: pointer;
+    border-left: 2px solid white  ;
+    border-radius: 2px;
+
+}

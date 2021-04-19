@@ -43,6 +43,7 @@
                     <th scope="row" class="col-1">{{ section.getSectionId() }}</th>
                     <td scope="row" class="col-3" replaceDataSection
                     (onSectionNameChange)="onSeactionNameChange($event)"
+            
                      > <span >{{ section.getSectionName() }}</span> </td>
                     <td scope="row" class="col-4">
                         <select class="form-select table-select" #parent  (change)='onSectionparentChange($event.target)'>
@@ -68,8 +69,6 @@
                 </div>
             </ng-template>
         </div>
-
-
 
     </div>
 </div>

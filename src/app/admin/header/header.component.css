@@ -1,12 +1,21 @@
 .sidenav{
+position: sticky;
 height: 100vh;
 top : 0;
 left: 0;
-right: 0;
 font-size: large;
 text-align: center;
 padding-top: 30px;
+background-color: #152129;
+}
 
+.sidenav>mat-icon{
+    color: silver;
+    font-size: 250%;
+    position:relative;
+    float: right;
+    padding-left: 10px;
+    cursor: pointer;
 }
 .sidenav > p{
     color: white;

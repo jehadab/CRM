@@ -21,6 +21,7 @@ export class ReplaceDataSection {
 
     @Output('onSectionNameChange') sectionNameFire :  EventEmitter<any> = new EventEmitter(); 
 
+
     // @HostListener ('click', ['$event']) clickInside(targetElement){
 
 

@@ -43,6 +43,22 @@ export class SectionComponent implements OnInit {
     this.sectionArray.push(this.section);
     this.section = new Section(4, '3edSection3', 3);
     this.sectionArray.push(this.section);
+    this.section = new Section(1, 'headQuarter', 0);
+    this.sectionArray.push(this.section);
+    this.section = new Section(2, '1edSection', 1);
+    this.sectionArray.push(this.section);
+    this.section = new Section(3, '2edSection2', 2);
+    this.sectionArray.push(this.section);
+    this.section = new Section(4, '3edSection3', 3);
+    this.sectionArray.push(this.section);
+    this.section = new Section(1, 'headQuarter', 0);
+    this.sectionArray.push(this.section);
+    this.section = new Section(2, '1edSection', 1);
+    this.sectionArray.push(this.section);
+    this.section = new Section(3, '2edSection2', 2);
+    this.sectionArray.push(this.section);
+    this.section = new Section(4, '3edSection3', 3);
+    this.sectionArray.push(this.section);
     this.fillParentNameSectionArray(this.sectionArray);
     this.fillParentArray();
     this.sectionArray.forEach((_section)=>{
@@ -110,8 +126,9 @@ export class SectionComponent implements OnInit {
 
   onSeactionNameChange(event: any) {
      
-    let span = event.span
+    console.log('fire');
     
+    let span = event.span
     let rowID: number = +(span.closest('tr').firstChild.textContent)
     this.sectionArray.find((_section, index) => {
       if (_section.getSectionId() == rowID) {
@@ -189,6 +206,10 @@ export class SectionComponent implements OnInit {
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
+  }
+  ss(ss:any){
+    console.log(ss);
+    
   }
 
 

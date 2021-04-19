@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { admincomponent } from './admin/admin.component'
 import { LoginComponent } from './admin/login/login.component';
-import { HeaderComponent } from './admin/header/header.component';
+import { HeaderComponent , TopHeader } from './admin/header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { from } from 'rxjs';
@@ -26,6 +26,7 @@ import { MatIconModule } from '@angular/material/icon';
     admincomponent,
     LoginComponent,
     HeaderComponent,
+    TopHeader,
     HomeComponent,
     SectionComponent,
     ReplaceDataSection
