@@ -6,7 +6,6 @@ import { LoginComponent } from './admin/login/login.component';
 import { HeaderComponent , TopHeader } from './admin/header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { from } from 'rxjs';
 import { HomeComponent } from './home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SectionComponent } from './admin/section/section.component';
@@ -17,9 +16,14 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from "@angular/material/select";
 import { MatIconModule } from '@angular/material/icon';
+import { EmployeeComponent } from './admin/employee/employee.component';
+import { EmployeeDirective } from './admin/employee/employee.directive';
+import { Routes } from '@angular/router';
 
 
-
+const adminRouter : Routes = [{
+  
+}]
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,8 +33,9 @@ import { MatIconModule } from '@angular/material/icon';
     TopHeader,
     HomeComponent,
     SectionComponent,
-    ReplaceDataSection
-
+    ReplaceDataSection,
+    EmployeeComponent,
+    EmployeeDirective
   ],
   imports: [
     BrowserModule,

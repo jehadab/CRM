@@ -46,7 +46,8 @@
             
                      > <span >{{ section.getSectionName() }}</span> </td>
                     <td scope="row" class="col-4">
-                        <select class="form-select table-select" #parent  (change)='onSectionparentChange($event.target)'>
+                        <select class="form-select table-select" #parent 
+                         (change)='onSectionparentChange($event.target)'>
                             <option *ngFor="let parent of sectionArray"
                              [value]="parent.getSectionId()"
                                 [selected]="parent.getSectionId() == section.getparent()" >{{ parent.getSectionName() }}
