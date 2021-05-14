@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { TemplateRef } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Data } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { __assign } from 'tslib';
 import { Employee } from "./employee.model";
@@ -16,7 +17,7 @@ export class EmployeeComponent implements OnInit {
   isaddEmployeeHidden: boolean = false;
   employeeArray: Employee[] = [];
   orginalEmployeeArray : Employee[]=[];
-  sectionArray: string[] = [];
+  sectionNameArray: string[] = [];
   addEmployeeForm: FormGroup;
   employee: Employee;
   employeeId: number = 0;
@@ -25,37 +26,47 @@ export class EmployeeComponent implements OnInit {
 
   constructor(     
      private modalService: BsModalService,
-     private http : HttpClient
+     private http : HttpClient,
+     private route : ActivatedRoute
     ) {
 
-    this.sectionArray.push('root');
-    this.sectionArray.push('mangment');
-    this.sectionArray.push('economic');
 
-    // this.employee = new Employee(this.employeeId++, 'abo somr'
-    //   , 'al derane', "fofo@test.com", this.sectionArray[0])
-    // this.employeeArray.push(this.employee)
-    // this.employee = new Employee(this.employeeId++, 'abo fofo'
-    //   , 'al derane', "fofo@test.com", this.sectionArray[0])
-    // this.employeeArray.push(this.employee)
-    // this.employee = new Employee(this.employeeId++, 'abo gogo'
-    //   , 'al derane', "fofo@test.com", this.sectionArray[0])
-    // this.employeeArray.push(this.employee)
+    this.route.data.subscribe(
+      (_data:Data)=>{
+        // console.log(_data['sectionNameArray']);
+        
+        this.sectionNameArray = _data['sectionNameArray']
+        
+        
+      }
+    )
 
-    // this.employee = new Employee(this.employeeId++, 'abo zozo'
-    //   , 'al derane', "zozo@test.com", this.sectionArray[1])
-    // this.employeeArray.push(this.employee)
-    // this.employee = new Employee(this.employeeId++, 'abo ss'
-    //   , 'al derane', "zozo@test.com", this.sectionArray[1])
-    // this.employeeArray.push(this.employee)
+     this.employee = new Employee(this.employeeId++, 'abo somr'
+       , 'al derane', "fofo@test.com", this.sectionNameArray[0])
+     this.employeeArray.push(this.employee)
+     this.employee = new Employee(this.employeeId++, 'abo fofo'
+       , 'al derane', "fofo@test.com", this.sectionNameArray[0])
+     this.employeeArray.push(this.employee)
+     this.employee = new Employee(this.employeeId++, 'abo gogo'
+       , 'al derane', "fofo@test.com", this.sectionNameArray[0])
+     this.employeeArray.push(this.employee)
 
-    // this.employee = new Employee(this.employeeId++, 'abo bb'
-    //   , 'al derane', "zozo@test.com", this.sectionArray[2])
-    // this.employeeArray.push(this.employee)
-    // this.employee = new Employee(this.employeeId++, 'abo nn'
-    //   , 'al derane', "zozo@test.com", this.sectionArray[2])
-    // this.employeeArray.push(this.employee)
+     this.employee = new Employee(this.employeeId++, 'abo zozo'
+       , 'al derane', "zozo@test.com", this.sectionNameArray[1])
+     this.employeeArray.push(this.employee)
+     this.employee = new Employee(this.employeeId++, 'abo ss'
+       , 'al derane', "zozo@test.com", this.sectionNameArray[1])
+     this.employeeArray.push(this.employee)
+
+     this.employee = new Employee(this.employeeId++, 'abo bb'
+       , 'al derane', "zozo@test.com", this.sectionNameArray[2])
+     this.employeeArray.push(this.employee)
+     this.employee = new Employee(this.employeeId++, 'abo nn'
+       , 'al derane', "zozo@test.com", this.sectionNameArray[2])
+     this.employeeArray.push(this.employee)
     this.isaddEmployeeHidden = ! this.isThereEmplyees()
+    // console.log(this.sectionNameArray);
+    
     this.sortEmployeesBySection()
 
 
@@ -129,7 +140,7 @@ export class EmployeeComponent implements OnInit {
 
   onSectionNameChange(event: HTMLInputElement) {
     let _empId = +(event.closest('tr').querySelector('td').textContent)
-    // console.log(_empId);
+    //  console.log(_empId);
 
     this.employeeArray.find((_emp, index) => {
       if (_emp.getId() == _empId) {

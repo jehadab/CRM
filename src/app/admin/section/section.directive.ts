@@ -3,23 +3,23 @@ import { BehaviorSubject } from 'rxjs';
 
 @Directive({
     selector: '[replaceDataSection]',
-    
+
 })
 export class ReplaceDataSection {
 
+    private isInputapper: boolean = false;
+    private clickedoutHandler;
+    private tableCellInput: HTMLInputElement;
+    innerData;
     constructor(private elRef: ElementRef, private render: Renderer2) {
         // elRef.nativeElement.style.backgroundColor = 'yellow';
         this.listen();
         // this.sectionNameFire.emit('hoho');
-        
+
 
     }
-    private isInputapper: boolean = false;
-    private clickedoutHandler ;
-    private tableCellInput : HTMLInputElement;
-    innerData;
 
-    @Output('onSectionNameChange') sectionNameFire :  EventEmitter<any> = new EventEmitter(); 
+    @Output('onSectionNameChange') sectionNameFire: EventEmitter<any> = new EventEmitter();
 
 
     // @HostListener ('click', ['$event']) clickInside(targetElement){
@@ -36,38 +36,38 @@ export class ReplaceDataSection {
     // }
     listen() {
         this.clickedoutHandler = this.render.listen('document', "click", (event) => {
-            
+
 
             if (this.elRef.nativeElement.contains(event.target)) {
 
-                if(!this.isInputapper){
+                if (!this.isInputapper) {
 
-                this.tableCellInput = this.render.createElement('input');
-                this.render.addClass(this.tableCellInput, 'form-control');
-                
-                this.innerData = this.elRef.nativeElement.innerText;
-                this.render.setProperty(this.tableCellInput, 'value', this.innerData)
-                this.render.setValue(this.tableCellInput , this.innerData)
-                
-                // this.elRef.nativeElement.style.display = 'none';
-                // this.elRef.nativeElement.innerText = null;
-                
-                this.render.setProperty(this.elRef.nativeElement.firstChild ,'hidden', true )
-                this.render.appendChild(this.elRef.nativeElement, this.tableCellInput);
-                this.tableCellInput.select()
-                this.isInputapper = true ;
+                    this.tableCellInput = this.render.createElement('input');
+                    this.render.addClass(this.tableCellInput, 'form-control');
+
+                    this.innerData = this.elRef.nativeElement.innerText;
+                    this.render.setProperty(this.tableCellInput, 'value', this.innerData)
+                    this.render.setValue(this.tableCellInput, this.innerData)
+
+                    // this.elRef.nativeElement.style.display = 'none';
+                    // this.elRef.nativeElement.innerText = null;
+
+                    this.render.setProperty(this.elRef.nativeElement.firstChild, 'hidden', true)
+                    this.render.appendChild(this.elRef.nativeElement, this.tableCellInput);
+                    this.tableCellInput.select()
+                    this.isInputapper = true;
 
                 }
             }
             else {
-                if(this.isInputapper){
-                    
-                    
+                if (this.isInputapper) {
+
+
                     this.innerData = this.tableCellInput.value;
                     this.elRef.nativeElement.firstChild.innerText = this.innerData
                     this.tableCellInput.remove();
-                    this.render.setProperty(this.elRef.nativeElement.firstChild ,'hidden', false )
-                    this.sectionNameFire.emit({value :this.innerData , span : this.elRef.nativeElement  })
+                    this.render.setProperty(this.elRef.nativeElement.firstChild, 'hidden', false)
+                    this.sectionNameFire.emit({ value: this.innerData, span: this.elRef.nativeElement })
                     // this.elRef.nativeElement.style.display ;
 
                 }

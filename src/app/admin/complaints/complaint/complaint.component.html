@@ -1,0 +1,55 @@
+.<div class="card">
+    <div class="card-header">
+        Complaint
+        
+    </div>
+    <div class="card-body">
+        <div class="" style="text-align: right;">
+            <button class="btn btn-primary" type="button" 
+            (click)="addAnotherInputField()">add another input feild</button>
+        </div>
+
+        <form [formGroup]="parentFormGroup"  class="from-group"
+        *ngFor="let formGroup of formControlArray.controls;let idx = index">
+            <div class="form-row" [formGroup]="formGroup">
+                
+                <div class="form-group col-5">
+                    
+                    <label [attr.for]="'label'+idx" >Input label</label>
+                    <input type="text" name="label" [id]="'label'+idx" class="form-control" formControlName="label" >
+                </div>
+                <div class="form-group col-5">
+
+                    <label [attr.for]="'inputName'+idx" class="">Input Name</label>
+                    <input type="text" name="inputName" [id]="'inputName'+idx" 
+                    class="form-control" formControlName="inputName">
+                </div>
+
+                <div class="form-group col-2">
+                    <label [attr.for]="'inputType'+idx">inputType</label>
+                    <select [id]="'inputType'+idx"
+                     class="form-control " name="inputType" formControlName="inputType">
+                        <option *ngFor="let inputType of inputTypes" value="{{ inputType }}">{{ inputType }}</option>
+                    </select>
+                </div>
+                <hr>
+            </div>
+            
+            
+        </form>
+        <div class="row" >
+            <div class="col-12">
+                <h2 *ngIf="complement.getcomplaint().inputs.length != 0">your complaint will look like</h2>
+                <div class="form-group generated-inputs" >
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-center">
+        <button class="btn btn-primary" (click)="showResault()">Show Complaint</button>
+        <button class="btn btn-success" (click)="save()">Save</button>
+        <input type="text" #comppaintprototype>
+        
+    </div>
+</div>

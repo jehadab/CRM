@@ -1,7 +1,3 @@
-import { Injectable, Pipe, PipeTransform } from "@angular/core";
-
-
-@Injectable()
 export class Section {
     constructor (private sectionId : number  ,
         private sectionName : string , 

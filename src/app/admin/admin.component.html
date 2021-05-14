@@ -5,7 +5,8 @@
             <app-header [isMenuCollapsed]='toggleSideMenu'></app-header>
         </div>
         <div class="col-12   main-background " [ngClass]="{ 'col-lg-10' : !toggleSideMenu , 'col-lg-12' : toggleSideMenu}">   
-            <app-employee></app-employee>
+            <router-outlet></router-outlet>
+            <!-- <app-employee></app-employee> -->
             <!-- <app-section></app-section> -->
         </div>
     </div>

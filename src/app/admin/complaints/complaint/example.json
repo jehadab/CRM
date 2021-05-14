@@ -1,0 +1,11 @@
+ 
+    {
+        "inputs": [
+            { "inputName": "placeholder", "label": "inputlabel"
+                , "inputType": "select OR text OR button", 
+                "multipleInputs": [{ "inputValue": "string" }] , "required": "boolean" 
+                , "minLingth" : "number"}
+
+        ]
+
+    }

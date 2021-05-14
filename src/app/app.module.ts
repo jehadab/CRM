@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SectionComponent } from './admin/section/section.component';
+import { SectionService } from './admin/section/section.service';
 import { ReplaceDataSection } from './admin/section/section.directive'
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -18,12 +19,13 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatIconModule } from '@angular/material/icon';
 import { EmployeeComponent } from './admin/employee/employee.component';
 import { EmployeeDirective } from './admin/employee/employee.directive';
-import { Routes } from '@angular/router';
+import { PageErrorComponent } from './page-error/page-error.component';
+import { RoutingModule } from "./app-routing.module";
+import { ServiceResolver } from "./admin/section/sectionNameArray.service";
+import { ComplaintComponent } from './admin/complaints/complaint/complaint.component';
+import { ComplaintService } from './admin/complaints/complaint/complaint.service';
+import { ComplaintsComponent } from './admin/complaints/complaints.component'
 
-
-const adminRouter : Routes = [{
-  
-}]
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +37,12 @@ const adminRouter : Routes = [{
     SectionComponent,
     ReplaceDataSection,
     EmployeeComponent,
-    EmployeeDirective
+    EmployeeDirective,
+    PageErrorComponent,
+    ComplaintComponent,
+    ComplaintsComponent,
+    
+    
   ],
   imports: [
     BrowserModule,
@@ -48,10 +55,11 @@ const adminRouter : Routes = [{
     BrowserAnimationsModule,
     MatInputModule,
     MatSelectModule,
-    MatIconModule
+    MatIconModule,
+    RoutingModule
 
   ],
-  providers: [],
+  providers: [ServiceResolver , SectionService ,ComplaintService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

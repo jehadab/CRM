@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {  Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
 loginForm : FormGroup ; 
 private loginCridits : {username : string , password : string}
-  constructor(private http : HttpClient) { 
+  constructor(
+    private http : HttpClient,
+    private router : Router
+    ) { 
 
   }
 
@@ -29,6 +33,8 @@ private loginCridits : {username : string , password : string}
     
     this.loginCridits.username = this.loginForm.controls['username'].value;
     this.loginCridits.password = this.loginForm.controls['password'].value;
+
+    this.router.navigate(['admin'])
     
     //  this.http.post('https://crmproject-558a8-default-rtdb.europe-west1.firebasedatabase.app/things.json'
     //  , this.loginCridits).subscribe(Response => {

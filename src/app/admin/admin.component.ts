@@ -6,6 +6,7 @@ import {  AUTO_STYLE,
   style,
   transition,
   trigger} from '@angular/animations';
+import { ActivatedRoute, Router } from '@angular/router';
 
   const DEFAULT_DURATION = 500;
 
@@ -26,10 +27,12 @@ import {  AUTO_STYLE,
 export class admincomponent implements OnInit{
 
   toggleSideMenu: boolean = true;
-  constructor(){}
+  constructor(private router : Router,
+    private route : ActivatedRoute){}
      
     ngOnInit(): void {
       
+      // this.router.navigate(['addDepartments'],{relativeTo:this.route})
       //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
       // Add 'implements OnInit' to the class.
 

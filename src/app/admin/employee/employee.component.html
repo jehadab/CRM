@@ -35,7 +35,7 @@
                     <select id="employeeSection" class="form-control" 
                     formControlName='employeeSection'>
 
-                        <option *ngFor="let section of sectionArray" [value]="section">
+                        <option *ngFor="let section of sectionNameArray" [value]="section">
                             {{ section }}</option>
                     </select>
                 </div>
@@ -85,7 +85,7 @@
                     <td class="col-2" scope="row"  >
                         <select class="form-select table-select" 
                         (change)="onSectionNameChange($event.target)">
-                            <option *ngFor="let sec of sectionArray" [value]="sec"
+                            <option *ngFor="let sec of sectionNameArray" [value]="sec"
                                 [selected]="sec == emp.getSectionName()">{{ sec }}</option>
                         </select>
                     </td>
