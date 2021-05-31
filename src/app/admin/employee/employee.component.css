@@ -17,6 +17,10 @@
     border-radius: 20px;
     padding: 1rem;
 }
+.checked-options {
+    float: right;
+
+}
 
 table>tbody {
     font-size: 1.1rem;

@@ -23,6 +23,7 @@ export class SectionComponent implements OnInit {
   modalRef: BsModalRef;
   isAddbuttonHidden: boolean = false;
   isDelatedSectionHasChildren: boolean = true;
+  isHasChildren: boolean = false;
   // sectionParentArray: [{ id: number, parentName: string }] // delete this
 
   constructor(
@@ -77,25 +78,7 @@ export class SectionComponent implements OnInit {
       });
     });
   }
-  private fillCheckedArray() {
-    this.checkedArray = []
-    this.sectionArray.forEach(
-      () => {
-        this.checkedArray.push(false);
-      })
-  }
-  // fillParentArray() {
-  //   this.sectionArray.forEach((_section, index) => {
-  //     let bol = this.sectionParentArray.some((_currentParent, index) => {
-  //       return _currentParent.id == _section.getparent();
-
-  //     })
-
-  //     if (!bol)
-  //       this.sectionParentArray.push(
-  //         { id: _section.getparent(), parentName: _section.getParentName() })
-  //   })
-  // }
+  
   onSectionparentChange(event: HTMLInputElement) {
 
     let rowID: number = +(event.closest('tr').firstChild.textContent)
@@ -133,8 +116,20 @@ export class SectionComponent implements OnInit {
 
 
   }
+
+  private fillCheckedArray() {
+    this.checkedArray = []
+    this.sectionArray.forEach(
+      () => {
+        this.checkedArray.push(false);
+      })
+  }
+  
   onCheckSection(checkbox: HTMLInputElement) {
-    this.sectionService.sectionChecked(this.checkedArray, checkbox)
+    this.sectionService.sectionChecked(this.checkedArray, checkbox);
+    if (this.isHasChildren) {
+      this.isHasChildren = false;
+    }
     // console.log(this.checkedArray);
 
 
@@ -153,61 +148,29 @@ export class SectionComponent implements OnInit {
   getSectionCheckedNumber() {
     return this.sectionService.getSectionCheckedNumber(this.checkedArray)
   }
-  delateSelectedSection() {
-    let deletedSectionCount = 0;
-    for (let index = 0; index < this.checkedArray.length; index++) {
-      if (this.checkedArray[index]) {
-        
-      // this.isSectionGotChilds(this.sectionArray[index].getSectionName());
-
-          
-        
-
-        if (true) {
-          // this.isDelatedSectionHasChildren = false;
-          // console.log("index : "+index);
-          
-          this.checkedArray.splice(index, 1)
-          this.sectionArray.splice(index, 1)
-
+  deleteSelectedSection() {
+    if (
+      (!this.sectionArray.find((_section, _idx) => {
+        if (this.sectionService.isSectionGotChilds(_section.getSectionName(), this.sectionArray) && this.checkedArray[_idx]) {
+          this.isHasChildren = true;
+          return true
         }
-      }
+      }))
+    ) {
+      this.sectionArray = this.sectionArray.filter(
+        (_section, _idx) => {
 
-    }
-    console.log(this.checkedArray);
-    console.log(this.sectionArray);
-
-    // this.sectionArray = this.sectionArray.filter((element, index) => {
-    //   if (!this.checkedArray[index]) {
-    //     this.sectionArray.forEach((_elem, _index) => {
-    //       if (_elem.getParentName() == element.getSectionName()) {
-    //         deletedSectionCount++;
-    //         this.isDelatedSectionHasChildren = true;
-
-    //       }
-    //     })
-    //     if (!this.isDelatedSectionHasChildren) {
-    //       console.log(deletedSectionCount);
-
-    //       return true
-    //     }
-    //   }
-    // })
-
-  }
-  isSectionGotChilds(section : string) {
-    this.sectionArray.forEach((element, index) => {
-      
-        this.sectionArray.forEach((_elem, _index) => {
-          if (_elem.getParentName() == element.getSectionName()) {
-
-           return this.isDelatedSectionHasChildren = this.isDelatedSectionHasChildren && false;
-
+          if (!this.checkedArray[_idx]) {
+            return true;
           }
         })
-      
-    })
+    }
+    
+    this.refrechChackedArray();
+    this.sectionService.refreshCheckBox(this.checkedArray)
   }
+
+ 
 
   private getParentName(id: number, _sectionArray: Section[]): string {
     let parentName: string

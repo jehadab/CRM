@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Section } from './section.model';
-import { dep } from './example.json'
+import { department } from './example.json'
 
 @Injectable({
     providedIn: 'root'
@@ -9,7 +9,7 @@ export class SectionService {
 
     private sectionNameArray: string[] = [];
     fetchSections(secArray: Section[]): Section[] {
-        dep.forEach(
+        department.forEach(
             (_section, index) => {
 
                 secArray.push(new Section(_section.id, _section.name, _section.parent));
@@ -93,16 +93,46 @@ export class SectionService {
         })
         return checkedCount;
     }
-    refreshCheckedSection(checkarray: boolean[]) {
+    refreshCheckBox(checkarray: boolean[]) {
 
         const allCheckBox = (document.querySelectorAll('[aria-label^="checkbox"]'));
+        const checkAll = (document.querySelector("[id^='checkAll']") as HTMLInputElement ) ; 
+               
+        
         checkarray = []
         allCheckBox.forEach(
             (element: HTMLInputElement, index) => {
-                checkarray.push(element.checked) ;
+                element.checked = false
 
             }
         )
+        checkAll.checked = false
+        
     }
+    deleteSelectedSections(sectionArray : Section[], checkedArray : boolean[] , isHasChildren : boolean) {
+
+        
+        
+      
+    }
+    isSectionGotChilds(section: string , sectionArray : Section[]): boolean {
+
+        if (
+          sectionArray.filter((element, index) => {
+    
+            if (element.getParentName() == section) {
+    
+              return true;
+    
+            }
+    
+          }).length > 0
+        ) {
+    
+          return true;
+        }
+        else false
+    
+      }
 
 }

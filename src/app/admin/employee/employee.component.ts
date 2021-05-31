@@ -6,6 +6,7 @@ import { ActivatedRoute, Data } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { __assign } from 'tslib';
 import { Employee } from "./employee.model";
+import { EmployeeService } from './employee.service';
 
 @Component({
   selector: 'app-employee',
@@ -19,15 +20,18 @@ export class EmployeeComponent implements OnInit {
   orginalEmployeeArray : Employee[]=[];
   sectionNameArray: string[] = [];
   addEmployeeForm: FormGroup;
+  checkedArray: boolean[];
   employee: Employee;
   employeeId: number = 0;
   modalRef: BsModalRef ;
 
 
+
   constructor(     
      private modalService: BsModalService,
+     private employeeService : EmployeeService , 
      private http : HttpClient,
-     private route : ActivatedRoute
+     private route : ActivatedRoute,
     ) {
 
 
@@ -41,33 +45,33 @@ export class EmployeeComponent implements OnInit {
       }
     )
 
-     this.employee = new Employee(this.employeeId++, 'abo somr'
-       , 'al derane', "fofo@test.com", this.sectionNameArray[0])
-     this.employeeArray.push(this.employee)
-     this.employee = new Employee(this.employeeId++, 'abo fofo'
-       , 'al derane', "fofo@test.com", this.sectionNameArray[0])
-     this.employeeArray.push(this.employee)
-     this.employee = new Employee(this.employeeId++, 'abo gogo'
-       , 'al derane', "fofo@test.com", this.sectionNameArray[0])
-     this.employeeArray.push(this.employee)
+    this.employeeService.fetchEmployees(this.employeeArray);
+    //  this.employee = new Employee(this.employeeId++, 'abo somr'
+    //    , 'al derane', "fofo@test.com", this.sectionNameArray[0])
+    //  this.employeeArray.push(this.employee)
+    //  this.employee = new Employee(this.employeeId++, 'abo fofo'
+    //    , 'al derane', "fofo@test.com", this.sectionNameArray[0])
+    //  this.employeeArray.push(this.employee)
+    //  this.employee = new Employee(this.employeeId++, 'abo gogo'
+    //    , 'al derane', "fofo@test.com", this.sectionNameArray[0])
+    //  this.employeeArray.push(this.employee)
 
-     this.employee = new Employee(this.employeeId++, 'abo zozo'
-       , 'al derane', "zozo@test.com", this.sectionNameArray[1])
-     this.employeeArray.push(this.employee)
-     this.employee = new Employee(this.employeeId++, 'abo ss'
-       , 'al derane', "zozo@test.com", this.sectionNameArray[1])
-     this.employeeArray.push(this.employee)
+    //  this.employee = new Employee(this.employeeId++, 'abo zozo'
+    //    , 'al derane', "zozo@test.com", this.sectionNameArray[1])
+    //  this.employeeArray.push(this.employee)
+    //  this.employee = new Employee(this.employeeId++, 'abo ss'
+    //    , 'al derane', "zozo@test.com", this.sectionNameArray[1])
+    //  this.employeeArray.push(this.employee)
 
-     this.employee = new Employee(this.employeeId++, 'abo bb'
-       , 'al derane', "zozo@test.com", this.sectionNameArray[2])
-     this.employeeArray.push(this.employee)
-     this.employee = new Employee(this.employeeId++, 'abo nn'
-       , 'al derane', "zozo@test.com", this.sectionNameArray[2])
-     this.employeeArray.push(this.employee)
+    //  this.employee = new Employee(this.employeeId++, 'abo bb'
+    //    , 'al derane', "zozo@test.com", this.sectionNameArray[2])
+    //  this.employeeArray.push(this.employee)
+    //  this.employee = new Employee(this.employeeId++, 'abo nn'
+    //    , 'al derane', "zozo@test.com", this.sectionNameArray[2])
+    //  this.employeeArray.push(this.employee)
     this.isaddEmployeeHidden = ! this.isThereEmplyees()
     // console.log(this.sectionNameArray);
     
-    this.sortEmployeesBySection()
 
 
 
@@ -77,6 +81,7 @@ export class EmployeeComponent implements OnInit {
   ngOnInit(): void {
 
     this.copyOrginalArray();
+    this.sortEmployeesBySection()
     this.addEmployeeForm = new FormGroup({
       'firstName': new FormControl(null, Validators.required),
       'lastName': new FormControl(null, Validators.required),
@@ -86,6 +91,7 @@ export class EmployeeComponent implements OnInit {
 
   }
   private copyOrginalArray(){
+    this.fillCheckedArray()
     this.employeeArray.forEach((_emp)=>{
       this.orginalEmployeeArray.push(
         new Employee(_emp.getId(),_emp.getFirstname(),_emp.getLastname(),
@@ -178,6 +184,54 @@ export class EmployeeComponent implements OnInit {
     }
 
   }
+
+  private fillCheckedArray() {
+    this.checkedArray = []
+    this.employeeArray.forEach(
+      () => {
+        this.checkedArray.push(false);
+      })
+  }
+
+  onEmployeeChecked(checkbox: HTMLInputElement){
+    this.employeeService.sectionChecked(this.checkedArray, checkbox);
+    // if (this.isHasChildren) {
+    //   this.isHasChildren = false;
+    // }
+  }
+
+
+  checkAll(checkbox: HTMLInputElement) {
+
+    this.employeeService.checkAll(this.checkedArray);
+  }
+
+  refrechChackedArray() {
+    this.checkedArray = []
+    this.employeeArray.forEach(
+      () => {
+        this.checkedArray.push(false);
+      })
+  }
+  getEmployeeCheckedNumber() {
+    return this.employeeService.getEmployeeCheckedNumber(this.checkedArray)
+  }
+  deleteSelectedEmployee() {
+    {
+      this.employeeArray = this.employeeArray.filter(
+        (_section, _idx) => {
+
+          if (!this.checkedArray[_idx]) {
+            return true;
+          }
+        })
+    }
+    
+    this.refrechChackedArray();
+    this.employeeService.refreshCheckBox(this.checkedArray)
+  }
+
+
   resetChanges(){
 
     

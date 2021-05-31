@@ -30,7 +30,7 @@
 .close-icon {
     float: right;
     text-align: right;
-    color: red;
+    color: rgb(255, 255, 255);
     cursor: pointer;
 }
 
@@ -42,6 +42,17 @@
 .checked-options {
     float: right;
 
+}
+.warining{
+    background-color: rgba(252, 172, 74, 0.13);
+    text-align: center;
+    color: white;
+    border-left:8px solid orange;
+    padding-top: 0.5rem;
+    padding-bottom: 1px;
+    padding-left: 1rem;
+    padding-right: 2rem;
+    margin-bottom: 0.8rem;
 }
 
 .full-width {

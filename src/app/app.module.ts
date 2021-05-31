@@ -18,6 +18,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from "@angular/material/select";
 import { MatIconModule } from '@angular/material/icon';
 import { EmployeeComponent } from './admin/employee/employee.component';
+import { EmployeeService } from './admin/employee/employee.service';
 import { EmployeeDirective } from './admin/employee/employee.directive';
 import { PageErrorComponent } from './page-error/page-error.component';
 import { RoutingModule } from "./app-routing.module";
@@ -59,7 +60,11 @@ import { ComplaintsComponent } from './admin/complaints/complaints.component'
     RoutingModule
 
   ],
-  providers: [ServiceResolver , SectionService ,ComplaintService],
+  providers: [
+    ServiceResolver ,
+    SectionService ,
+    ComplaintService ,
+    EmployeeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

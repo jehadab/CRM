@@ -1,5 +1,5 @@
 {
-    "dep":[
+    "department":[
         {"id" : 0 ,
             "name":"وزارة الاتصالات",
             "parent":0

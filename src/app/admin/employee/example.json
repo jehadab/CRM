@@ -1,0 +1,32 @@
+{
+    "users": [
+        {
+            "id": 0,
+            "firstName": "محمد ",
+            "lastName": "الفري",
+            "email": "ss@hotmail.com",
+            "sectionName": "وزارة الاتصالات"
+        },
+        {
+            "id": 1,
+            "firstName": "العنزي ",
+            "lastName": "اسماعيل",
+            "email": "ffs@hotmail.com",
+            "sectionName": "وزارة الاتصالات"
+        },
+        {
+            "id": 2,
+            "firstName": "سلوى ",
+            "lastName": "الديد",
+            "email": "ggs@hotmail.com",
+            "sectionName": "المؤسسة العامة للبريد"
+        },
+        {
+            "id": 5,
+            "firstName": "ورئة ",
+            "lastName": "وحياة امي اسمي ورئة",
+            "email": "paper@hotmail.com",
+            "sectionName": "الهيئة الوطنية لخدمات الشبكة"
+        }
+    ]
+}
