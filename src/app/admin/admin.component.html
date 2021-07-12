@@ -1,10 +1,11 @@
-<top-header (sideNavToggler)="test($event)" ></top-header>
+<top-header (sideNavToggler)="toggleSideMenu($event)" ></top-header>
 <div class="container-fluid ">
     <div class="row no-gutters">
-        <div  class="col-12 col-lg-2 header " [@collapse]="toggleSideMenu">
-            <app-header [isMenuCollapsed]='toggleSideMenu'></app-header>
+        <div  class="col-12 col-lg-2 header " >
+            <app-header  [(isMenuCollapsed)]="isSideMenuOpen"></app-header>
         </div>
-        <div class="col-12   main-background " [ngClass]="{ 'col-lg-10' : !toggleSideMenu , 'col-lg-12' : toggleSideMenu}">   
+        <div class="col-12 main-background "
+         [ngClass]="{'blur-body' : isSideMenuOpen }">   
             <router-outlet></router-outlet>
             <!-- <app-employee></app-employee> -->
             <!-- <app-section></app-section> -->

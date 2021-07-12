@@ -1,50 +1,77 @@
 
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, Renderer2 } from '@angular/core';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
-  
+
 })
 export class HeaderComponent implements OnInit {
+  @Input() isMenuCollapsed: boolean = false;
 
-  @Input() isMenuCollapsed : boolean ;
-  constructor() { 
+  constructor(private render: Renderer2) {
+    // this.clickHandlerOutsideSideHeader = this.render.listen('document', "click", (clickEvent) => {
+    //   console.log("headermenustatus: "+this.isMenuCollapsed);
+
+    //   if(!this.isMenuCollapsed){
+    //     const element : HTMLElement = document.querySelector("#sidemenu");
+    //     if(!element.contains(clickEvent.target) ){
+    //       // this.isMenuCollapsed = !this.isMenuCollapsed
+    //       this.menuValueChange.emit(this.isMenuCollapsed);
+    //     }
+
+    //   }
+    // })
+
 
   }
 
   ngOnInit(): void {
   }
 
-  toggleSideNav(){
-    
-
-    return this.isMenuCollapsed = !this.isMenuCollapsed;
-  }
-  
-
 }
 
 @Component({
   selector: 'top-header',
-  templateUrl:'./topheader.component.html',
-  styleUrls:['./topheader.component.css']
+  templateUrl: './topheader.component.html',
+  styleUrls: ['./topheader.component.css']
 })
-export class TopHeader implements OnInit{
-  @Output('sideNavToggler') toggleer :  EventEmitter<any> = new EventEmitter();
+export class TopHeader implements OnInit {
+  @Output('sideNavToggler') toggleer: EventEmitter<any> = new EventEmitter();
+  isOpen: boolean = false;
+  private clickHandlerOutsideSideHeader;
 
 
-  ngOnInit(){
+  constructor(private render: Renderer2) {
 
   }
-  isOpen :boolean = true ;
-  toggleside(){
+  ngOnInit() {
 
-    this.isOpen = !this.isOpen;    
+  }
+  toggleside() {
+
+    this.isOpen = !this.isOpen;
     this.toggleer.emit(this.isOpen);
 
+    const sideNaveElement: HTMLElement = document.querySelector("#sidemenu");
+    const topHeaderElement: HTMLElement = document.querySelector("#topheader");
+    if (this.isOpen) {
+      // console.log(sideNaveElement.classList);
+      // console.log("contain closed");
+
+      this.clickHandlerOutsideSideHeader = this.render.listen('document', "click", (clickEvent) => {
+        if (!sideNaveElement.contains(clickEvent.target) && !topHeaderElement.contains(clickEvent.target)) {
+          this.isOpen = false;
+          this.toggleer.emit(this.isOpen);
+
+        }
+      })
+    }
+
+
+
   }
-  show(ss:any){
-    
+  show(ss: any) {
+
   }
 }

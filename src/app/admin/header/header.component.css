@@ -1,13 +1,23 @@
 .sidenav{
-position: sticky;
-height: 100vh;
-top : 0;
+position : absolute;
+z-index: 2;
+height: 100%;
+width: 200px;
 left: 0;
 font-size: large;
 text-align: center;
 padding-top: 30px;
 background-color: #152129;
+transition: 1s;
 }
+.closed{
+    width: 0px;
+    left: -200px;
+    position: fixed;
+        
+    
+  }
+
 
 .sidenav>mat-icon{
     color: silver;

@@ -3,7 +3,7 @@
         All Employees
     </div>
     <div class="card-body ">
-        <button class="btn add-employee-btn" [hidden]='isaddEmployeeHidden'
+        <!-- <button class="btn add-employee-btn" [hidden]='isaddEmployeeHidden'
             (click)="isaddEmployeeHidden = !isaddEmployeeHidden">Add Employee</button>
 
         <form [formGroup]="addEmployeeForm" [hidden]="!isaddEmployeeHidden" 
@@ -54,10 +54,10 @@
         <div class="checked-options">
             <button *ngIf="getEmployeeCheckedNumber() != 0" class="btn btn-danger"
              (click)="deleteSelectedEmployee()">Delete ({{getEmployeeCheckedNumber()}})</button>
-            <!-- <div class="warining" *ngIf="isHasChildren">
+             <div class="warining" *ngIf="isHasChildren">
                 <mat-icon class="close-icon" (click)="isHasChildren = !isHasChildren ">close</mat-icon>
                 <p>There is one or more Sections has children </p>
-            </div> -->
+            </div> 
         </div>
         <table class="table table-dark" *ngIf="isThereEmplyees()">
             <thead class="thead-dark">
@@ -107,7 +107,13 @@
                 </tr>
             
             </tbody>
-        </table>
+        </table> -->
+    
+        <h3 for="sections">Select Section :</h3 >
+            <div class="search"> <input type="text" class="search-input" placeholder="Search..." name=""> <a href="#" class="search-icon"> <i class="fa fa-search"></i> </a> </div>
+        <ul id="sections" class="list-group">
+            <li *ngFor="let item of sectionNameArray" class="list-group-item">{{ item }}</li>
+        </ul>
     </div>
     <div class="card-footer text-center">
         <button [disabled]="!isThereEmplyees()" (click)="saveChanges(template)" class="btn btn-success ">Save</button>

@@ -69,7 +69,7 @@ export class ComplaintComponent implements OnInit {
         // console.log(this.complement);
       }
       this.complaintService.showComplaintPrototypeView(this.complaintPrototypeContainer, this.complement, this.render)
-      // console.log(this.complaintPrototypeContainer);
+      //  console.log(this.complaintPrototypeContainer);
 
   }
   

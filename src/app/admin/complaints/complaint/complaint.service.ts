@@ -12,8 +12,11 @@ export class ComplaintService {
         // console.log(complaint.complaintInterfaceObject);
         
         let inputs = complaint.complaintInterfaceObject.inputs
-        let wrapper = eleRef.nativeElement
-        //   console.log(inputs);
+        const wrapper : HTMLElement = eleRef.nativeElement
+           console.log(inputs);
+           console.log("wraper " + wrapper.classList);
+
+        // render.appendChild(wrapper,inputs[0]);
         
         inputs.forEach((input,index)=> {
             this.generatedInputs.push(render.createElement('input'));
@@ -23,7 +26,7 @@ export class ComplaintService {
                 
                 case 'text':
                     // console.log(eleRef);
-                    
+                    console.log("text");
                     this.generatedInputs[index].setAttribute('type',input.inputType);
                     this.generatedInputs[index].setAttribute('placeholder',input.label);
                     this.generatedInputs[index].setAttribute("class","form-control")

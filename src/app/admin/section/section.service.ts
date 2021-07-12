@@ -8,6 +8,7 @@ import { department } from './example.json'
 export class SectionService {
 
     private sectionNameArray: string[] = [];
+    
     fetchSections(secArray: Section[]): Section[] {
         department.forEach(
             (_section, index) => {

@@ -1,6 +1,6 @@
 .card {
     background-color: #253138;
-    color: #98a6ad;
+    color: #e2f5ff;
 }
 .add-employee-btn{
     background-color: rgb(93, 172, 236);
@@ -70,4 +70,74 @@ table>tbody>tr>td {
 }
 .card-footer>button{
     margin-left: 1.2rem;
+}
+.list-group-item{
+    background-color: rgb(230, 230, 233);
+    font-size:1.3rem;
+    padding: 1.4rem;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-align: center;
+}
+.list-group-item:hover{
+    background-color: rgb(161, 172, 218);
+    transform :scaleX(1.01);
+
+}
+
+
+.search {
+    width: 100%;
+    margin-bottom: auto;
+    margin-top: 20px;
+    height: 50px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px
+}
+
+.search-input {
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 0;
+    margin-top: 5px;
+    caret-color: transparent;
+    line-height: 20px;
+    transition: width 0.4s linear
+}
+
+.search .search-input {
+    padding: 0 10px;
+    width: 100%;
+    caret-color: #536bf6;
+    font-size: 19px;
+    font-weight: 300;
+    color: black;
+    transition: width 0.4s linear
+}
+
+.search-icon {
+    height: 34px;
+    width: 34px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #536bf6;
+    font-size: 10px;
+    bottom: 30px;
+    position: relative;
+    border-radius: 5px
+}
+
+.search-icon:hover {
+    color: #fff !important
+}
+
+a:link {
+    text-decoration: none
 }
