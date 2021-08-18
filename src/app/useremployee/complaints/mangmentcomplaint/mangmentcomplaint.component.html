@@ -1,0 +1,39 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="main-complaint col-12   ">
+            <div class="main-complaint-header">
+                <h1>{{mangmentComplaint.name}}</h1>
+            </div>
+            <div class="main-complaint-content">
+                <p>{{mangmentComplaint.content}}</p>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="replayes" *ngFor="let item of mangmentComplaint.flow.steps">
+                
+
+                <div class="replay-card ">
+                    <div class="replay-header card-header">
+                        <h2>{{ item.employeeinfo }}</h2>
+                    </div>
+                    <div class="replay-content card-body">
+                        <p>{{ item.note }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="adding-resolve">
+                <label for="complaint-solve">Add your view to the complaint</label>
+                <textarea id="complaint-solve" class="form-control" type="" name="complaint-solve" [(ngModel)]="noteText">
+
+                </textarea>
+                <button class="btn btn-success" (click)="accepted()">Accept</button>
+                <button class="btn btn-danger" (click)="rejected()">Reject</button>
+
+            </div>
+        </div>
+    </div>
+</div>

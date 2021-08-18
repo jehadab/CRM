@@ -72,16 +72,17 @@ table>tbody>tr>td {
     margin-left: 1.2rem;
 }
 .list-group-item{
-    background-color: rgb(230, 230, 233);
-    font-size:1.3rem;
-    padding: 1.4rem;
-    margin-bottom: 10px;
+    font-size:1.2rem;
     cursor: pointer;
+    background-color: inherit;
     transition: all 0.2s ease-in-out;
-    text-align: center;
+    border:none;
+    border-bottom: 1px solid whitesmoke;
+    margin-top: 10px;
+    color: inherit;
 }
 .list-group-item:hover{
-    background-color: rgb(161, 172, 218);
+    left: -10px;
     transform :scaleX(1.01);
 
 }
@@ -104,8 +105,7 @@ table>tbody>tr>td {
     background: none;
     width: 0;
     margin-top: 5px;
-    caret-color: transparent;
-    line-height: 20px;
+        caret-color: transparent;
     transition: width 0.4s linear
 }
 

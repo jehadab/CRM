@@ -108,13 +108,21 @@
             
             </tbody>
         </table> -->
-    
-        <h3 for="sections">Select Section :</h3 >
-            <div class="search"> <input type="text" class="search-input" placeholder="Search..." name=""> <a href="#" class="search-icon"> <i class="fa fa-search"></i> </a> </div>
-        <ul id="sections" class="list-group">
-            <li *ngFor="let item of sectionNameArray" class="list-group-item">{{ item }}</li>
-        </ul>
+
+        <h3 for="sections">Select Section :</h3>
+        <div class="d-flex justify-content-center px-5">
+
+        <div class="search">
+            <form action="" [formGroup] = "searchFilterForm">
+            <input type="text" class="search-input" placeholder="Search for a section" name="">
+            <a href="#" class="search-icon"> <i class="fa fa-search"></i> </a>
+        </form>
+        </div>
     </div>
+
+        <ul id="sections" class="list-group">
+            <li *ngFor="let item of filteredSectionsName" class="list-group-item" >{{ item }}</li>
+        </ul>
     <div class="card-footer text-center">
         <button [disabled]="!isThereEmplyees()" (click)="saveChanges(template)" class="btn btn-success ">Save</button>
         <button [disabled]="!isThereEmplyees()" (click)="resetChanges()" class="btn btn-danger ">Reset Data</button>

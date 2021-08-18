@@ -4,6 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Data } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Observable } from 'rxjs';
+import {map, startWith, takeUntil} from 'rxjs/operators';
 import { __assign } from 'tslib';
 import { Employee } from "./employee.model";
 import { EmployeeService } from './employee.service';
@@ -24,6 +26,19 @@ export class EmployeeComponent implements OnInit {
   employee: Employee;
   employeeId: number = 0;
   modalRef: BsModalRef ;
+
+  searchFilterForm : FormControl = new FormControl() ;
+  filteredSectionsName: string[] = ['One', 'Two', 'Three'];
+  searchFilterSubscription: Observable<string[]>;
+
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    console.log("ana w habibi fejneneh");
+    
+
+    return this.filteredSectionsName.filter(option => option.toLowerCase().includes(filterValue));
+  }
 
 
 
@@ -88,6 +103,14 @@ export class EmployeeComponent implements OnInit {
       'email': new FormControl(null, Validators.required),
       'employeeSection': new FormControl(null, Validators.required)
     })
+    this.filteredSectionsName =  this.sectionNameArray ;
+    this.searchFilterSubscription = this.searchFilterForm.valueChanges
+      // .pipe(
+        
+      //   map(value => this._filter(value))
+        
+      // );
+      // .subscribe(value => this._filter(value))
 
   }
   private copyOrginalArray(){
@@ -258,6 +281,11 @@ export class EmployeeComponent implements OnInit {
   decline() {
     this.modalRef.hide();
 
+  }
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    
   }
 
 

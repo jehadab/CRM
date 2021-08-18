@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { admincomponent } from './admin/admin.component'
 import { LoginComponent } from './admin/login/login.component';
-import { HeaderComponent , TopHeader } from './admin/header/header.component';
+import { HeaderComponent, TopHeader } from './admin/header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SectionComponent } from './admin/section/section.component';
@@ -25,7 +25,20 @@ import { RoutingModule } from "./app-routing.module";
 import { ServiceResolver } from "./admin/section/sectionNameArray.service";
 import { ComplaintComponent } from './admin/complaints/complaint/complaint.component';
 import { ComplaintService } from './admin/complaints/complaint/complaint.service';
-import { ComplaintsComponent } from './admin/complaints/complaints.component'
+import { ComplaintsComponent } from './admin/complaints/complaints.component';
+import { UseremployeeComponent } from './useremployee/useremployee.component';
+import { EmployeeloginComponent } from './useremployee/employeelogin/employeelogin.component'
+import { EmployeeAuth } from './useremployee/employeelogin/employeeauth.service'
+import { EmployeeSideNav } from "./useremployee/sidenav/empsidenav.component";
+import { UserEmployeeServive } from "./useremployee/useremployee.service";
+import { EmployeeAuthInterceptorService } from "./useremployee/employeelogin/interceptor.service";
+import { ServicecomplaintComponent } from './useremployee/complaints/servicecomplaint/servicecomplaint.component';
+import { MangmentcomplaintComponent } from './useremployee/complaints/mangmentcomplaint/mangmentcomplaint.component';
+import { mangmentresolver } from './useremployee/complaints/mangmentcomplaint/mangmentresolver.service';
+import { ComplaintslistComponent } from './useremployee/complaintslist/complaintslist.component';
+import { ComplaintsListService } from './useremployee/complaintslist/complaintslist.service';
+import { NewcomplaintComponent } from './useremployee/newcomplaint/newcomplaint.component';
+import { MangmentComplaintService } from './useremployee/complaints/mangmentcomplaint/mangmentcomplaint.service';
 
 @NgModule({
   declarations: [
@@ -42,8 +55,18 @@ import { ComplaintsComponent } from './admin/complaints/complaints.component'
     PageErrorComponent,
     ComplaintComponent,
     ComplaintsComponent,
+    UseremployeeComponent,
+    EmployeeloginComponent,
+    EmployeeSideNav,
+    ServicecomplaintComponent,
+    MangmentcomplaintComponent,
+    ComplaintslistComponent,
+    NewcomplaintComponent,
     
-    
+
+
+
+
   ],
   imports: [
     BrowserModule,
@@ -61,10 +84,22 @@ import { ComplaintsComponent } from './admin/complaints/complaints.component'
 
   ],
   providers: [
-    ServiceResolver ,
-    SectionService ,
-    ComplaintService ,
-    EmployeeService],
+    ServiceResolver,
+    mangmentresolver,
+    SectionService,
+    ComplaintService,
+    EmployeeService,
+    EmployeeAuth,
+    UserEmployeeServive,
+    ComplaintsListService,
+    MangmentComplaintService,
+
+  {
+    provide :HTTP_INTERCEPTORS ,
+    useClass : EmployeeAuthInterceptorService,
+    multi : true
+  }],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

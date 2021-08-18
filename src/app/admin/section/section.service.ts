@@ -1,21 +1,40 @@
 import { Injectable } from '@angular/core';
 import { Section } from './section.model';
 import { department } from './example.json'
-
+import { HttpClient } from '@angular/common/http';
+import { tap } from "rxjs/operators";
+import { Statics } from "../../shered/statics.component";
 @Injectable({
     providedIn: 'root'
 })
 export class SectionService {
 
     private sectionNameArray: string[] = [];
+
+constructor(private http : HttpClient,
+    ) {
+    
+        
+        
+    }
+    
     
     fetchSections(secArray: Section[]): Section[] {
-        department.forEach(
-            (_section, index) => {
+        this.http.get(Statics.API_HOST +'department/all').
+        subscribe(((res : any) =>{
+            console.log(res.dep);
+            
+            res.dep.forEach(element => {
+                secArray.push(new Section(element.id, element.name, element.parent));
 
-                secArray.push(new Section(_section.id, _section.name, _section.parent));
+            });
+        }))
+        // department.forEach(
+        //     (_section, index) => {
 
-            })
+        //         // secArray.push(new Section(_section.id, _section.name, _section.parent));
+
+        //     })
         return secArray;
     }
     getSectionNameArray(): string[] {

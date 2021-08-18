@@ -1,0 +1,43 @@
+.sidenav-container{
+    
+    height  : 100%;
+}
+.search-bar{
+    border: 1px solid rgb(197, 197, 197);
+    padding-left: 20px;
+    padding-right: 20px;
+    border-top-left-radius: 35px;
+    border-top-right-radius: 35px;
+    border-bottom-left-radius: 35px;
+    border-bottom-right-radius: 35px;
+    margin-top: 5px;
+    background-color: rgb(80, 80, 255);
+}
+.complement-category{
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    font-weight: bold;
+    font-size: large;
+
+}
+.complement-category .col-3{
+    
+    cursor: pointer;    
+    
+}
+.active {
+    border-bottom: solid 4px rgb(255, 64, 64);
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+.table-row{
+    cursor: pointer;
+
+}
+.table-row :hover {
+    
+    background-color: rgba(79, 79, 204, 0.589);
+}
+

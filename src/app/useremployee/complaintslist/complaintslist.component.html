@@ -1,0 +1,56 @@
+<div class="row">
+                
+                
+    <div class="offset-7 col-lg-4 col-md-4 col-sm-4 ">
+        <div class="search-bar ">
+            <div class="input-group">
+                <input id="typeahead-focus" type="text" class="form-control" aria-describedby="basic-addon1"
+                    placeholder="Search for a compliment" [(ngModel)]="model" [ngbTypeahead]="search"
+                    (focus)="focus$.next($any($event).target.value)"
+                    (click)="click$.next($any($event).target.value)" #instance="ngbTypeahead" />
+                <div class="input-group-append">
+                    <span class="input-group-text" id="my-addon">
+                        <button style="border: none;"><i class="fa fa-search"
+                                aria-hidden="true"></i></button></span>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+</div>
+<div class="row complement-category">
+    <div class="col-3 active" 
+    (click)="showMangmentComplaint($event.target)"
+    #mangmentComplaint>
+        بريد الشكاوي اللإدارية
+    </div>
+    <div class="col-3" 
+    (click)="showServiceComplaint($event.target)"
+    #serviceComplaint>
+        بريد الشكاوي الخدمية
+    </div>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <th colspan="col">#</th>
+        <th colspan="col">Name</th>
+        <th colspan="col">ApplyDate</th>
+        <th colspan="col">lastUpdated</th>
+    </thead>
+    <tbody>
+        
+        <tr *ngFor="let complaint of displayedComplaints" class="table-row" (click)="getSelectedComplaint($event.target)">
+            <th scope="row">{{ complaint.id }}</th>
+            <td>{{ complaint.name }}</td>
+            <td>{{ complaint.applyDate }}</td>
+            <td>{{ complaint.updateDate }}</td>
+        </tr>
+        
+
+    </tbody>
+</table>
