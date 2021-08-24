@@ -40,12 +40,7 @@ export class ComplaintslistComponent implements OnInit {
               private emplyeeAuth : EmployeeAuth , 
               private router : Router ,
               private activeRoute : ActivatedRoute ) { 
-    //  this.complaintListService.fetchComplaints(this.mangmentComplaints, this.serviceComplaints).subscribe(resault =>{
-
-    //  },errorMessage  => {
-        
-    //  })
-    this.displayedComplaints = this.mangmentComplaints;
+      
   }
 
   mangmentComplaint: MangmentComplaint = {
@@ -60,93 +55,105 @@ export class ComplaintslistComponent implements OnInit {
   };
   ngOnInit(): void {
 
-    
-    let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890" ;
-    for (let i = 0; i <= 5; i++) {
-
+    this.complaintListService.fetchComplaints( this.serviceComplaints).subscribe(resault =>{
+      console.log(resault);
       
-      this.mangmentComplaint.id = i;
-      // this.mangmentComplaint.name = "zezafon al shmal "+ i
-      this.mangmentComplaint.name = ''
-       
-      for (let index = 0; index < 6; index++) {
-        
-        this.mangmentComplaint.name +=  possible.charAt(Math.floor(Math.random() * possible.length)); 
-        
-      }
-      this.mangmentComplaint.applyDate = new Date();
-      this.mangmentComplaint.content = "zrm zrmbo "+ i;
-      this.mangmentComplaint.updateDate = new Date() ;
-      this.mangmentComplaint.flow = {
-        'stepscount' : 5 ,
-        'currentstep': 1 ,
-     
-        
-         steps :[{
-           id : 4,
-           employeeinfo : "سيد جزرة",
-         date : new Date(),
-         rejected : false, 
-         status : 0,
-         note  : "انت مو انت و انت جعان",
-         },{
-        
-           id : 3,
-           employeeinfo : "سيد فراس",
-         date : new Date(),
-         rejected : false, 
-         status : 0,
-         note  : "2انت مو انت و انت جعان",
-        
-         }]
-      }
-      // console.log(this.mangmentmangmentComplaints);
 
-      this.mangmentComplaints.push(Object.assign({},this.mangmentComplaint));
-
-       
+    },errorMessage  => {
+      console.log(errorMessage);
       
-    }
-    for (let i = 0; i <= 50; i++) {
-    
-      this.serviceComplaint.id = i;
-      this.serviceComplaint.applyDate = new Date();
-      this.serviceComplaint.content = "zrm zrmbo zeza meko" + i ;
-      this.serviceComplaint.updateDate = new Date() 
-
-      this.serviceComplaints.push(Object.assign({},this.serviceComplaint));
-
-    }
-
-    this.displayedComplaints.forEach(element => {
-      this.searchedComplaints.push(element.name);
-    });
-    
-
-    this.searchsubscription =  this.instance.selectItem.subscribe((value )=>{
       
-      console.log(this.model);
-      if(value == ''  || this.model == ''){ 
-        if(this.onmangmentComplaints){
-          this.displayedComplaints = this.mangmentComplaints;
-          
-        }
-        this.displayedComplaints       
-        return  ;
-     }
-     
-       this.displayedComplaints = this.displayedComplaints.filter(
-         (_value => {
-          
-           console.log("not empty");
-            if(_value.content.toLowerCase().includes(value.item.toLowerCase()) ){
-              
-              return true;
-
-           }
-         })
-       )
     })
+  this.displayedComplaints = this.mangmentComplaints;
+
+    
+    // let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890" ;
+    // for (let i = 0; i <= 5; i++) {
+
+      
+    //   this.mangmentComplaint.id = i;
+    //   // this.mangmentComplaint.name = "zezafon al shmal "+ i
+    //   this.mangmentComplaint.name = ''
+       
+    //   for (let index = 0; index < 6; index++) {
+        
+    //     this.mangmentComplaint.name +=  possible.charAt(Math.floor(Math.random() * possible.length)); 
+        
+    //   }
+    //   this.mangmentComplaint.applyDate = new Date();
+    //   this.mangmentComplaint.content = "zrm zrmbo "+ i;
+    //   this.mangmentComplaint.updateDate = new Date() ;
+    //   this.mangmentComplaint.flow = {
+    //     'stepscount' : 5 ,
+    //     'currentstep': 1 ,
+     
+        
+    //      steps :[{
+    //        id : 4,
+    //        employeeinfo : "سيد جزرة",
+    //      date : new Date(),
+    //      status : 1,
+    //      note  : "انت مو انت و انت جعان",
+    //      },{
+        
+    //        id : 3,
+    //        employeeinfo : "سيد فراس",
+    //      date : new Date(),
+    //      status : 0,
+    //      note  : "2انت مو انت و انت جعان",
+        
+    //      }]
+    //   }
+    //   // console.log(this.mangmentmangmentComplaints);
+
+    //   this.mangmentComplaints.push(Object.assign({},this.mangmentComplaint));
+
+       
+      
+    // }
+    // for (let i = 0; i <= 50; i++) {
+    
+    //   this.serviceComplaint.id = i;
+    //   this.serviceComplaint.applyDate = new Date();
+    //   this.serviceComplaint.content = "zrm zrmbo zeza meko" + i ;
+    //   this.serviceComplaint.updateDate = new Date() 
+
+    //   this.serviceComplaints.push(Object.assign({},this.serviceComplaint));
+
+    // }
+
+    // this.displayedComplaints.forEach(element => {
+    //   this.searchedComplaints.push(element.name);
+    // });
+    
+
+    // this.searchsubscription =  this.instance.selectItem.subscribe((value )=>{
+      
+    //   // console.log('hi');
+    //   if(value == ''  || this.model == ''){ 
+    //     if(this.onmangmentComplaints){
+    //       console.log('empty');
+          
+    //       this.displayedComplaints = this.mangmentComplaints;
+    //       this.model = '';
+          
+    //     }
+    //     return  ;
+    //  }
+     
+    //    this.displayedComplaints = this.mangmentComplaints.filter(
+    //      (_value => {
+          
+    //         console.log(value.item);
+    //       //  console.log(_value.name);
+    //         if(_value.name.toLowerCase().includes(value.item.toLowerCase()) ){
+              
+    //           return true;
+
+    //        }
+    //      })
+    //    )
+    // })
     
   }
 
@@ -158,26 +165,16 @@ export class ComplaintslistComponent implements OnInit {
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
 
-  search: OperatorFunction<string, readonly string[]> = (text$: Observable<string>) => {
-    const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
-    const clicksWithClosedPopup$ = this.click$.pipe(filter(() => !this.instance.isPopupOpen()));
-    const inputFocus$ = this.focus$;
-    // console.log(clicksWithClosedPopup$);
-
-        
+  search: OperatorFunction<string, readonly string[]> = (text$: Observable<string>) =>
+  text$.pipe(
+    debounceTime(200),
+    distinctUntilChanged(),
+    map(term =>( term == '' && term.length > 1 )? []
+      : this.searchedComplaints.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+  )
     
+  
 
-    return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
-      
-      map(term => 
-        
-        
-        (term === '' ? this.searchedComplaints
-        : this.searchedComplaints.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10) )
-    );
-   
-    
-  }
 
   showMangmentComplaint(categoryDiv: HTMLElement) {
     // console.log(this.serviceElemnt.nativeElement.classList);

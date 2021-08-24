@@ -17,10 +17,10 @@ import { EmployeeService } from './employee.service';
 })
 export class EmployeeComponent implements OnInit {
 
-  isaddEmployeeHidden: boolean = false;
-  employeeArray: Employee[] = [];
-  orginalEmployeeArray : Employee[]=[];
   sectionNameArray: string[] = [];
+  employeeArray: Employee[] = [];
+  isaddEmployeeHidden: boolean = false;
+  orginalEmployeeArray : Employee[]=[];
   addEmployeeForm: FormGroup;
   checkedArray: boolean[];
   employee: Employee;
@@ -59,6 +59,8 @@ export class EmployeeComponent implements OnInit {
         
       }
     )
+
+    this.employeeService.fetchAllSectionsName().subscribe(sectionName=>{ sectionName =  this.sectionNameArray});
 
     this.employeeService.fetchEmployees(this.employeeArray);
     //  this.employee = new Employee(this.employeeId++, 'abo somr'

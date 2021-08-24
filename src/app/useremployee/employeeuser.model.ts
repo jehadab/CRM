@@ -1,14 +1,12 @@
 export class EmpUserModel {
-    constructor (public email : String ,
-        public name : String ,
-        private _token : String, 
-        private _tokenExpirationDate : Date){}
+    constructor (
+        public email : string ,
+        public name : string ,
+        public _token : string, 
+        private _tokenExpirationDate? : Date){}
 
-        get token (){
+//         get token (){
 
-            if(!this._tokenExpirationDate || new Date () > this._tokenExpirationDate)
-            return null ;
-
-            return this.token;
-        }
-}
+//             return this.token;
+//         }
+ }

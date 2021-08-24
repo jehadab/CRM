@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Data } from '@angular/router';
+import { ActivatedRoute, Data, Router } from '@angular/router';
+import { take } from 'rxjs/operators';
 import { MangmentComplaint } from 'src/app/shered/models/complaints/mangmentcomplaint.model';
+import { EmployeeAuth } from '../../employeelogin/employeeauth.service';
 import { MangmentComplaintService } from './mangmentcomplaint.service';
 
 @Component({
@@ -10,6 +12,7 @@ import { MangmentComplaintService } from './mangmentcomplaint.service';
 })
 export class MangmentcomplaintComponent implements OnInit {
   noteText : String ;
+  isLoading : boolean = false ;
 
   public mangmentComplaint : MangmentComplaint = {
     id : 0 ,
@@ -19,8 +22,11 @@ export class MangmentcomplaintComponent implements OnInit {
 
   }; 
 
-  constructor(private route : ActivatedRoute ,
-    private mangmentComplaintService : MangmentComplaintService) {
+  constructor(private router : Router,
+    private route : ActivatedRoute ,
+    private mangmentComplaintService : MangmentComplaintService,
+    private employeeAuth : EmployeeAuth) {
+
     this.route.data.subscribe((_data : Data) => {
    
       this.mangmentComplaint.id = _data.serviceComplaint.id
@@ -30,9 +36,9 @@ export class MangmentcomplaintComponent implements OnInit {
       
       this.mangmentComplaint.flow = _data.serviceComplaint.flow;
       
-      console.log(_data.serviceComplaint);
+      // console.log(_data.serviceComplaint);
       
-      // console.log(this.mangmentComplaint);
+      //  console.log(this.mangmentComplaint);
       // Complaint : id   , userid , status : int , data : JSON {title : string , discription : string } 
       // flow {  }
 
@@ -46,20 +52,47 @@ export class MangmentcomplaintComponent implements OnInit {
   }
   accepted()
   {
-    const currentreplay : number= this.mangmentComplaint.flow.currentstep;
-    this.mangmentComplaint.flow.steps[currentreplay].rejected = false ;
-    this.mangmentComplaint.flow.steps[currentreplay].note = this.noteText.toString();
+    // this.isLoading = true ;
+    // const currentreplay : number= this.mangmentComplaint.flow.currentstep;
+    // this.mangmentComplaint.flow.steps[currentreplay].status = 1 ;
+    // this.mangmentComplaint.flow.steps[currentreplay].note = this.noteText.toString();
+    
+    let employeeEmail ;
+     this.employeeAuth.useremployee.pipe(take(1)).subscribe(user=>{
+      employeeEmail = user.email
+    })
+    // console.log(employeeEmail);
+    
+    const reqBody : { id : number , data : string , email : string , status : number } =
+     {id : 5 , data : this.noteText.toString() , email : employeeEmail , status : 1}
+    console.log(reqBody);
+    
+    // console.log(this.mangmentComplaint);
+    
+    this.mangmentComplaintService.postAcceptReplay(reqBody).subscribe((resault)=>{
+      
+      console.log(resault);
+      this.isLoading = false ;
+      this.router.navigate(['../../'] , {relativeTo : this.route})
 
-    this.mangmentComplaintService.postAcceptReplay(this.mangmentComplaint) ;
+     },errmsg=>{
+       console.log(errmsg);
+       this.isLoading = false;
+      
+     }) ;
 
   }
   rejected(){
     const currentReplay : number = this.mangmentComplaint.flow.currentstep;
-    this.mangmentComplaint.flow.steps[currentReplay].rejected = true ; 
+    this.mangmentComplaint.flow.steps[currentReplay].status = 0 ; 
     this.mangmentComplaint.flow.steps[currentReplay].note = this.noteText.toString();
 
 
-    this.mangmentComplaintService.postAcceptReplay(this.mangmentComplaint)
+    this.mangmentComplaintService.postAcceptReplay(this.mangmentComplaint).subscribe(resault => {
+
+    }, errmsg => {
+
+    })
   }
 
 

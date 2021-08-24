@@ -43,13 +43,13 @@ export class EmployeeloginComponent implements OnInit {
       this.employeeAuth
       .login(this.loginCridits.username , this.loginCridits.password)
       .subscribe(resault => {
-        // console.log('done');
+        console.log('done');
         this.isLoading = false
         this.router.navigate(['employee'])
         
       },errorMessage =>{
         this.isLoading = false ;
-        // console.log("err");
+        console.log("err : " + errorMessage);
         
       });
       

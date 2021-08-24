@@ -1,8 +1,57 @@
-<div class="sidenav-container">
+<!-- <div class="sidenav-container">
+    <div class="profile">
+        <h3>Profile Name</h3>
+        <img src="../../../assets/shared/images/unknownaccount.png">
+        
+
+    </div>
     <div class="sidenav">
-        <div routerLink="inbox" ><i class="fa fa-envelope"></i><a > Inbox</a></div>
-        <div routerLink="newcomplaint"><i class="fa fa-plus"></i><a> Add New Complaint</a></div>
-        <div></div>
+        <div routerLink="inbox" >
+            <i class="fa fa-envelope"></i><a class="nav-item"> Inbox</a>
+        </div>
+        <div routerLink="newcomplaint">
+            <i class="fa fa-plus"></i><a class="nav-item"> Add New Complaint</a>
+        </div>
+        <div>
+
+        </div>
         
     </div>
-</div>
+</div> -->
+<nav id="sidebar" class="">
+    <div class="custom-menu">
+        <button (click)="toggleSidenav($event)" type="button" id="sidebarCollapse" class="btn btn-primary">
+            <i class="fa fa-bars"></i>
+            <span class="sr-only">Toggle Menu</span>
+        </button>
+    </div>
+    <div class="p-4">
+        <h1><a href="index.html" class="logo">Flash</a></h1>
+        <ul class="list-unstyled components mb-5">
+            <li class="active">
+                <a href="#"><span class="fa fa-home mr-3"></span> Home</a>
+            </li>
+            <li>
+                <a href="#"><span class="fa fa-user mr-3"></span> About</a>
+            </li>
+            <li>
+                <a href="#"><span class="fa fa-briefcase mr-3"></span> Portfolio</a>
+            </li>
+            <li>
+                <a href="#"><span class="fa fa-sticky-note mr-3"></span> Blog</a>
+            </li>
+            <li>
+                <a href="#"><span class="fa fa-paper-plane mr-3"></span> Contact</a>
+            </li>
+        </ul>
+        
+        <div class="footer">
+            <p>
+                Copyright ©
+                <script>document.write(new Date().getFullYear());</script>2021 All rights reserved | This template is
+                made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                    target="_blank">Colorlib.com</a>
+            </p>
+        </div>
+    </div>
+</nav>

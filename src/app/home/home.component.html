@@ -1,7 +1,23 @@
-<h3>home comp</h3>
-<button class="btn btn-primary"></button>
-<a routerLink='adminlogin'>Admin login</a>
-<a routerLink='admin'>Admin </a>
-<a routerLink = 'employeelogin'> Employee Login </a>
-<a routerLink = 'employee'> Employee </a>
+<header id="header" class="header">
+    <div class="header-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="text-container">
+                        <h1><span class="turquoise">Complaint Mangment System</span></h1>
+                        <p class="p-large">Use Evolo free landing page template to promote your business startup and generate leads for the offered services</p>
+                        <a class="btn-solid-lg page-scroll" routerLink="/adminlogin">Admin</a>
+                        <a class="btn-solid-lg page-scroll employee" routerLink="/employeelogin">Employee</a>
+                    </div> <!-- end of text-container -->
+                </div> <!-- end of col -->
+                <div class="col-lg-6">
+                    <div class="image-container">
+                        <img class="img-fluid" src='../../assets/shared/images/header-teamwork.svg' alt="alternative">
+                    </div> <!-- end of image-container -->
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of header-content -->
+</header>
+
 <router-outlet></router-outlet>

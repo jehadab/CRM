@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { tap } from 'rxjs/operators';
+import { Statics } from 'src/app/shered/statics.component';
 import { Employee } from './employee.model';
  import { users } from './example.json'
 
@@ -8,6 +11,14 @@ import { Employee } from './employee.model';
     providedIn: 'root'
 })
 export class EmployeeService {
+    constructor(private http : HttpClient){
+
+    }
+
+    fetchAllSectionsName(){
+        return this.http.get(Statics.API_HOST + '' )
+
+    }
     
     fetchEmployees(empArray : Employee[]){
         users.forEach(
@@ -19,6 +30,7 @@ export class EmployeeService {
                     user.email,
                     user.sectionName))
         })
+
     }
 
     sectionChecked(checkarray: boolean[], checkbox: HTMLInputElement) {

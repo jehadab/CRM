@@ -39,6 +39,8 @@ import { ComplaintslistComponent } from './useremployee/complaintslist/complaint
 import { ComplaintsListService } from './useremployee/complaintslist/complaintslist.service';
 import { NewcomplaintComponent } from './useremployee/newcomplaint/newcomplaint.component';
 import { MangmentComplaintService } from './useremployee/complaints/mangmentcomplaint/mangmentcomplaint.service';
+import { WaitSpeener } from "./shered/models/waitingspeener.component";
+import { EmployeesinsectionComponent } from './admin/employee/employeesinsection/employeesinsection.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,8 @@ import { MangmentComplaintService } from './useremployee/complaints/mangmentcomp
     MangmentcomplaintComponent,
     ComplaintslistComponent,
     NewcomplaintComponent,
+    WaitSpeener,
+    EmployeesinsectionComponent
     
 
 

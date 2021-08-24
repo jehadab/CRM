@@ -4,6 +4,8 @@ import { map , tap } from "rxjs/operators";
 import { EmpUserModel } from '../employeeuser.model';
 import { Complaint } from '../../shered/models/Complaint.model';
 import {MangmentComplaint } from '../../shered/models/complaints/mangmentcomplaint.model';
+import { Statics } from 'src/app/shered/statics.component';
+import { ServiceComplaint } from "../../shered/models/complaints/servicecomplaint.model";
 
 @Injectable()
 export class ComplaintsListService {
@@ -11,19 +13,24 @@ export class ComplaintsListService {
 
     }
     private selectedComplaint : MangmentComplaint ;
+    
+    ServiceComplaint : ServiceComplaint = {
+        id : 1 ,
+        content : "",
+        applyDate : new Date()
+    }
 
-    fetchComplaints(mangmentComplements : Complaint[] , serviceComplements : Complaint[]){
+    fetchComplaints( serviceComplements : Complaint[]){
+       
         return this.http.get(
-            'https://crmproject-558a8-default-rtdb.europe-west1.firebasedatabase.app/complaints/services_complaint.JSON')
-            .pipe(tap((res : any ) => { /// TYPE ANY
-                console.log(res);
-                
-                // mangmentComplements = res.mangmentComplements;
-                // serviceComplements =  res.serviceComplements;
-        },errorMassage =>{
-            console.log("error " + errorMassage);
-            
-        }))
+            Statics.API_HOST + "complaint/services/get").pipe(tap(resault => {
+
+                for(let i in resault){
+                    
+                    
+                }
+            }))
+           
         
 
     }

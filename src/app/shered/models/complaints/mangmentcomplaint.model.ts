@@ -14,12 +14,11 @@ export interface Steps {
 
         id : number , 
         employeeinfo : string , 
-        date : Date , 
-        rejected : boolean , 
-        status : number ,
+        date? : Date , 
+        // rejected : boolean , 
+        status : number , //0 rejected , 1 accepted
         note : string ,
-    
-
 }
+
     
     
