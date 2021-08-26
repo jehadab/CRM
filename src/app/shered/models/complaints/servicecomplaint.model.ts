@@ -8,13 +8,13 @@ export interface FlowSteps {
     stepscount : number , 
     currentstep : number , 
     
-    steps : [{
-        id : number , 
-        employeeinfo : string , 
-        date : Date , 
-        rejected : boolean , 
-        status : number ,
-        note : string ,
+    steps? : [{
+        id? : number , 
+        employeeinfo? : string , 
+        date? : Date , 
+        rejected? : boolean , 
+        status? : number ,
+        note? : string ,
     }
     ]
 }

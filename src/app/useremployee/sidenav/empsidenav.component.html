@@ -26,31 +26,25 @@
         </button>
     </div>
     <div class="p-4">
-        <h1><a href="index.html" class="logo">Flash</a></h1>
+        <h1>Welcome</h1>
+        <h1><a routerLink='/employee' class="logo">{{employeeName}}</a></h1>
         <ul class="list-unstyled components mb-5">
             <li class="active">
-                <a href="#"><span class="fa fa-home mr-3"></span> Home</a>
+                <a routerLink="inbox"><span class="fa fa-home mr-3"></span> Inbox</a>
+            </li>
+            <li>
+                <a routerLink="newcomplaint"><span class="fa fa-briefcase mr-3"></span> Add New Service Complaint</a>
             </li>
             <li>
                 <a href="#"><span class="fa fa-user mr-3"></span> About</a>
             </li>
-            <li>
-                <a href="#"><span class="fa fa-briefcase mr-3"></span> Portfolio</a>
-            </li>
-            <li>
-                <a href="#"><span class="fa fa-sticky-note mr-3"></span> Blog</a>
-            </li>
-            <li>
-                <a href="#"><span class="fa fa-paper-plane mr-3"></span> Contact</a>
-            </li>
+
         </ul>
         
         <div class="footer">
             <p>
                 Copyright ©
-                <script>document.write(new Date().getFullYear());</script>2021 All rights reserved | This template is
-                made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
-                    target="_blank">Colorlib.com</a>
+                <script>document.write(new Date().getFullYear());</script>2021 All rights reserved 
             </p>
         </div>
     </div>

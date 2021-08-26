@@ -37,10 +37,13 @@ import { MangmentcomplaintComponent } from './useremployee/complaints/mangmentco
 import { mangmentresolver } from './useremployee/complaints/mangmentcomplaint/mangmentresolver.service';
 import { ComplaintslistComponent } from './useremployee/complaintslist/complaintslist.component';
 import { ComplaintsListService } from './useremployee/complaintslist/complaintslist.service';
-import { NewcomplaintComponent } from './useremployee/newcomplaint/newcomplaint.component';
+// import { NewcomplaintComponent } from './useremployee/newcomplaint/newcomplaint.component';
 import { MangmentComplaintService } from './useremployee/complaints/mangmentcomplaint/mangmentcomplaint.service';
 import { WaitSpeener } from "./shered/models/waitingspeener.component";
 import { EmployeesinsectionComponent } from './admin/employee/employeesinsection/employeesinsection.component';
+import { NewcomplaintComponent } from './useremployee/newcomplaint/newcomplaint.component';
+import { NewComplaintService } from './useremployee/newcomplaint/newcomplaintservice.service';
+
 
 @NgModule({
   declarations: [
@@ -63,13 +66,10 @@ import { EmployeesinsectionComponent } from './admin/employee/employeesinsection
     ServicecomplaintComponent,
     MangmentcomplaintComponent,
     ComplaintslistComponent,
-    NewcomplaintComponent,
+    // NewcomplaintComponent,
     WaitSpeener,
-    EmployeesinsectionComponent
-    
-
-
-
+    EmployeesinsectionComponent,
+    NewcomplaintComponent,
 
   ],
   imports: [
@@ -84,7 +84,8 @@ import { EmployeesinsectionComponent } from './admin/employee/employeesinsection
     MatInputModule,
     MatSelectModule,
     MatIconModule,
-    RoutingModule
+    RoutingModule,
+    
 
   ],
   providers: [
@@ -97,6 +98,7 @@ import { EmployeesinsectionComponent } from './admin/employee/employeesinsection
     UserEmployeeServive,
     ComplaintsListService,
     MangmentComplaintService,
+    NewComplaintService,
 
   {
     provide :HTTP_INTERCEPTORS ,

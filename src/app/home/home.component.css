@@ -21,6 +21,10 @@
 .header .p-large {
 	margin-bottom: 1.875rem;
 }
+.header .p-xlarge{
+	font-size: large;
+	font-weight: bold;
+}
 
 .header .header-content {
     padding-top: 10.5rem;

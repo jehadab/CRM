@@ -1,0 +1,29 @@
+ 
+    {
+        "inputs": [
+            { "inputName": "placeholder", "label": "inputlabel"
+                , "inputType": "text", 
+                "multipleInputs": [{ "inputValue": "string" }] ,
+                "validators" : [
+
+                    {"required": "boolean"},
+                    {"minLingth" : "number"}
+                    
+                ]
+                  
+            },
+            { "inputName": "input1", "label": "lapel1"
+                , "inputType": "textarea", 
+                "multipleInputs": [{ "inputValue": "string" }] ,
+                "validators" : [
+
+                    {"required": "boolean"},    
+                    {"minLingth" : "number"}
+                    
+                ]
+                  
+            }
+            
+        ]
+
+    }

@@ -55,8 +55,8 @@ export class ComplaintslistComponent implements OnInit {
   };
   ngOnInit(): void {
 
-    this.complaintListService.fetchComplaints( this.serviceComplaints).subscribe(resault =>{
-      console.log(resault);
+    this.complaintListService.fetchComplaints( this.mangmentComplaints).subscribe(resault =>{
+      // console.log(resault);
       
 
     },errorMessage  => {
@@ -67,50 +67,50 @@ export class ComplaintslistComponent implements OnInit {
   this.displayedComplaints = this.mangmentComplaints;
 
     
-    // let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890" ;
-    // for (let i = 0; i <= 5; i++) {
+     let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890" ;
+     for (let i = 0; i <= 5; i++) {
 
       
-    //   this.mangmentComplaint.id = i;
-    //   // this.mangmentComplaint.name = "zezafon al shmal "+ i
-    //   this.mangmentComplaint.name = ''
+       this.mangmentComplaint.id = i;
+        this.mangmentComplaint.name = "zezafon al shmal "+ i
+       this.mangmentComplaint.name = ''
        
-    //   for (let index = 0; index < 6; index++) {
+       for (let index = 0; index < 6; index++) {
         
-    //     this.mangmentComplaint.name +=  possible.charAt(Math.floor(Math.random() * possible.length)); 
+         this.mangmentComplaint.name +=  possible.charAt(Math.floor(Math.random() * possible.length)); 
         
-    //   }
-    //   this.mangmentComplaint.applyDate = new Date();
-    //   this.mangmentComplaint.content = "zrm zrmbo "+ i;
-    //   this.mangmentComplaint.updateDate = new Date() ;
-    //   this.mangmentComplaint.flow = {
-    //     'stepscount' : 5 ,
-    //     'currentstep': 1 ,
+       }
+       this.mangmentComplaint.applyDate = new Date();
+       this.mangmentComplaint.content = "zrm zrmbo "+ i;
+       this.mangmentComplaint.updateDate = new Date() ;
+       this.mangmentComplaint.flow = {
+         'stepscount' : 5 ,
+         'currentstep': 1 ,
      
         
-    //      steps :[{
-    //        id : 4,
-    //        employeeinfo : "سيد جزرة",
-    //      date : new Date(),
-    //      status : 1,
-    //      note  : "انت مو انت و انت جعان",
-    //      },{
+          steps :[{
+            id : 4,
+            employeeinfo : "سيد جزرة",
+          date : new Date(),
+          status : 1,
+          note  : "انت مو انت و انت جعان",
+          },{
         
-    //        id : 3,
-    //        employeeinfo : "سيد فراس",
-    //      date : new Date(),
-    //      status : 0,
-    //      note  : "2انت مو انت و انت جعان",
+            id : 3,
+            employeeinfo : "سيد فراس",
+          date : new Date(),
+          status : 0,
+          note  : "2انت مو انت و انت جعان",
         
-    //      }]
-    //   }
-    //   // console.log(this.mangmentmangmentComplaints);
+          }]
+       }
+        // console.log(this.mangmentmangmentComplaints);
 
-    //   this.mangmentComplaints.push(Object.assign({},this.mangmentComplaint));
+       this.mangmentComplaints.push(Object.assign({},this.mangmentComplaint));
 
        
       
-    // }
+     }
     // for (let i = 0; i <= 50; i++) {
     
     //   this.serviceComplaint.id = i;
@@ -122,38 +122,38 @@ export class ComplaintslistComponent implements OnInit {
 
     // }
 
-    // this.displayedComplaints.forEach(element => {
-    //   this.searchedComplaints.push(element.name);
-    // });
+     this.displayedComplaints.forEach(element => {
+       this.searchedComplaints.push(element.name);
+     });
     
 
-    // this.searchsubscription =  this.instance.selectItem.subscribe((value )=>{
+     this.searchsubscription =  this.instance.selectItem.subscribe((value )=>{
       
-    //   // console.log('hi');
-    //   if(value == ''  || this.model == ''){ 
-    //     if(this.onmangmentComplaints){
-    //       console.log('empty');
+        // console.log('hi');
+       if(value == ''  || this.model == ''){ 
+         if(this.onmangmentComplaints){
+          //  console.log('empty');
           
-    //       this.displayedComplaints = this.mangmentComplaints;
-    //       this.model = '';
+           this.displayedComplaints = this.mangmentComplaints;
+           this.model = '';
           
-    //     }
-    //     return  ;
-    //  }
+         }
+         return  ;
+      }
      
-    //    this.displayedComplaints = this.mangmentComplaints.filter(
-    //      (_value => {
+        this.displayedComplaints = this.mangmentComplaints.filter(
+          (_value => {
           
-    //         console.log(value.item);
-    //       //  console.log(_value.name);
-    //         if(_value.name.toLowerCase().includes(value.item.toLowerCase()) ){
+             console.log(value.item);
+             console.log(_value.name);
+             if(_value.name.toLowerCase().includes(value.item.toLowerCase()) ){
               
-    //           return true;
+               return true;
 
-    //        }
-    //      })
-    //    )
-    // })
+            }
+          })
+        )
+     })
     
   }
 

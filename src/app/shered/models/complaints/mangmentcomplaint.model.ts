@@ -7,17 +7,18 @@ export interface MangmentComplaint extends Complaint{
 export interface FlowSteps {
     stepscount : number , 
     currentstep : number ,
-    steps : Steps []
+    steps? : Steps []
 
 }
 export interface Steps {
 
-        id : number , 
-        employeeinfo : string , 
+        id? : number , 
+        employeeinfo? : string , 
         date? : Date , 
         // rejected : boolean , 
-        status : number , //0 rejected , 1 accepted
-        note : string ,
+        status? : number , //0 rejected , 1 accepted
+        note? : string ,
+        valid? : boolean
 }
 
     

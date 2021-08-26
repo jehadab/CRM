@@ -1,1 +1,35 @@
-<p>newcomplaint works!</p>
+<div class="card bg-light mb-3 serviceComplaint" >
+    <h2 class="card-header">Add you Complaint</h2>
+    <div class="card-body">
+      <h3 class="card-title"></h3>
+      <div class="card-text">
+          <form class="form-group complaintForm" [formGroup]="complaintForm" (ngSubmit)="submitComplaint()">
+              <div class="row">
+                  <div class="col-md-8 col-lg-8" >
+
+                    <div *ngFor="let inp of inputsJSON">
+                        <div [ngSwitch]="inp.inputType">
+                          <label [for]="inp.inputName" class="inputLabel">{{inp.label}}</label>
+                            <input *ngSwitchCase="'text'" [id]="inp.inputName" 
+                            class="form-control complaintInput" [formControlName]='inp.inputName' type="text">
+                            <textarea *ngSwitchCase="'textarea'" [id]="inp.inputName" 
+                            class="form-control complaintInput" [formControlName]='inp.inputName'></textarea>
+                        </div>
+                    </div>
+                    <!-- <label for="my-input">Text</label>
+                    <input id="my-input" formControlName="testc" class="form-control"  type="text" name="" > -->
+                      
+                      
+                  </div>
+                  <!-- <div class="col-md-6 col-lg-6"#rightFormContainer>
+                      
+                </div> -->
+              </div>
+              <button type="submit" class="btn btn-primary submit">
+                  Send
+              </button> 
+            </form>
+            
+      </div>
+    </div>
+  </div>

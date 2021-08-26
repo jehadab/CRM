@@ -17,7 +17,7 @@ export class EmployeeAuth {
     login(email : String , password : String ){
 
         
-        console.log("cridets : " + email + password);
+        // console.log("cridets : " + email + password);
         
   
         return this.http.post<any>(
@@ -32,11 +32,11 @@ export class EmployeeAuth {
             // console.log(resaultData);
             
             const expirationDate = new Date( new Date().getTime()*1000 +100) ;
-            const user = new EmpUserModel(resaultData.user.email , resaultData.user.firstName + ' '+ resaultData.user.lastName , resaultData.token )
-            const employeeuser = new EmpUserModel(resaultData.user.email , resaultData.user.firstName + ' '+ resaultData.user.lastName , resaultData.token )
+            const user = new EmpUserModel(resaultData.user.email , resaultData.user.firstName , resaultData.token )
+            const employeeuser = new EmpUserModel(resaultData.user.email , resaultData.user.firstName  , resaultData.token , resaultData.role )
             this.useremployee.next(employeeuser)
             this.user.next(user);
-               console.log(user);
+            //    console.log(user);
             
             // add enterceptor for all requests
         }))

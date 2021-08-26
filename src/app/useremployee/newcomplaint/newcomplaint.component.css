@@ -1,0 +1,23 @@
+.serviceComplaint{
+    margin-right: 30px;
+    margin-top: 20px;
+}
+.complaintForm {
+    
+}
+.complaintForm :nth-child(n\2){
+    
+
+}
+.complaintInput{
+    margin : 10px ;
+}
+.inputLabel{
+    font-size: large;
+    font-weight: normal;
+    margin : 10px ;
+
+}
+.submit{
+    margin-top: 20px;
+}

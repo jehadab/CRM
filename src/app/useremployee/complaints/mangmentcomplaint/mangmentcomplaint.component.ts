@@ -14,13 +14,7 @@ export class MangmentcomplaintComponent implements OnInit {
   noteText : String ;
   isLoading : boolean = false ;
 
-  public mangmentComplaint : MangmentComplaint = {
-    id : 0 ,
-    content : "",
-    name : "",
-    applyDate : new Date ()
-
-  }; 
+  public mangmentComplaint : MangmentComplaint ;
 
   constructor(private router : Router,
     private route : ActivatedRoute ,
@@ -28,13 +22,16 @@ export class MangmentcomplaintComponent implements OnInit {
     private employeeAuth : EmployeeAuth) {
 
     this.route.data.subscribe((_data : Data) => {
-   
-      this.mangmentComplaint.id = _data.serviceComplaint.id
-      this.mangmentComplaint.content = _data.serviceComplaint.content
-      this.mangmentComplaint.name = _data.serviceComplaint.name
-      this.mangmentComplaint.applyDate = _data.serviceComplaint.date;
+      this.mangmentComplaint = {
+        id : _data.serviceComplaint.id,
+        content : _data.serviceComplaint.content ,
+        name : _data.serviceComplaint.name ,
+        applyDate : _data.serviceComplaint.date ,
+        flow : _data.serviceComplaint.flow  
+      }
+      console.log("flow : " ,this.mangmentComplaint);
       
-      this.mangmentComplaint.flow = _data.serviceComplaint.flow;
+   
       
       // console.log(_data.serviceComplaint);
       
@@ -64,14 +61,12 @@ export class MangmentcomplaintComponent implements OnInit {
     // console.log(employeeEmail);
     
     const reqBody : { id : number , data : string , email : string , status : number } =
-     {id : 5 , data : this.noteText.toString() , email : employeeEmail , status : 1}
-    console.log(reqBody);
-    
+     {id : this.mangmentComplaint.id , data : this.noteText.toString() , email : employeeEmail , status : 6}    
     // console.log(this.mangmentComplaint);
     
     this.mangmentComplaintService.postAcceptReplay(reqBody).subscribe((resault)=>{
       
-      console.log(resault);
+       console.log("resp ",resault);
       this.isLoading = false ;
       this.router.navigate(['../../'] , {relativeTo : this.route})
 
@@ -83,14 +78,23 @@ export class MangmentcomplaintComponent implements OnInit {
 
   }
   rejected(){
-    const currentReplay : number = this.mangmentComplaint.flow.currentstep;
-    this.mangmentComplaint.flow.steps[currentReplay].status = 0 ; 
-    this.mangmentComplaint.flow.steps[currentReplay].note = this.noteText.toString();
+    let employeeEmail ;
+    this.employeeAuth.useremployee.pipe(take(1)).subscribe(user=>{
+     employeeEmail = user.email
+   })
+    const reqBody : { id : number , data : string , email : string , status : number } =
+     {id : this.mangmentComplaint.id , data : this.noteText.toString() , email : employeeEmail , status : 5}    
+  
+    this.mangmentComplaintService.postAcceptReplay(reqBody).subscribe(resault => {
+      
+      this.isLoading = false ;
+      this.router.navigate(['../../'] , {relativeTo : this.route})
 
-
-    this.mangmentComplaintService.postAcceptReplay(this.mangmentComplaint).subscribe(resault => {
 
     }, errmsg => {
+      console.log(errmsg);
+       this.isLoading = false;
+      
 
     })
   }

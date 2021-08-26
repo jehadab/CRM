@@ -39,11 +39,7 @@ export class EmployeeDirective {
               this.render.setValue(this.tableCellInput , this.innerData)
               
               this.tableCellInput.required = true
-              
-              
-              
-    
-              
+
               // this.elRef.nativeElement.style.display = 'none';
               // this.elRef.nativeElement.innerText = null;
               

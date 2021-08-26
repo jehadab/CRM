@@ -18,7 +18,7 @@ export class mangmentresolver
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<MangmentComplaint> | Promise<MangmentComplaint> | MangmentComplaint{
 
-        // console.log("resolver : "+this.sectionService.getSectionNameArray());
+        //  console.log("resolver : "+this.complaintsListService.getSelectedComplaint());
       
          return this.complaintsListService.getSelectedComplaint();
       

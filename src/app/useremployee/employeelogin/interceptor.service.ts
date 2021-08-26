@@ -21,7 +21,7 @@ export class EmployeeAuthInterceptorService {
                     'x-auth-token':user._token
                 }}
                 )
-                console.log(modifiedReq);
+                // console.log(modifiedReq);
                 
 
            return next.handle(modifiedReq)

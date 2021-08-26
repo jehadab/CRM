@@ -8,7 +8,7 @@ import { Statics } from "../../../shered/statics.component";
      }
 
     postAcceptReplay(mangmentComplaint){
-        return this.http.post( Statics.API_HOST + "",mangmentComplaint);
+        return this.http.post( Statics.API_HOST + "complaint/replay",mangmentComplaint)
     }
 
 

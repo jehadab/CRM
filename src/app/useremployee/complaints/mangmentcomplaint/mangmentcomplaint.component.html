@@ -11,25 +11,27 @@
         </div>
 
         <div class="row">
-            <div class="replayes" *ngFor="let item of mangmentComplaint.flow.steps">
-                <div class="replay-card ">
-                    <div class="replay-header card-header">
-                        <h2>{{ item.employeeinfo }}</h2>
+            <div class="replayes"  *ngFor="let item of mangmentComplaint.flow.steps">
+                <div *ngIf="item.valid">
+                    <div class="replay-card ">
+                        <div class="replay-header card-header">
+                            <h2>{{ item.employeeinfo }}</h2>
+                        </div>
+                        <div class="replay-content card-body">
+                            <p>{{ item.note }}</p>
+                        </div>
                     </div>
-                    <div class="replay-content card-body">
-                        <p>{{ item.note }}</p>
-                    </div>
+
                 </div>
+                
             </div>
         </div>
         <div class="row">
             <wait-speener [showSpeener] = "isLoading"></wait-speener>
 
-            <div class="adding-resolve" *ngIf="!isLoading">
+            <div class="adding-resolve" *ngIf="!isLoading" ngSwitch="">
                 <label for="complaint-solve">Add your view to the complaint</label>
-                <textarea id="complaint-solve" class="form-control" type="" name="complaint-solve" [(ngModel)]="noteText">
-
-                </textarea>
+                <textarea id="complaint-solve" class="form-control" type="" name="complaint-solve" [(ngModel)]="noteText"></textarea>
                 <button class="btn btn-success" (click)="accepted()">Accept</button>
                 <button class="btn btn-danger" (click)="rejected()">Reject</button>
 
