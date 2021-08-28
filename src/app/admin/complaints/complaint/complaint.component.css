@@ -1,7 +1,84 @@
+.card {
+    background-color: #253138;
+    /* color: #98a6ad; */
+    color: lightgray;
+    font-family: 'Quicksand', sans-serif;
+
+}
+.table {
+    font-size: 15px;
+    font-weight: normal ;
+}
+.table-select {
+    padding: 5px;
+    border: none;
+    /* background: inherit; */
+    background-color: #566066;
+    color: inherit;
+    border-color: inherit;
+    cursor: pointer;
+    font-size: 15px;
+
+    
+}
+
+.table-select:focus {
+    border: 2px solid #98a6ad !important;
+    border-radius: 5px;
+    box-shadow: none;
+    padding: 8px;
+}
+.table-input{
+    background-color: #566066;
+    color: lightgray;
+
+}
 .generated-inputs :nth-child(n){
     margin-top: 1.3rem;
     
 }
 .card-footer>button{
     margin-left: 1.1rem;
+}
+.theme-list {
+    position: relative;
+    padding-left: 30px;
+    list-style: none;
+    z-index: 10;
+}
+
+.theme-list::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 9px;
+    margin: auto;
+    width: 1px;
+    height: 85%;
+    background-color: #cacdd6;
+    z-index: -1;
+}
+
+.theme-list li {
+    display: block;
+    margin: 5px 0;
+}
+
+.theme-list li::before {
+    content: "";
+    position: absolute;
+    left: 3px;
+    margin: 6px 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 2px solid #888;
+}
+.theme-purple .theme-list li::before {
+    border-color: #6f42c1;
+}
+.theme-red .theme-list li::before {
+    border-color: #EF3724;
 }

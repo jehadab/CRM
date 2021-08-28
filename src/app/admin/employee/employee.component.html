@@ -121,9 +121,9 @@
     </div>
 
         <ul id="sections" class="list-group">
-            <li *ngFor="let item of filteredSectionsName" class="list-group-item" >{{ item }}</li>
+            <li *ngFor="let item of filteredSectionsName" class="list-group-item" (click)="selectSections($event.target)">{{ item }}</li>
         </ul>
-    <div class="card-footer text-center">
+    <!-- <div class="card-footer text-center">
         <button [disabled]="!isThereEmplyees()" (click)="saveChanges(template)" class="btn btn-success ">Save</button>
         <button [disabled]="!isThereEmplyees()" (click)="resetChanges()" class="btn btn-danger ">Reset Data</button>
 
@@ -134,5 +134,5 @@
                 <button type="button" class="btn btn-primary" (click)="decline()">No</button>
             </div>
         </ng-template>
-    </div>
+    </div> -->
 </div>

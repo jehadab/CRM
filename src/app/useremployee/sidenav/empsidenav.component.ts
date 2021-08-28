@@ -21,6 +21,8 @@ export class EmployeeSideNav {
         this.sidenav = document.getElementById('sidebar');
         let employeeEmail ;
         this.employeeAuth.useremployee.pipe(take(1)).subscribe(user=>{
+            // console.log(user);
+            
         this.employeeName = user.name
    })
     }

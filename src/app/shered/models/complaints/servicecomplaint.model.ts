@@ -1,7 +1,7 @@
 import { Complaint } from "../../models/Complaint.model";
 export interface ServiceComplaint extends Complaint{
 
-    flow? : FlowSteps ;
+    
 
 }
 export interface FlowSteps {

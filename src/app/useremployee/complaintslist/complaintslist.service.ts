@@ -3,16 +3,19 @@ import { HttpClient } from "@angular/common/http";
 import { map, tap } from "rxjs/operators";
 import { EmpUserModel } from '../employeeuser.model';
 import { Complaint } from '../../shered/models/Complaint.model';
-import { MangmentComplaint, Steps  , FlowSteps} from '../../shered/models/complaints/mangmentcomplaint.model';
+import { MangmentComplaint, Steps, FlowSteps } from '../../shered/models/complaints/mangmentcomplaint.model';
 import { Statics } from 'src/app/shered/statics.component';
-import { ServiceComplaint  } from "../../shered/models/complaints/servicecomplaint.model";
+import { ServiceComplaint } from "../../shered/models/complaints/servicecomplaint.model";
+import { ServicecomplaintComponent } from '../complaints/servicecomplaint/servicecomplaint.component';
 
 @Injectable()
 export class ComplaintsListService {
     constructor(private http: HttpClient) {
 
     }
-    private selectedComplaint: MangmentComplaint;
+    private selectedManagmentComplaint: MangmentComplaint;
+    private selectedServiceComplaint: ServiceComplaint
+
 
     ServiceComplaint: ServiceComplaint = {
         id: 1,
@@ -20,17 +23,17 @@ export class ComplaintsListService {
         applyDate: new Date()
     }
 
-    fetchComplaints(serviceComplements: Complaint[]) {
+    fetchComplaints(complaints: Complaint[], complaintType: string) {
 
         return this.http.get(
-            Statics.API_HOST + "complaint/services/get").pipe(tap(resault => {
+            Statics.API_HOST + "complaint/" + complaintType + "/get").pipe(tap(resault => {
 
                 for (let complaint in resault) {
                     const complaintData = resault[parseInt(complaint)];
-                    console.log(complaintData);
+                    // console.log(complaintData);
 
 
-                    const serviceComplaintObject: MangmentComplaint = {
+                    const complaintObject: Complaint = {
                         id: complaintData.id,
                         name: complaintData.data.title,
                         content: complaintData.data.description,
@@ -49,7 +52,7 @@ export class ComplaintsListService {
                     }
 
                     for (let index = 0; index < complaintData.flow.steps.length; index++) {
-                        const flowData  = complaintData.flow.steps[index];
+                        const flowData = complaintData.flow.steps[index];
                         // console.log(flowData);
                         if (!flow.steps) {
                             flow.steps = [{
@@ -57,11 +60,8 @@ export class ComplaintsListService {
                                 employeeinfo: flowData.employee,
                                 date: flowData.date,
                                 status: flowData.status,
-                                note: flowData.note ,
-                                valid : flowData.valid = "true"  ? true : false 
-                                
-                                
-                                
+                                note: flowData.note,
+                                valid: flowData.valid = "true" ? true : false
 
                             }]
                         }
@@ -77,28 +77,35 @@ export class ComplaintsListService {
 
 
                                 })
-
                         }
-
                     }
-                    serviceComplaintObject.flow = flow;
-
-                    serviceComplements.push(serviceComplaintObject);
+                    complaintObject.flow = flow;
+                    // console.log("list push  :" , complaintObject);
+                    complaints.push(complaintObject);
                 }
             }))
 
 
 
     }
-    setSelectedComplaint(complaitn: MangmentComplaint) {
+    setSelectedManagmentComplaint(complaitn: MangmentComplaint) {
 
-        this.selectedComplaint = complaitn;
+        this.selectedManagmentComplaint = complaitn;
     }
-    getSelectedComplaint(): MangmentComplaint {
+    getSelectedManagementComplaint(): MangmentComplaint {
 
-        return this.selectedComplaint
+        return this.selectedManagmentComplaint
 
     }
+    setSelectedServiceComplaint(complaint: ServiceComplaint) {
+        this.selectedServiceComplaint = complaint;
+    }
+    getSelectedServiceComplaint(): ServiceComplaint {
+        // console.log('get ' , this.selectedServiceComplaint);
+
+        return this.selectedServiceComplaint
+    }
+
 
 
 }

@@ -1,12 +1,21 @@
- 
-    {
-        "inputs": [
-            { "inputName": "placeholder", "label": "inputlabel"
-                , "inputType": "select OR text OR button", 
-                "multipleInputs": [{ "inputValue": "string" }] , "required": "boolean" 
-                , "minLingth" : "number"
-            }
-
-        ]
-
-    }
+{
+    "inputs": [
+        {
+            "id": "0",
+            "inputName": "placeholder",
+            "label": "inputlabel",
+            "inputType": "select OR text OR button",
+            "multipleInputs": [
+                {
+                    "inputValue": "string"
+                }
+            ],
+            "validetors": 
+                {
+                    "required": "boolean",
+                    "minLingth": "number"
+                }
+            
+        }
+    ]
+}

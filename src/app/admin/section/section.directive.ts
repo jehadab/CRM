@@ -39,8 +39,11 @@ export class ReplaceDataSection {
 
 
             if (this.elRef.nativeElement.contains(event.target)) {
+                console.log('directive');
+
 
                 if (!this.isInputapper) {
+                    
 
                     this.tableCellInput = this.render.createElement('input');
                     this.render.addClass(this.tableCellInput, 'form-control');

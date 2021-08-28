@@ -5,98 +5,137 @@ import { MangmentComplaint } from 'src/app/shered/models/complaints/mangmentcomp
 import { EmployeeAuth } from '../../employeelogin/employeeauth.service';
 import { MangmentComplaintService } from './mangmentcomplaint.service';
 
+
 @Component({
   selector: 'app-mangmentcomplaint',
   templateUrl: './mangmentcomplaint.component.html',
-  styleUrls: ['./mangmentcomplaint.component.css']
+  styleUrls: ['./mangmentcomplaint.component.css'],
+  
 })
+
 export class MangmentcomplaintComponent implements OnInit {
-  noteText : String ;
-  isLoading : boolean = false ;
+  noteText: String;
+  isLoading: boolean = false;
 
-  public mangmentComplaint : MangmentComplaint ;
+  sectionsNames: {id : number , name : string  }[] = [];
+  roles: { id: number, name: string }[] = [];
+  isForwarder = false;
+  forwardRoleId = 6;
+  roleValue ;
+  sectuinValue ;
 
-  constructor(private router : Router,
-    private route : ActivatedRoute ,
-    private mangmentComplaintService : MangmentComplaintService,
-    private employeeAuth : EmployeeAuth) {
+  isDecisionMaker = false ;
+  
+  public mangmentComplaint: MangmentComplaint;
+  user: { role: number, email: string } = {
+    role: 0,
+    email: ""
+  }
 
-    this.route.data.subscribe((_data : Data) => {
+  constructor(private router: Router,
+    private route: ActivatedRoute,
+    private mangmentComplaintService: MangmentComplaintService,
+    private employeeAuth: EmployeeAuth) {     
+    
+
+    
+  }
+
+  ngOnInit(): void { 
+    this.route.data.subscribe((_data: Data) => {
       this.mangmentComplaint = {
-        id : _data.serviceComplaint.id,
-        content : _data.serviceComplaint.content ,
-        name : _data.serviceComplaint.name ,
-        applyDate : _data.serviceComplaint.date ,
-        flow : _data.serviceComplaint.flow  
+        id: _data.managementComplaint.id,
+        content: _data.managementComplaint.content,
+        name: _data.managementComplaint.name,
+        applyDate: _data.managementComplaint.applyDate,
+        flow: _data.managementComplaint.flow
       }
-      console.log("flow : " ,this.mangmentComplaint);
-      
-   
-      
-      // console.log(_data.serviceComplaint);
-      
-      //  console.log(this.mangmentComplaint);
-      // Complaint : id   , userid , status : int , data : JSON {title : string , discription : string } 
-      // flow {  }
 
-      
     })
 
-   }
 
-  ngOnInit(): void {
+    this.employeeAuth.useremployee.pipe(take(1)).subscribe(user => {
+      // this.user.email = user.email
+      // this.user.role = user.role
+      this.user.email = "fof@ss.n"
+      this.user.role = 6
+    })
+    if (this.user.role == this.forwardRoleId) {
+      this.mangmentComplaintService.fetchSectionsAndRoles(this.roles, this.sectionsNames)
+      this.isForwarder = true;
 
+    }
+    if(this.mangmentComplaint.flow.currentstep == this.mangmentComplaint.flow.stepscount){
+      this.isDecisionMaker = true ;
+    }
+    
+    console.log(this.user);
   }
-  accepted()
-  {
+  accepted() {
     // this.isLoading = true ;
     // const currentreplay : number= this.mangmentComplaint.flow.currentstep;
     // this.mangmentComplaint.flow.steps[currentreplay].status = 1 ;
     // this.mangmentComplaint.flow.steps[currentreplay].note = this.noteText.toString();
-    
-    let employeeEmail ;
-     this.employeeAuth.useremployee.pipe(take(1)).subscribe(user=>{
-      employeeEmail = user.email
-    })
-    // console.log(employeeEmail);
-    
-    const reqBody : { id : number , data : string , email : string , status : number } =
-     {id : this.mangmentComplaint.id , data : this.noteText.toString() , email : employeeEmail , status : 6}    
-    // console.log(this.mangmentComplaint);
-    
-    this.mangmentComplaintService.postAcceptReplay(reqBody).subscribe((resault)=>{
-      
-       console.log("resp ",resault);
-      this.isLoading = false ;
-      this.router.navigate(['../../'] , {relativeTo : this.route})
 
-     },errmsg=>{
-       console.log(errmsg);
-       this.isLoading = false;
-      
-     }) ;
+    // console.log(employeeEmail);
+
+    const reqBody: { id: number, data: string, email: string, status: number } =
+      { id: this.mangmentComplaint.id, data: this.noteText.toString(), email: this.user.email, status: 6 }
+    // console.log(this.mangmentComplaint);
+
+    this.mangmentComplaintService.postAcceptReplay(reqBody).subscribe((resault) => {
+
+      console.log("resp ", resault);
+      this.isLoading = false;
+      this.router.navigate(['../../'], { relativeTo: this.route })
+
+    }, errmsg => {
+      console.log(errmsg);
+      this.isLoading = false;
+
+    });
 
   }
-  rejected(){
-    let employeeEmail ;
-    this.employeeAuth.useremployee.pipe(take(1)).subscribe(user=>{
-     employeeEmail = user.email
-   })
-    const reqBody : { id : number , data : string , email : string , status : number } =
-     {id : this.mangmentComplaint.id , data : this.noteText.toString() , email : employeeEmail , status : 5}    
-  
+  forward(){
+
+    this.mangmentComplaintService.sendForwardedComplaint({compID : this.mangmentComplaint.id , newDep : this.sectuinValue , newRole : this.roleValue , employee  : this.user.email});
+    
+
+  }
+  rejected() {
+    const reqBody: { id: number, data: string, email: string, status: number } =
+      { id: this.mangmentComplaint.id, data: this.noteText.toString(), email: this.user.email, status: 5 }
+
     this.mangmentComplaintService.postAcceptReplay(reqBody).subscribe(resault => {
-      
-      this.isLoading = false ;
-      this.router.navigate(['../../'] , {relativeTo : this.route})
+
+      this.isLoading = false;
+      this.router.navigate(['../../'], { relativeTo: this.route })
 
 
     }, errmsg => {
       console.log(errmsg);
-       this.isLoading = false;
-      
+      this.isLoading = false;
+
 
     })
+  }
+  deleteComplaint(){
+    const reqBody: { id: number, data: string, email: string, status: number } =
+      { id: this.mangmentComplaint.id, data: this.noteText.toString(), email: this.user.email, status: 5 }
+
+    this.mangmentComplaintService.postAcceptReplay(reqBody).subscribe(resault => {
+
+      this.isLoading = false;
+      this.router.navigate(['../../'], { relativeTo: this.route })
+
+
+    }, errmsg => {
+      console.log(errmsg);
+      this.isLoading = false;
+
+
+    })
+
   }
 
 

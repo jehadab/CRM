@@ -22,7 +22,7 @@ constructor(private http : HttpClient,
     fetchSections(secArray: Section[]): Section[] {
         this.http.get(Statics.API_HOST +'department/all').
         subscribe(((res : any) =>{
-            console.log(res.dep);
+            // console.log(res.dep);
             
             res.dep.forEach(element => {
                 secArray.push(new Section(element.id, element.name, element.parent));

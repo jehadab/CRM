@@ -1,14 +1,15 @@
 import { Component } from "@angular/core"
-
 export interface ComplaintInterface {
     inputs: Input[]
 
 }
 export interface Input {
+    id : string  ;
     inputName: string
     label: string
     inputType: string
     ultipleInputs?: MultipleInputs[]
+    validetors? :  {[key : string] : string}[]  
 
 
 }
@@ -45,9 +46,9 @@ export class Complaint {
         return this.complaintInterfaceObject
     }
 
-    addCompalint( label: string,inputName: string, inputType: string): ComplaintInterface {
+    addCompalint( id : string,label: string,inputName: string, inputType: string): ComplaintInterface {
         this.complaintInterfaceObject.inputs.push(
-            { label: label , inputName : inputName , inputType : inputType})
+            {id : id , label: label , inputName : inputName , inputType : inputType})
         return this.complaintInterfaceObject
     }
 

@@ -46,8 +46,8 @@
         <tr *ngFor="let complaint of displayedComplaints" class="table-row" (click)="getSelectedComplaint($event.target)">
             <th scope="row">{{ complaint.id }}</th>
             <td>{{ complaint.name }}</td>
-            <td>{{ complaint.applyDate }}</td>
-            <td>{{ complaint.updateDate }}</td>
+            <td>{{ complaint.applyDate | date :"yyyy/mm/dd ; hh:ss" }}</td>
+            <td>{{ complaint.updateDate |  date :"yyyy/mm/dd ; hh:ss" }}</td>
         </tr>
         
 

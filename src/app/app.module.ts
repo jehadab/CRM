@@ -6,6 +6,7 @@ import { LoginComponent } from './admin/login/login.component';
 import { HeaderComponent, TopHeader } from './admin/header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SectionComponent } from './admin/section/section.component';
@@ -35,15 +36,18 @@ import { EmployeeAuthInterceptorService } from "./useremployee/employeelogin/int
 import { ServicecomplaintComponent } from './useremployee/complaints/servicecomplaint/servicecomplaint.component';
 import { MangmentcomplaintComponent } from './useremployee/complaints/mangmentcomplaint/mangmentcomplaint.component';
 import { mangmentresolver } from './useremployee/complaints/mangmentcomplaint/mangmentresolver.service';
+import { ServiceComplaintResolver } from './useremployee/complaints/servicecomplaint/serviceresolver.service';
 import { ComplaintslistComponent } from './useremployee/complaintslist/complaintslist.component';
 import { ComplaintsListService } from './useremployee/complaintslist/complaintslist.service';
-// import { NewcomplaintComponent } from './useremployee/newcomplaint/newcomplaint.component';
 import { MangmentComplaintService } from './useremployee/complaints/mangmentcomplaint/mangmentcomplaint.service';
 import { WaitSpeener } from "./shered/models/waitingspeener.component";
 import { EmployeesinsectionComponent } from './admin/employee/employeesinsection/employeesinsection.component';
 import { NewcomplaintComponent } from './useremployee/newcomplaint/newcomplaint.component';
 import { NewComplaintService } from './useremployee/newcomplaint/newcomplaintservice.service';
-
+import {ServiceComplaintService} from './useremployee/complaints/servicecomplaint/servicecomplaintservice.service';
+import { EmployeeSectionResolver } from './admin/employee/employeeresolver.service';
+import { EmployeesInSectionDirective } from './admin/employee/employeesinsection/employeesinsection.directive'
+import { EmployeesInSectionService } from './admin/employee/employeesinsection/employeesinsection.service'
 
 @NgModule({
   declarations: [
@@ -65,11 +69,11 @@ import { NewComplaintService } from './useremployee/newcomplaint/newcomplaintser
     EmployeeSideNav,
     ServicecomplaintComponent,
     MangmentcomplaintComponent,
+    WaitSpeener ,
     ComplaintslistComponent,
-    // NewcomplaintComponent,
-    WaitSpeener,
     EmployeesinsectionComponent,
     NewcomplaintComponent,
+    EmployeesInSectionDirective
 
   ],
   imports: [
@@ -85,10 +89,12 @@ import { NewComplaintService } from './useremployee/newcomplaint/newcomplaintser
     MatSelectModule,
     MatIconModule,
     RoutingModule,
+    CommonModule
     
 
   ],
   providers: [
+    ServiceComplaintResolver,
     ServiceResolver,
     mangmentresolver,
     SectionService,
@@ -99,6 +105,11 @@ import { NewComplaintService } from './useremployee/newcomplaint/newcomplaintser
     ComplaintsListService,
     MangmentComplaintService,
     NewComplaintService,
+    ServiceComplaintService,
+    EmployeeSectionResolver,
+    EmployeesInSectionService,
+    
+    
 
   {
     provide :HTTP_INTERCEPTORS ,

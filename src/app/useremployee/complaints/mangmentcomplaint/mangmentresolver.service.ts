@@ -20,7 +20,7 @@ export class mangmentresolver
 
         //  console.log("resolver : "+this.complaintsListService.getSelectedComplaint());
       
-         return this.complaintsListService.getSelectedComplaint();
+         return this.complaintsListService.getSelectedManagementComplaint();
       
       }
 }

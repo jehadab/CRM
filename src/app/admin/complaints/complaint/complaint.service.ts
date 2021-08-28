@@ -1,11 +1,13 @@
+import { HttpClient } from '@angular/common/http';
 import { ElementRef, Injectable, Renderer2 } from '@angular/core';
+import { Statics } from 'src/app/shered/statics.component';
 import { Complaint } from './complaint.model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ComplaintService {
-    constructor(){}
+    constructor(private http : HttpClient){}
     generatedInputs : HTMLInputElement[]=[];
 
     showComplaintPrototypeView(eleRef : ElementRef , complaint:Complaint,render : Renderer2){
@@ -54,5 +56,9 @@ export class ComplaintService {
                     break;
             }
         })
+    }
+    sendComplaint(Complaint : {name : string  , type : number , department , form , path }){
+        return this.http.post(Statics.API_HOST + "" , Complaint)
+
     }
 }

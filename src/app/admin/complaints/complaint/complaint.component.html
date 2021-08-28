@@ -1,47 +1,170 @@
-.<div class="card">
+.<div class="card ">
     <div class="card-header">
         Complaint
-        
+
     </div>
     <div class="card-body">
-        <div class="" style="text-align: right;">
-            <button class="btn btn-primary" type="button" 
-            (click)="addAnotherInputField()">add another input feild</button>
-        </div>
 
-        <form [formGroup]="parentFormGroup"  class="from-group"
-        *ngFor="let formGroup of formControlArray.controls;let idx = index">
+        <form [formGroup] = "nameAndTypeForm">
+            <div class="form-group">
+                <label for="complaintName">Complaint Name</label>
+                <input id="complaintName" class="form-control" type="text" name="" formControlName="name">
+            </div>
+            <div class="form-group mt-4">
+                <label for="depSelect">Select Department</label>
+                <select id="depSelect" class="form-control" name="">
+                    <option *ngFor="let dep of depList" [value]="dep.id">{{dep.name}}</option>
+                </select>
+            </div>
+            <div class="form-check orm-check-inline mt-4">
+                <input class="form-check-input" type="radio" [name]="'type'"
+                 id="exampleRadios1" formControlName="type" [value]="2" checked>
+                <label class="form-check-label" for="exampleRadios1">
+                  Management Complaint
+                </label>
+              </div>
+              <div class="form-check orm-check-inline">
+                <input class="form-check-input" type="radio" [name]="'type'"
+                 id="exampleRadios2" formControlName="type" [value]="3">
+                <label class="form-check-label" for="exampleRadios2">
+                  Service Complaint
+                </label>
+              </div>
+
+        </form>
+        <div class="" style="text-align: right;">
+            <button class="btn btn-primary" type="button" (click)="addAnotherInputField()">
+                add another input feild
+            </button>
+        </div>
+        <table class="table table-dark">
+            <thead>
+                <th scope="col" style="width: 10%">#</th>
+                <th scope="col" style="width: 30%">Input Name</th>
+                <th scope="col" style="width: 30%">Input label</th>
+                <th scope="col" style="width: 30%">Input Type</th>
+            </thead>
+            <tbody [formGroup]="parentFormGroup" class="from-group"
+                *ngFor="let formGroup of formControlArray.controls;let idx = index">
+                <tr [formGroup]="formGroup">
+
+                    <th scope="row">{{idx}}</th>
+                    <td scope="row">
+                        <div class="form-group">
+                            <input type="text" name="label" [id]="'label'+idx" class="form-control table-input"
+                                formControlName="label">
+                        </div>
+                    </td>
+                    <td scope="row ">
+                        <div class="form-group">
+                            <input id="input label" class="form-control table-input" type="text" name=""
+                                formControlName="inputName">
+                        </div>
+                    </td>
+                    <td scope="row">
+                        <select class="form-select form-select-lg table-select" aria-label="Default"
+                            formControlName="inputType">
+                            <option *ngFor="let type of inputTypes" [value]="type">{{type}}</option>
+                        </select>
+                    </td>
+
+                </tr>
+            </tbody>
+
+        </table>
+        <div class="" style="text-align: right;">
+            <button class="btn btn-primary" type="button" (click)="addAnotherFlowStep()">
+                Add Another Flow Step
+            </button>
+        </div>
+        <table class="table table-dark">
+            <thead>
+                <th scope="col" style="width: 5%">#Step</th>
+                <th scope="col" style="width: 50%">Comolaint Department</th>
+                <th scope="col" style="width: 45%">Employee Role</th>
+            </thead>
+            <tbody [formGroup]="parentStepsForm" class="from-group"
+                *ngFor="let formGroup of stepsFormArray.controls;let idx = index">
+                <tr [formGroup]="formGroup">
+
+                    <th scope="row">{{ idx }}</th>
+                    <td scope="row">
+
+                        <select class="form-select form-select-lg table-select " aria-label="Default"
+                            formControlName="dep">
+                            <option *ngFor="let dep of depList" [value]="dep.id">{{dep.name}}</option>
+                        </select>
+                    </td>
+                    <td scope="row">
+
+                        <select class="form-select form-select-lg table-select " aria-label="Default"
+                            formControlName="role">
+                            <option *ngFor="let role of roleList" [value]="role.id">{{role.name}}</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+
+
+        
+        <!-- <div class="form-group">
+            <label for="complaintName">Complaint Name</label>
+            <input id="complaintName" class="form-control" type="text" name="">
+        </div>
+        <div class="form-check orm-check-inline">
+            <input class="form-check-input" type="radio" name="complaintType" id="exampleRadios1" value="2" checked>
+            <label class="form-check-label" for="exampleRadios1">
+              Management Complaint
+            </label>
+          </div>
+          <div class="form-check orm-check-inline">
+            <input class="form-check-input" type="radio" name="complaintType" id="exampleRadios2" value="3">
+            <label class="form-check-label" for="exampleRadios2">
+              Service Complaint
+            </label>
+          </div> -->
+
+
+        <!-- <form [formGroup]="parentFormGroup" class="from-group"
+            *ngFor="let formGroup of formControlArray.controls;let idx = index">
             <div class="form-row" [formGroup]="formGroup">
-                
+
                 <div class="form-group col-5">
-                    
-                    <label [attr.for]="'label'+idx" >Input label</label>
-                    <input type="text" name="label" [id]="'label'+idx" class="form-control" formControlName="label" >
+
+                    <label [attr.for]="'label'+idx">Input label</label>
+                    <input type="text" name="label" [id]="'label'+idx" class="form-control" formControlName="label">
                 </div>
                 <div class="form-group col-5">
 
                     <label [attr.for]="'inputName'+idx" class="">Input Name</label>
-                    <input type="text" name="inputName" [id]="'inputName'+idx" 
-                    class="form-control" formControlName="inputName">
+                    <input type="text" name="inputName" [id]="'inputName'+idx" class="form-control"
+                        formControlName="inputName">
                 </div>
 
                 <div class="form-group col-2">
                     <label [attr.for]="'inputType'+idx">inputType</label>
-                    <select [id]="'inputType'+idx"
-                     class="form-control " name="inputType" formControlName="inputType">
+                    <select [id]="'inputType'+idx" class="form-control " name="inputType" formControlName="inputType">
                         <option *ngFor="let inputType of inputTypes" value="{{ inputType }}">{{ inputType }}</option>
                     </select>
                 </div>
                 <hr>
             </div>
-            
-            
-        </form>
-        <div class="row" >
+
+
+        </form> -->
+        <div class="row">
             <div class="col-12">
                 <h2 *ngIf="complement.getcomplaint().inputs.length != 0">your complaint will look like</h2>
                 <div class="form-group generated-inputs" #comppaintprototype>
-                    
+                    <div class="theme-purple">
+
+                        <ul class="theme-list">
+                            <li *ngFor="let step of displayedFlow"><b>{{ step.dep }} : </b>{{ step.role }}</li>
+                        </ul>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -49,7 +172,6 @@
     <div class="card-footer text-center">
         <button class="btn btn-primary" (click)="showResault()">Show Complaint</button>
         <button class="btn btn-success" (click)="save()">Save</button>
-        <input type="text" #comppaintprototype>
-        
+
     </div>
 </div>

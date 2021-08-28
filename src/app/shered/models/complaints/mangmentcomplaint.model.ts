@@ -2,7 +2,7 @@ import { Complaint } from "../../models/Complaint.model";
 
 export interface MangmentComplaint extends Complaint{
 
-    flow? : FlowSteps ;
+    
 }
 export interface FlowSteps {
     stepscount : number , 

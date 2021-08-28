@@ -9,16 +9,6 @@ import  { MangmentComplaint  } from '../../shered/models/complaints/mangmentcomp
 import  { ServiceComplaint  } from '../../shered/models/complaints/servicecomplaint.model';
 import { ActivatedRoute, Router } from '@angular/router';
 
-const states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado',
-  'Connecticut', 'Delaware', 'District Of Columbia', 'Federated States Of Micronesia', 'Florida', 'Georgia',
-  'Guam', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine',
-  'Marshall Islands', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana',
-  'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
-  'Northern Mariana Islands', 'Ohio', 'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico', 'Rhode Island',
-  'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Islands', 'Virginia',
-  'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
-
-
 @Component({
   selector: 'app-complaintslist',
   templateUrl: './complaintslist.component.html',
@@ -26,7 +16,6 @@ const states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'C
 })
 export class ComplaintslistComponent implements OnInit {
 
-  plzreplace : boolean = true ;
 
   onmangmentComplaints : boolean = true ;
   mangmentComplaints: MangmentComplaint[] = [];
@@ -55,8 +44,8 @@ export class ComplaintslistComponent implements OnInit {
   };
   ngOnInit(): void {
 
-    this.complaintListService.fetchComplaints( this.mangmentComplaints).subscribe(resault =>{
-      // console.log(resault);
+    this.complaintListService.fetchComplaints( this.mangmentComplaints , "management").subscribe(resault =>{
+       console.log('fetch res : ', resault);
       
 
     },errorMessage  => {
@@ -64,67 +53,68 @@ export class ComplaintslistComponent implements OnInit {
       
       
     })
-  this.displayedComplaints = this.mangmentComplaints;
+   this.displayedComplaints = this.mangmentComplaints;
 
     
-     let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890" ;
-     for (let i = 0; i <= 5; i++) {
+      let possible = " ABCDEFGHIJKLMNOPQRSTUVWXYZ " ;
+      for (let i = 0; i <= 5; i++) {
 
       
-       this.mangmentComplaint.id = i;
-        this.mangmentComplaint.name = "zezafon al shmal "+ i
-       this.mangmentComplaint.name = ''
+        this.mangmentComplaint.id = i;
+         this.mangmentComplaint.name = "my boss make bad decisions" 
+        // this.mangmentComplaint.name = ''
        
-       for (let index = 0; index < 6; index++) {
+        // for (let index = 0; index < 12; index++) {
         
-         this.mangmentComplaint.name +=  possible.charAt(Math.floor(Math.random() * possible.length)); 
+        //   this.mangmentComplaint.name +=  possible.charAt(Math.floor(Math.random() * possible.length)); 
         
-       }
-       this.mangmentComplaint.applyDate = new Date();
-       this.mangmentComplaint.content = "zrm zrmbo "+ i;
-       this.mangmentComplaint.updateDate = new Date() ;
-       this.mangmentComplaint.flow = {
-         'stepscount' : 5 ,
-         'currentstep': 1 ,
+        // }
+        this.mangmentComplaint.applyDate = new Date();
+        this.mangmentComplaint.content = "there is many decision made by my boss can harm the Economie of the company. "+ i;
+        this.mangmentComplaint.updateDate = new Date() ;
+        this.mangmentComplaint.flow = {
+          'stepscount' : 5 ,
+          'currentstep': 5 ,
      
         
-          steps :[{
-            id : 4,
-            employeeinfo : "سيد جزرة",
-          date : new Date(),
-          status : 1,
-          note  : "انت مو انت و انت جعان",
-          },{
+           steps :[{
+             id : 4,
+             employeeinfo : "management office header",
+           date : new Date(),
+           status : 1,
+           note  : "we have check the Financial budget , and there is flaw on it",
+           valid : true ,
+           },{
         
-            id : 3,
-            employeeinfo : "سيد فراس",
-          date : new Date(),
-          status : 0,
-          note  : "2انت مو انت و انت جعان",
+             id : 3,
+             employeeinfo : "Director",
+           date : new Date(),
+           status : 0,
+           note  : "decision has been made to the Head of Department",
+           valid : true
         
-          }]
-       }
-        // console.log(this.mangmentmangmentComplaints);
+           }]
+        }
 
-       this.mangmentComplaints.push(Object.assign({},this.mangmentComplaint));
+        this.mangmentComplaints.push(Object.assign({},this.mangmentComplaint));
 
        
       
-     }
-    // for (let i = 0; i <= 50; i++) {
+      }
+    //  for (let i = 0; i <= 50; i++) {
     
-    //   this.serviceComplaint.id = i;
-    //   this.serviceComplaint.applyDate = new Date();
-    //   this.serviceComplaint.content = "zrm zrmbo zeza meko" + i ;
-    //   this.serviceComplaint.updateDate = new Date() 
+    //    this.serviceComplaint.id = i;
+    //    this.serviceComplaint.applyDate = new Date();
+    //    this.serviceComplaint.content = "zrm zrmbo zeza meko" + i ;
+    //    this.serviceComplaint.updateDate = new Date() 
 
-    //   this.serviceComplaints.push(Object.assign({},this.serviceComplaint));
+    //    this.serviceComplaints.push(Object.assign({},this.serviceComplaint));
 
-    // }
+    //  }
 
-     this.displayedComplaints.forEach(element => {
-       this.searchedComplaints.push(element.name);
-     });
+    //  this.displayedComplaints.forEach(element => {
+    //    this.searchedComplaints.push(element.name);
+    //  });
     
 
      this.searchsubscription =  this.instance.selectItem.subscribe((value )=>{
@@ -174,11 +164,22 @@ export class ComplaintslistComponent implements OnInit {
   )
     
   
-
-
+  
+  
   showMangmentComplaint(categoryDiv: HTMLElement) {
-    // console.log(this.serviceElemnt.nativeElement.classList);
     this.onmangmentComplaints = true;
+    this.mangmentComplaints = [] ; 
+    this.complaintListService.fetchComplaints( this.mangmentComplaints , "management").subscribe(resault =>{
+      // console.log(resault);
+      
+
+    },errorMessage  => {
+      console.log(errorMessage);
+      
+      
+    })
+  // this.displayedComplaints = this.mangmentComplaints;
+    // console.log(this.serviceElemnt.nativeElement.classList);
 
     const classList = categoryDiv.classList;
     this.displayedComplaints = this.mangmentComplaints as Complaint[];
@@ -191,9 +192,21 @@ export class ComplaintslistComponent implements OnInit {
   }
   showServiceComplaint(categoryDiv: HTMLElement) {
     this.onmangmentComplaints = false ;
+    this.serviceComplaints = [] ; 
+
+    this.complaintListService.fetchComplaints( this.serviceComplaints , "services").subscribe(resault =>{
+      // console.log(resault);
+      
+
+    },errorMessage  => {
+      console.log(errorMessage);
+      
+      
+    })
+  // this.displayedComplaints = this.serviceComplaints;
 
     const classList = categoryDiv.classList;
-    this.displayedComplaints = this.serviceComplaints;
+    this.displayedComplaints = this.serviceComplaints as Complaint[];
 
 
     classList.add('active')
@@ -201,8 +214,10 @@ export class ComplaintslistComponent implements OnInit {
 
   }
 
-  getSelectedComplaint(complaint : HTMLElement) : MangmentComplaint {
+  getSelectedComplaint(complaint : HTMLElement){
     const parentNode : HTMLElement =complaint.parentElement ;
+    if(this.onmangmentComplaints){
+
     const selectedCompiant =  this.mangmentComplaints.find(_complaint => {
       
       if(_complaint.id == Number(parentNode.children[0].innerHTML))
@@ -210,24 +225,23 @@ export class ComplaintslistComponent implements OnInit {
         
     } )     
     
-
-    this.plzreplace = false;
-    const mc : MangmentComplaint  = {
-      id : selectedCompiant.id ,
-      content : selectedCompiant.content , 
-      name : "zrm zrmbo" ,
-      applyDate : new Date(),
+      this.complaintListService.setSelectedManagmentComplaint(selectedCompiant);
+      this.router.navigate(['managementcomplaint/'+selectedCompiant.id],{ relativeTo :  this.activeRoute })
+    }
+    else {
       
-    } ;
-    // console.log(mc);
-
+    const selectedCompiant =  this.serviceComplaints.find(_complaint => {
+      if(_complaint.id == Number(parentNode.children[0].innerHTML))
+      return true ;
+        
+    } )
+    console.log("selected ",selectedCompiant);
     
+          
+      this.complaintListService.setSelectedServiceComplaint(selectedCompiant);
+      this.router.navigate(['servicecomplaint/'+selectedCompiant.id],{ relativeTo :  this.activeRoute })
+    }
     
-    complaint.children[0];
-    this.router.navigate(['complaint/'+mc.id],{ relativeTo :  this.activeRoute })
-    
-    this.complaintListService.setSelectedComplaint(selectedCompiant);
-    return mc ;
 
   }
   ngOnDestroy(): void {

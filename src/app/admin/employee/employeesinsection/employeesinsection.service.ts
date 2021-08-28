@@ -2,15 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { Statics } from 'src/app/shered/statics.component';
-import { Employee } from './employee.model';
- import { users } from './example.json'
+import { Employee } from '../employee.model';
+ import { users } from '../example.json'
 
 
 
 @Injectable({
     providedIn: 'root'
 })
-export class EmployeeService {
+export class EmployeesInSectionService {
     constructor(private http : HttpClient){
 
     }

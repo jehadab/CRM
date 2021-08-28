@@ -1,7 +1,7 @@
  
     {
         "inputs": [
-            { "inputName": "placeholder", "label": "inputlabel"
+            { "inputName": "placeholder", "label": "complaint title"
                 , "inputType": "text", 
                 "multipleInputs": [{ "inputValue": "string" }] ,
                 "validators" : [
@@ -12,7 +12,7 @@
                 ]
                   
             },
-            { "inputName": "input1", "label": "lapel1"
+            { "inputName": "input1", "label": "complaint description"
                 , "inputType": "textarea", 
                 "multipleInputs": [{ "inputValue": "string" }] ,
                 "validators" : [
