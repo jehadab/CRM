@@ -18,7 +18,9 @@ import { NewComplaintService } from './newcomplaintservice.service';
 export class NewcomplaintComponent implements OnInit {
   complaintForm: FormGroup;
   formArray :  FormArray ;
-  inputsJSON = inputs;
+  inputsJSON : any = [];
+  formsNames : { id : number , name : string }[] = [] ;
+  selectValue ;
 
   // @ViewChild('leftFormContainer', { static: true }) leftFormContainer: ElementRef;
   // @ViewChild('rightFormContainer', { static: true }) rightFormContainer: ElementRef;
@@ -30,6 +32,15 @@ export class NewcomplaintComponent implements OnInit {
 
     this.complaintForm = new FormGroup({
 
+
+
+    })
+    this.newComplaintService.fetchForms(this.formsNames).subscribe(
+      res=>{
+
+      
+
+    },err=>{
 
     })
 
@@ -54,34 +65,60 @@ export class NewcomplaintComponent implements OnInit {
 
     //   }
     // });
-    let id1 = 0 ;
-    inputs.forEach(input => {
+    // let id1 = 0 ;
+    // inputs.forEach(input => {
       
-      let fromControl: FormControl = new FormControl(null)
+    //   let fromControl: FormControl = new FormControl(null)
       
-      this.complaintForm.addControl(input.inputName, fromControl)
-      // console.log("name ",input.inputName);
-      // console.log("control ",fromControl);
-      // console.log("form ",this.complaintForm);
+    //   this.complaintForm.addControl(input.inputName, fromControl)
+    //   // console.log("name ",input.inputName);
+    //   // console.log("control ",fromControl);
+    //   // console.log("form ",this.complaintForm);
       
+
+    // })
+
+  }
+  createFormControl(){
+    this.inputsJSON.forEach(input=>{
+      this.complaintForm.addControl(input.inputName , new FormControl())
+      
+    })
+  }
+  onSelectChange(){
+    this.newComplaintService.fetchInputs(this.selectValue).subscribe((res : any)=>{
+
+      res.form.forEach(element => {
+        this.inputsJSON.push(element) ;
+        
+        
+      });
+      this.createFormControl();
+      
+      console.log(res);
+      console.log(this.complaintForm);
+      
+
+    },err=>{
 
     })
 
   }
 
     submitComplaint(){
-      let reqbody : {name? : string ,disctiption? : string } = {};
-      let dataArray : {[key : string] : string}[] = []; 
+      let reqbody : {formID : number ,data? } = {formID : this.selectValue};
+      let dataArray :{[key : string] : string}[] = []; 
        
-      inputs.forEach(element=>{
+      this.inputsJSON.forEach(element=>{
         //  this.complaintForm.controls[element.inputName].setValue('444')
         dataArray.push({[element.inputName] : this.complaintForm.controls[element.inputName].value })
          
         
       })
+      reqbody.data = dataArray ;
       
       
-      this.newComplaintService.submit(dataArray).subscribe(res=>{
+      this.newComplaintService.submit(reqbody ).subscribe(res=>{
           console.log(res);
           
         },err=>{

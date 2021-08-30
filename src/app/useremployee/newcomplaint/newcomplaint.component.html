@@ -1,6 +1,12 @@
 <div class="card bg-light mb-3 serviceComplaint" >
     <h2 class="card-header">Add you Complaint</h2>
     <div class="card-body">
+      <div class="form-group">
+        <label for="formSelect">select a Complaint </label>
+        <select id="formSelect" class="form-control" name="" [(ngModel)]="selectValue" (change)="onSelectChange()">
+          <option *ngFor="let form of formsNames" [value]="form.id" >{{form.name}}</option>
+        </select>
+      </div>
       <h3 class="card-title"></h3>
       <div class="card-text">
           <form class="form-group complaintForm" [formGroup]="complaintForm" (ngSubmit)="submitComplaint()">
@@ -14,7 +20,7 @@
                             class="form-control complaintInput" [formControlName]='inp.inputName' type="text">
                             <textarea *ngSwitchCase="'textarea'" [id]="inp.inputName" 
                             class="form-control complaintInput" [formControlName]='inp.inputName'></textarea>
-                        </div>
+                        </div>  
                     </div>
                     <!-- <label for="my-input">Text</label>
                     <input id="my-input" formControlName="testc" class="form-control"  type="text" name="" > -->

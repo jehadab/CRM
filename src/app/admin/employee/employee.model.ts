@@ -5,9 +5,11 @@ export class Employee {
         private firstName : string ,
         private lastName : string , 
         private email :string ,
-        private sectionName : string ,
+        private department : string ,
+        public password? : string ,
+        public role? : string , 
+        public phone? : number ,
         ){
-
     }
     
     public setId(value : number) {
@@ -23,7 +25,7 @@ export class Employee {
         this.email = value;
     }
     public setSectionName(value : string) {
-        this.sectionName = value;
+        this.department = value;
     }
     
     public getId() : number {
@@ -39,7 +41,7 @@ export class Employee {
         return this.email ;
     }
     public getSectionName() : string {
-        return this.sectionName ;
+        return this.department ;
     }
     
     

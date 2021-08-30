@@ -45,7 +45,7 @@ export class ComplaintslistComponent implements OnInit {
   ngOnInit(): void {
 
     this.complaintListService.fetchComplaints( this.mangmentComplaints , "management").subscribe(resault =>{
-       console.log('fetch res : ', resault);
+      //  console.log('fetch res : ', resault);
       
 
     },errorMessage  => {
@@ -56,51 +56,51 @@ export class ComplaintslistComponent implements OnInit {
    this.displayedComplaints = this.mangmentComplaints;
 
     
-      let possible = " ABCDEFGHIJKLMNOPQRSTUVWXYZ " ;
-      for (let i = 0; i <= 5; i++) {
+      // let possible = " ABCDEFGHIJKLMNOPQRSTUVWXYZ " ;
+      // for (let i = 0; i <= 5; i++) {
 
       
-        this.mangmentComplaint.id = i;
-         this.mangmentComplaint.name = "my boss make bad decisions" 
-        // this.mangmentComplaint.name = ''
+      //   this.mangmentComplaint.id = i;
+      //    this.mangmentComplaint.name = "my boss make bad decisions" 
+      //   // this.mangmentComplaint.name = ''
        
-        // for (let index = 0; index < 12; index++) {
+      //   // for (let index = 0; index < 12; index++) {
         
-        //   this.mangmentComplaint.name +=  possible.charAt(Math.floor(Math.random() * possible.length)); 
+      //   //   this.mangmentComplaint.name +=  possible.charAt(Math.floor(Math.random() * possible.length)); 
         
-        // }
-        this.mangmentComplaint.applyDate = new Date();
-        this.mangmentComplaint.content = "there is many decision made by my boss can harm the Economie of the company. "+ i;
-        this.mangmentComplaint.updateDate = new Date() ;
-        this.mangmentComplaint.flow = {
-          'stepscount' : 5 ,
-          'currentstep': 5 ,
+      //   // }
+      //   this.mangmentComplaint.applyDate = new Date();
+      //   this.mangmentComplaint.content = "there is many decision made by my boss can harm the Economie of the company. "+ i;
+      //   this.mangmentComplaint.updateDate = new Date() ;
+      //   this.mangmentComplaint.flow = {
+      //     'stepscount' : 5 ,
+      //     'currentstep': 5 ,
      
         
-           steps :[{
-             id : 4,
-             employeeinfo : "management office header",
-           date : new Date(),
-           status : 1,
-           note  : "we have check the Financial budget , and there is flaw on it",
-           valid : true ,
-           },{
+      //      steps :[{
+      //        id : 4,
+      //        employeeinfo : "management office header",
+      //      date : new Date(),
+      //      status : 1,
+      //      note  : "we have check the Financial budget , and there is flaw on it",
+      //      valid : true ,
+      //      },{
         
-             id : 3,
-             employeeinfo : "Director",
-           date : new Date(),
-           status : 0,
-           note  : "decision has been made to the Head of Department",
-           valid : true
+      //        id : 3,
+      //        employeeinfo : "Director",
+      //      date : new Date(),
+      //      status : 0,
+      //      note  : "decision has been made to the Head of Department",
+      //      valid : true
         
-           }]
-        }
+      //      }]
+      //   }
 
-        this.mangmentComplaints.push(Object.assign({},this.mangmentComplaint));
+      //   this.mangmentComplaints.push(Object.assign({},this.mangmentComplaint));
 
        
       
-      }
+      // }
     //  for (let i = 0; i <= 50; i++) {
     
     //    this.serviceComplaint.id = i;
@@ -134,8 +134,8 @@ export class ComplaintslistComponent implements OnInit {
         this.displayedComplaints = this.mangmentComplaints.filter(
           (_value => {
           
-             console.log(value.item);
-             console.log(_value.name);
+            //  console.log(value.item);
+            //  console.log(_value.name);
              if(_value.name.toLowerCase().includes(value.item.toLowerCase()) ){
               
                return true;

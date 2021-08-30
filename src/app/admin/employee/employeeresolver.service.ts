@@ -6,12 +6,12 @@ import { EmployeeService } from "./employee.service";
 
 
 @Injectable()
-export class EmployeeSectionResolver implements Resolve<string>{
+export class EmployeeSectionResolver implements Resolve<{id : number , name :  string}>{
   constructor(private employeeService : EmployeeService){
     
   }
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<string> | Promise<string> | string{
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<{id : number , name :  string}> | Promise<{id : number , name :  string}> | {id : number , name :  string}{
 
         //  console.log("resolver : " ,this.employeeService.getSectionName());
       

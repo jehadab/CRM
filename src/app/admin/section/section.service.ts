@@ -19,23 +19,26 @@ constructor(private http : HttpClient,
     }
     
     
-    fetchSections(secArray: Section[]): Section[] {
-        this.http.get(Statics.API_HOST +'department/all').
-        subscribe(((res : any) =>{
+    fetchSections(secArray: Section[]){
+        return this.http.get(Statics.API_HOST +'department/all').pipe(tap
+        (((res : any) =>{
             // console.log(res.dep);
             
-            res.dep.forEach(element => {
+            res.forEach(element => {
                 secArray.push(new Section(element.id, element.name, element.parent));
 
             });
-        }))
+        })))
         // department.forEach(
         //     (_section, index) => {
 
         //         // secArray.push(new Section(_section.id, _section.name, _section.parent));
 
         //     })
-        return secArray;
+    }
+    postSection(section ){
+        return this.http.post(Statics.API_HOST + "department/addDepartment", section)
+
     }
     getSectionNameArray(): string[] {
 

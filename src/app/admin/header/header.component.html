@@ -4,14 +4,18 @@
     <img src="../../../assets/shared/images/unknownaccount.png" alt="" srcset="">
     <ul ngbNav>
         <li [ngbNavItem]="1">
-            <a routerLink='addDepartments'
+            <a routerLink='home'
             routerLinkActive="active"
-            ngbNavLink> Add Section</a>
+            ngbNavLink> Dashboard</a>
         </li>
         <li [ngbNavItem]="2">
-            <a routerLink='addEmployee' ngbNavLink> Add Employee </a>
+            <a routerLink='addDepartments'
+            ngbNavLink> Add Section</a>
         </li>
         <li [ngbNavItem]="3">
+            <a routerLink='addEmployee' ngbNavLink> Add Employee </a>
+        </li>
+        <li [ngbNavItem]="4">
             <a routerLink='complaints' ngbNavLink> Complaint Moving</a>
         </li>
     </ul>

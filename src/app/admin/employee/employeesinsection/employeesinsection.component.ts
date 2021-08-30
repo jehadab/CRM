@@ -17,9 +17,10 @@ import { EmployeesInSectionService } from './employeesinsection.service';
 })
 export class EmployeesinsectionComponent implements OnInit {
 
-  selectedSection: string;
+  selectedSection: { id: number, name: string };
 
-  sectionNameArray: string[] = [];
+  sectionNameArray: { id: number, name: string }[] = [];
+  rolesArray: { id: string, name: string }[] = [];
   employeeArray: Employee[] = [];
   isaddEmployeeHidden: boolean = false;
   orginalEmployeeArray: Employee[] = [];
@@ -41,38 +42,41 @@ export class EmployeesinsectionComponent implements OnInit {
       'firstName': new FormControl(null, Validators.required),
       'lastName': new FormControl(null, Validators.required),
       'email': new FormControl(null, Validators.required),
-      'employeeSection': new FormControl(null, Validators.required)
+      'employeeSection': new FormControl(null, Validators.required),
+      'employeRole': new FormControl(null, Validators.required) , 
+      'phoneNumber' : new FormControl(null , Validators.required),
+      'password' : new FormControl ( null , Validators.required)
+
     })
 
 
-    this.employeeService.fetchEmployees(this.employeeArray);
-      this.employee = new Employee(this.employeeId++, 'abo somr'
-        , 'al derane', "fofo@test.com", this.sectionNameArray[0])
-      this.employeeArray.push(this.employee)
-      this.employee = new Employee(this.employeeId++, 'abo fofo'
-        , 'al derane', "fofo@test.com", this.sectionNameArray[0])
-      this.employeeArray.push(this.employee)
-      this.employee = new Employee(this.employeeId++, 'abo gogo'
-        , 'al derane', "fofo@test.com", this.sectionNameArray[0])
-      this.employeeArray.push(this.employee)
+    //   this.employee = new Employee(this.employeeId++, 'abo somr'
+    //     , 'al derane', "fofo@test.com", this.sectionNameArray[0])
+    //   this.employeeArray.push(this.employee)
+    //   this.employee = new Employee(this.employeeId++, 'abo fofo'
+    //     , 'al derane', "fofo@test.com", this.sectionNameArray[0])
+    //   this.employeeArray.push(this.employee)
+    //   this.employee = new Employee(this.employeeId++, 'abo gogo'
+    //     , 'al derane', "fofo@test.com", this.sectionNameArray[0])
+    //   this.employeeArray.push(this.employee)
 
-      this.employee = new Employee(this.employeeId++, 'abo zozo'
-        , 'al derane', "zozo@test.com", this.sectionNameArray[1])
-      this.employeeArray.push(this.employee)
-      this.employee = new Employee(this.employeeId++, 'abo ss'
-        , 'al derane', "zozo@test.com", this.sectionNameArray[1])
-      this.employeeArray.push(this.employee)
+    //   this.employee = new Employee(this.employeeId++, 'abo zozo'
+    //     , 'al derane', "zozo@test.com", this.sectionNameArray[1])
+    //   this.employeeArray.push(this.employee)
+    //   this.employee = new Employee(this.employeeId++, 'abo ss'
+    //     , 'al derane', "zozo@test.com", this.sectionNameArray[1])
+    //   this.employeeArray.push(this.employee)
 
-      this.employee = new Employee(this.employeeId++, 'abo bb'
-        , 'al derane', "zozo@test.com", this.sectionNameArray[2])
-      this.employeeArray.push(this.employee)
-      this.employee = new Employee(this.employeeId++, 'abo nn'
-        , 'al derane', "zozo@test.com", this.sectionNameArray[2])
-      this.employeeArray.push(this.employee)
-    this.isaddEmployeeHidden = ! this.isThereEmplyees()
+    //   this.employee = new Employee(this.employeeId++, 'abo bb'
+    //     , 'al derane', "zozo@test.com", this.sectionNameArray[2])
+    //   this.employeeArray.push(this.employee)
+    //   this.employee = new Employee(this.employeeId++, 'abo nn'
+    //     , 'al derane', "zozo@test.com", this.sectionNameArray[2])
+    //   this.employeeArray.push(this.employee)
+    this.isaddEmployeeHidden = !this.isThereEmplyees()
     // console.log(this.sectionNameArray);
-    
-   }
+
+  }
 
   ngOnInit(): void {
     // console.log(this.router.getCurrentNavigation().extras.state);
@@ -82,8 +86,26 @@ export class EmployeesinsectionComponent implements OnInit {
       //     // console.log(_data['sectionNameArray']);
 
       this.selectedSection = data['selectedSection'];
+      this.employeeService.selectedSection = data['selectedSection']
 
     })
+
+    this.employeeService.fetchAllSectionsName(this.sectionNameArray).subscribe(res => {
+
+    }, err => {
+
+    });
+    this.employeeService.fetchEmployees(this.employeeArray).subscribe(res => {
+
+    }, err => {
+
+    });
+    this.employeeService.fetchAllRoles(this.rolesArray).subscribe(res => {
+
+    }, err => {
+
+    });
+
 
     // this.employeeService.fetchEmployees(this.employeeArray);
     // this.employee = new Employee(this.employeeId++, 'abo somr'
@@ -114,15 +136,15 @@ export class EmployeesinsectionComponent implements OnInit {
 
     this.copyOrginalArray();
     // this.sortEmployeesBySection()
-    
+
     // this.filteredSectionsName =  this.sectionNameArray ;
     // this.searchFilterSubscription = this.searchFilterForm.valueChanges
-      // .pipe(
-        
-      //   map(value => this._filter(value))
-        
-      // );
-      // .subscribe(value => this._filter(value))
+    // .pipe(
+
+    //   map(value => this._filter(value))
+
+    // );
+    // .subscribe(value => this._filter(value))
 
   }
 
@@ -131,7 +153,7 @@ export class EmployeesinsectionComponent implements OnInit {
     this.employeeArray.forEach((_emp) => {
       this.orginalEmployeeArray.push(
         new Employee(_emp.getId(), _emp.getFirstname(), _emp.getLastname(),
-          _emp.getEmail(), _emp.getSectionName())
+          _emp.getEmail(), _emp.getSectionName(), _emp.role)
       )
     })
   }
@@ -140,13 +162,27 @@ export class EmployeesinsectionComponent implements OnInit {
     this.employeesForm.reset();
   }
   saveForm() {
+    let emp : Employee
     if (this.employeesForm.valid) {
-      this.employeeArray.push(new Employee(this.employeeId++,
+      emp = new Employee(this.employeeId++,
         this.employeesForm.controls['firstName'].value,
         this.employeesForm.controls['lastName'].value,
         this.employeesForm.controls['email'].value,
-        this.employeesForm.controls['employeeSection'].value)
-      )
+        this.employeesForm.controls['employeeSection'].value,
+        this.employeesForm.controls['employeRole'].value ,
+        this.employeesForm.controls['phoneNumber'].value ,
+        this.employeesForm.controls['password'].value ,
+        )
+        // console.log(emp);
+        
+        
+        this.employeeService.sendEmployee(emp).subscribe(res=>{
+        this.employeeArray.push(emp)
+
+      },err=>{
+        
+
+      })
       this.employeesForm.reset()
       // this.sortEmployeesBySection()
       this.isaddEmployeeHidden = !this.isaddEmployeeHidden;
@@ -187,6 +223,20 @@ export class EmployeesinsectionComponent implements OnInit {
       if (_emp.getId() == _empId) {
 
         _emp.setSectionName(event.value)
+        // this.sortEmployeesBySection();
+        return true
+      }
+    })
+
+  }
+  onRoleChange(event: HTMLInputElement) {
+    let _empId = +(event.closest('tr').querySelector('td').textContent)
+    //  console.log(_empId);
+
+    this.employeeArray.find((_emp, index) => {
+      if (_emp.getId() == _empId) {
+
+        _emp.role = event.value
         // this.sortEmployeesBySection();
         return true
       }
@@ -288,6 +338,7 @@ export class EmployeesinsectionComponent implements OnInit {
   }
   confirm() {
     // this.sendData()
+    
     this.modalRef.hide();
   }
   decline() {

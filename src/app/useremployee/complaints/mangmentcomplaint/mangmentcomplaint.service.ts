@@ -16,10 +16,11 @@ import { Statics } from "../../../shered/statics.component";
             });
             this.http.get(Statics.API_HOST + "department/all").
             subscribe(((resault : any) =>{
-                // console.log(res.dep);
+                //  console.log(resault);
                 
-                resault.dep.forEach(element => {
-                    sectionsNamesArray.push( element.name);
+                resault.forEach(element => {
+
+                    sectionsNamesArray.push( {id : element.id, name : element.name});
     
                 });
             }))

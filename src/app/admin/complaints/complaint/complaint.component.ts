@@ -1,6 +1,8 @@
+import { FocusTrap } from '@angular/cdk/a11y';
 import { stringify } from '@angular/compiler/src/util';
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup, FormGroupName, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Complaint, ComplaintInterface } from './complaint.model';
 import { ComplaintService } from './complaint.service';
 
@@ -13,9 +15,9 @@ import { ComplaintService } from './complaint.service';
 export class ComplaintComponent implements OnInit {
   @ViewChild('comppaintprototype') complaintPrototypeContainer: ElementRef<HTMLInputElement>
 
-  inputTypes = ['text', 'select', 'file', 'checkbox', 'radio'] 
-  depList: { id: number, name: string }[] = [{ id: 0, name: "head" }, { id: 1, name: 'fss' }];
-  roleList: { id: number, name: string }[] = [{ id: 0, name: "checker" }, { id: 1, name: 'zrm' }];
+  inputTypes = ['text', 'select', 'file', 'checkbox', 'radio']
+  depList: { id: number, name: string }[] =[];
+  roleList: { id: number, name: string }[] = [];
   displayedFlow: { dep: string, role: string }[] = [];
 
   complement: Complaint;
@@ -24,22 +26,39 @@ export class ComplaintComponent implements OnInit {
   parentFormGroup: FormGroup;
   parentStepsForm: FormGroup;
   stepsFormArray: FormArray;
-  nameAndTypeForm : FormGroup ;
+  nameAndTypeForm: FormGroup;
   path: { Dep: number, role: number }[] = [];
+  sendPath = ''; 
   type: number;
   department: number;
   complaintName: string;
 
   constructor(
     private render: Renderer2,
-    private complaintService: ComplaintService
-  ) { }
+    private complaintService: ComplaintService ,
+    private router : Router ,
+    private route : ActivatedRoute ){
+      
+    }
+  
 
 
 
   ngOnInit(): void {
 
     //fetch depList , roleList // add text area 
+
+
+    this.complaintService.fetchAllSectionsName(this.depList).subscribe(res=>{
+
+    },err=>{
+
+    });
+    this.complaintService.fetchAllRoles(this.roleList).subscribe(res=>{
+
+    },err=>{
+
+    });
 
 
     this.formControlArray = new FormArray([])
@@ -60,9 +79,10 @@ export class ComplaintComponent implements OnInit {
     }))
 
     this.nameAndTypeForm = new FormGroup({
-        'name' : new FormControl (null),
-        'type' : new FormControl (null)
-     })
+      'name': new FormControl(null),
+      'type': new FormControl(null),
+      'dep' : new FormControl(null)
+    })
 
 
 
@@ -107,6 +127,7 @@ export class ComplaintComponent implements OnInit {
   }
 
   pakageComplaintData() {
+    this.displayedFlow = this.displayedFlow.splice(0,this.displayedFlow.length)
     for (let index = 0; index < this.formControlArray.controls.length; index++) {
       const _formgroup = this.formControlArray.controls[index] as FormGroup;
 
@@ -142,25 +163,78 @@ export class ComplaintComponent implements OnInit {
       this.displayedFlow.push({ dep: selectedDep.name, role: selectedRole.name })
     }
     // console.log(this.stepsFormArray);
-    this.complaintName =  this.nameAndTypeForm.controls['name'].value
-    this.type =  this.nameAndTypeForm.controls['type'].value
-    this.department = this.nameAndTypeForm.controls['type'].value
+    this.complaintName = this.nameAndTypeForm.controls['name'].value
+    this.type = this.nameAndTypeForm.controls['type'].value
+    this.department = this.nameAndTypeForm.controls['dep'].value
 
-    console.log("name : " , this.complaintName);
-    console.log("type : " , this.type);
+    this.sendPath 
+    this.path.forEach(p=>{
+      this.sendPath += p.Dep + ',' + p.role + ':'
+    })
+    this.sendPath =  this.sendPath.slice(0 , this.sendPath.length - 1 );
+
+    console.log('path '+this.sendPath);
+    console.log("name : ", this.complaintName);
+    console.log("dep : ", this.department);
+    console.log("type : ", this.type);
+
+
     
+
+
+
+  }
+  removeRow(row: HTMLElement) {
+    let _empId = +(row.closest('tr').querySelector('td').textContent)
+
+    let slectedControl =
+      this.formControlArray.value.find((control, index) => {
+        if (index == _empId) {
+
+          return true;
+        }
+      })
+
+    this.formControlArray.controls.splice(this.formControlArray.controls.indexOf(slectedControl));
+
+  }
+  removePathRow(row : HTMLElement){
+
+    let _empId = +(row.closest('tr').querySelector('td').textContent)
+
+    let slectedControl =
+      this.stepsFormArray.value.find((control, index) => {
+        if (index == _empId) {
+
+          return true;
+        }
+      })
+
+    this.stepsFormArray.controls.splice(this.stepsFormArray.controls.indexOf(slectedControl));
 
 
   }
 
   save() {
-    this.complaintService.sendComplaint({name : this.complaintName , type : this.type , department : this.department 
-      , form : this.complement.getcomplaint().inputs , path : this.path}).
-      subscribe(res=>{
+    this.pakageComplaintData()
+    this.complaintService.sendComplaint({
+      name: this.complaintName, type: this.type, department: this.department
+      , cmpform : this.complement.getcomplaint().inputs , path: this.sendPath
+    }).
+      subscribe(res => {
 
-    },err =>{
+        // this.router.navigate(['admin/complaints'])
+        this.parentFormGroup.reset()
+        this.formControlArray.clear();
+        this.stepsFormArray.clear()
+        this.nameAndTypeForm.reset();
+        this.addAnotherInputField();
+        this.addAnotherFlowStep();
+        this.displayedFlow = this.displayedFlow.splice(0,this.displayedFlow.length)
+        }, err => {
 
-    })
+      })
+      
 
   }
 

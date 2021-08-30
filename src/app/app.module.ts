@@ -47,7 +47,8 @@ import { NewComplaintService } from './useremployee/newcomplaint/newcomplaintser
 import {ServiceComplaintService} from './useremployee/complaints/servicecomplaint/servicecomplaintservice.service';
 import { EmployeeSectionResolver } from './admin/employee/employeeresolver.service';
 import { EmployeesInSectionDirective } from './admin/employee/employeesinsection/employeesinsection.directive'
-import { EmployeesInSectionService } from './admin/employee/employeesinsection/employeesinsection.service'
+import { EmployeesInSectionService } from './admin/employee/employeesinsection/employeesinsection.service';
+import { DashboardComponent } from './admin/dashboard/dashboard.component'
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { EmployeesInSectionService } from './admin/employee/employeesinsection/e
     ComplaintslistComponent,
     EmployeesinsectionComponent,
     NewcomplaintComponent,
-    EmployeesInSectionDirective
+    EmployeesInSectionDirective,
+    DashboardComponent
 
   ],
   imports: [

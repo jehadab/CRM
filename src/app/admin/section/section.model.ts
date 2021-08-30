@@ -1,5 +1,6 @@
 export class Section {
-    constructor (private sectionId : number  ,
+    constructor (
+        private sectionId : number  ,
         private sectionName : string , 
         private parent : number ,
         private parentName? : string){

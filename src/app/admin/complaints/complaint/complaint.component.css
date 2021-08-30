@@ -21,6 +21,11 @@
 
     
 }
+.close-icon{
+    cursor: pointer;
+    font-size: 28px;
+    color: red;
+}
 
 .table-select:focus {
     border: 2px solid #98a6ad !important;

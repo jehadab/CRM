@@ -37,8 +37,12 @@ export class SectionComponent implements OnInit {
   ngOnInit(): void {
     // this.sectionParentArray = [{ id: 0, parentName: 'root' }]
 
-    this.sectionService.fetchSections(this.sectionArray)
-    this.isSectionArrayEmpty()
+    this.sectionService.fetchSections(this.sectionArray).subscribe(res=>{
+      this.isSectionArrayEmpty();
+
+    },err=>{
+
+    })
 
     this.fillParentNameSectionArray(this.sectionArray);
     this.fillCheckedArray()
@@ -54,7 +58,6 @@ export class SectionComponent implements OnInit {
 
   private isSectionArrayEmpty() {
     if (this.sectionArray.length == 0) {
-
       this.sectionArray.push(new Section(0, "root", 0, "root"))
     }
   }
@@ -187,15 +190,28 @@ export class SectionComponent implements OnInit {
 
   createSection() {
     this.idCounter = this.sectionArray.length + 1;
+    const sendSection = {name :       this.sectionForm.controls['sectionName'].value,
+     parent : this.sectionForm.controls['sectionParent'].value}
+     console.log(sendSection);
+     
     let _section: Section = new Section(this.idCounter,
       this.sectionForm.controls['sectionName'].value,
       this.sectionForm.controls['sectionParent'].value);
+
     if (!this.sectionForm.invalid) {
 
+      this.sectionService.postSection(sendSection).subscribe(res=>{
+
+      }, err=>{
+
+      })
       this.sectionArray.push(_section);
-      this.sectionForm.reset()
-      this.isAddbuttonHidden = !this.isAddbuttonHidden
+      this.sectionForm.reset() ;
+      this.isAddbuttonHidden = !this.isAddbuttonHidden ;
     }
+    else{
+    }
+    
 
   }
 
@@ -238,14 +254,14 @@ export class SectionComponent implements OnInit {
 
   }
   sendData() {
-    this.http.post(
-      'https://crmproject-558a8-default-rtdb.europe-west1.firebasedatabase.app/posts.json',
-      this.sectionArray
-    ).subscribe((soso => {
-      console.log(soso);
+  //   this.http.post(
+  //     'https://crmproject-558a8-default-rtdb.europe-west1.firebasedatabase.app/posts.json',
+  //     this.sectionArray
+  //   ).subscribe((soso => {
+  //     console.log(soso);
 
-    }))
-  }
+  //   }))
+   }
 
 
 

@@ -41,7 +41,7 @@ export class admincomponent implements OnInit {
   ngOnInit(): void {
 
 
-    // this.router.navigate(['addDepartments'],{relativeTo:this.route})
+     this.router.navigate(['home'],{relativeTo:this.route})
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     // Add 'implements OnInit' to the class.
 

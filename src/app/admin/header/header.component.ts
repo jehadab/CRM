@@ -1,5 +1,6 @@
 
 import { Component, EventEmitter, Input, OnInit, Output, Renderer2 } from '@angular/core';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -42,7 +43,8 @@ export class TopHeader implements OnInit {
   private clickHandlerOutsideSideHeader;
 
 
-  constructor(private render: Renderer2) {
+  constructor(private render: Renderer2,
+    private router : Router) {
 
   }
   ngOnInit() {
@@ -70,6 +72,9 @@ export class TopHeader implements OnInit {
 
 
 
+  }
+  logout(){
+    this.router.navigate(['/'])
   }
   show(ss: any) {
 

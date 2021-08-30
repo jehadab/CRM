@@ -19,9 +19,6 @@ import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 
 export class UseremployeeComponent implements OnInit {
 
-
-  
-  
   constructor(private employeeService: UserEmployeeServive,
               private emplyeeAuth : EmployeeAuth , 
               private router : Router ,
@@ -35,6 +32,7 @@ export class UseremployeeComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.router.navigate(["employee/inbox"] )
 
 
     

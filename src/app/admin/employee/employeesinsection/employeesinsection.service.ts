@@ -14,33 +14,50 @@ export class EmployeesInSectionService {
     constructor(private http : HttpClient){
 
     }
-    public selectedSection : string;
+    public selectedSection : {id : number , name :  string};
 
-    getSectionName() : string{
+    getSectionName() : {id : number , name :  string}{
         return this.selectedSection;
         
     }
 
     fetchAllSectionsName(sectionName ){
         return this.http.get(Statics.API_HOST + 'department/all' ).pipe(tap((resault : any) => {
-            resault.dep.forEach(element => {
-                sectionName.push(element.name);
+            resault.forEach(element => {
+                
+                sectionName.push({id : element.id , name : element.name}) ;
                 
             });
         }))
-
+    }
+    
+    fetchAllRoles (rolesArray : {id : string , name : string}[]){
+        return this.http.get(Statics.API_HOST + 'role/all').pipe(tap((roles  : any)=>{
+            roles.forEach(role => {
+                  rolesArray.push({id : role.id , name : role.name})  
+                
+            });
+        }))
     }
     
     fetchEmployees(empArray : Employee[]){
+        return this.http.get(Statics.API_HOST + "department/employees/"+this.selectedSection.id).pipe(tap((_users : any)=>{
+            _users.forEach(_user => {
+                empArray.push(new Employee (
+                    _user.id ,
+                    _user.firstName,
+                    _user.lastName,
+                    _user.email,
+                    this.selectedSection.name , 
+                    _user.role))
+
+                
+            });
+
+        }))
         users.forEach(
             (user)=>{
-                empArray.push(new Employee (
-                    user.id ,
-                    user.firstName,
-                    user.lastName,
-                    user.email,
-                    user.sectionName))
-        })
+                        })
 
     }
 
@@ -111,6 +128,12 @@ export class EmployeesInSectionService {
             }
         )
         checkAll.checked = false
+
+    }
+    // {firstName : string , lastName : string  , email : string , role : number , dep : number}
+    sendEmployee(employee : Employee){
+
+        return this.http.post(Statics.API_HOST+ 'users/employee' , employee) ;
 
     }
 

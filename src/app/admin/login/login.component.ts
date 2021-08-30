@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {  Router } from '@angular/router';
+import { Statics } from 'src/app/shered/statics.component';
 
 @Component({
   selector: 'app-login',
@@ -34,6 +35,13 @@ private loginCridits : {username : string , password : string}
     this.loginCridits.username = this.loginForm.controls['username'].value;
     this.loginCridits.password = this.loginForm.controls['password'].value;
 
+    this.http.post(Statics.API_HOST + "auth/admin" , 
+    {email : this.loginCridits.username ,password : this.loginCridits.password}).subscribe(res=>{
+
+    }, err =>{
+        
+    })
+
     this.router.navigate(['admin'])
     
     //  this.http.post('https://crmproject-558a8-default-rtdb.europe-west1.firebasedatabase.app/things.json'
@@ -43,7 +51,7 @@ private loginCridits : {username : string , password : string}
     //  })
    }
    isValidPassword(){
-     console.log(this.loginForm);
+    //  console.log(this.loginForm);
      
      if(this.loginForm.get('password').hasError('minlength')){
        if(this.loginForm.get('password').invalid

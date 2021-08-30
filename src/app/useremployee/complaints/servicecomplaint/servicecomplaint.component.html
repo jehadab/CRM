@@ -1,48 +1,101 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="main-complaint col-12   ">
+        <ul class="timeline mt-4 pr-md-5">
+            <li>
+                <div class="title bg-darkblue">{{serviceComplaint.applyDate | date : "yyyy/mm/dd "}}</div>
+                <div class="details">
+                    <!-- <h5>Specialize of course</h5> -->
+                    <small class="fg-theme">{{serviceComplaint.name}}</small>
+                    <p>{{serviceComplaint.content}}</p>
+                </div>
+            </li>
+            <li class="timeline mt-4 pr-md-5" *ngFor="let item of serviceComplaint.flow.steps">
+                <div *ngIf="item.valid">
+                    <div class="title">{{item.date | date : "YYYY-MM-DD"}}</div>
+                    <div class="details">
+                        <!-- <h5>Specialize of course</h5> -->
+                        <small class="fg-theme">{{ item.employeeinfo }}</small>
+                        <p>{{ item.note }}</p>
+                    </div>
+                </div>
+
+            </li>
+
+            <!-- <div class="main-complaint col-12   ">
             <div class="main-complaint-header">
-                <h1>{{serviceComplaint.name}}</h1>
+                <h1>{{mangmentComplaint.name}}</h1>
             </div>
             <div class="main-complaint-content">
-                <p>{{serviceComplaint.content}}</p>
+                <p>{{mangmentComplaint.content}}</p>
             </div>
 
-        </div>
+        </div> -->
 
-        <div class="row">
-            <div class="replayes"  *ngFor="let item of serviceComplaint.flow.steps">
+            <!-- <div class="row">
+            <div class="replayes" *ngFor="let item of mangmentComplaint.flow.steps">
                 <div *ngIf="item.valid">
                     <div class="replay-card ">
-                        <div class="replay-header card-header">
+                        <div class="replay-header ">
                             <h2>{{ item.employeeinfo }}</h2>
                         </div>
-                        <div class="replay-content card-body">
+                        <div class="replay-content">
                             <p>{{ item.note }}</p>
                         </div>
                     </div>
 
                 </div>
+
+            </div>
+        </div> -->
+
+        </ul>
+
+        <div  [ngSwitch]="user.role">  
+
+            <wait-speener [showSpeener]="isLoading"></wait-speener>
+
+            <div class="row" *ngSwitchCase="forwardRoleId">
+                <div class="col-md-6">
+                    <select class="form-select form-group" aria-label="Default select example" [(ngModel)]="sectuinValue">
+                        <option selected>select a section</option>
+                        <option *ngFor="let section of sectionsNames" [value]="section.value">
+                            {{section.name}}
+                        </option>
+                    </select>
+                    
+                </div>
+                <div class="col-md-4">
+                    <select id="role-select" class="form-select form-group" aria-label="Default select example" [(ngModel)]="roleValue">
+                        <option selected>select a role</option>
+                        <option value="0">yo</option>
+                        <option value="1">yo2</option>
+                        <option *ngFor="let role of roles" [value]="role.id">
+                            {{role.name}}
+                        </option>
+                    </select>
+                    
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <button id="forward" class="btn btn-success" (click)="forward()">Forward</button>
+                    </div>
+                </div>
+
+            </div>
+            <div *ngSwitchDefault>
                 
+                <div class="adding-resolve" *ngIf="!isLoading"  >
+                    <label for="complaint-solve">Add your view to the complaint</label>
+                    <textarea id="complaint-solve" class="form-control" type="" name="complaint-solve"
+                        [(ngModel)]="noteText"></textarea>
+                    <button id="accept" class="btn btn-success" (click)="accepted()">Accept</button>
+                    <button id="reject" class="btn btn-danger" (click)="rejected()">Reject</button>
+                    <button *ngIf="isDecisionMaker" id="deleteComplaint" class="btn btn-danger" (click)="deleteComplaint()">Delete Complaint</button>
+                    
+                </div>
             </div>
-        </div>
-        <div class="card w-100 bg-primary text-white">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Button</a>
-            </div>
-          </div>
-        <div class="row">
-            <wait-speener [showSpeener] = "isLoading"></wait-speener>
 
-            <div class="adding-resolve" *ngIf="!isLoading" ngSwitch="">
-                <label for="complaint-solve">Add your view to the complaint</label>
-                <textarea id="complaint-solve" class="form-control" type="" name="complaint-solve" [(ngModel)]="noteText"></textarea>
-                <button class="btn btn-success" (click)="accepted()">Accept</button>
-                <button class="btn btn-danger" (click)="rejected()">Reject</button>
-
-            </div>
         </div>
+        
     </div>
 </div>

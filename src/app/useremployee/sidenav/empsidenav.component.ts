@@ -35,6 +35,8 @@ export class EmployeeSideNav {
 
 
     }
-    
+    logout(){
+        this.employeeAuth.onLogout();
+    }
 
 }

@@ -11,7 +11,7 @@
             </li>
             <li class="timeline mt-4 pr-md-5" *ngFor="let item of mangmentComplaint.flow.steps">
                 <div *ngIf="item.valid">
-                    <div class="title">{{item.date | date : "yyyy/mm/dd"}}</div>
+                    <div class="title">{{item.date | date : "YYYY-MM-DD"}}</div>
                     <div class="details">
                         <!-- <h5>Specialize of course</h5> -->
                         <small class="fg-theme">{{ item.employeeinfo }}</small>

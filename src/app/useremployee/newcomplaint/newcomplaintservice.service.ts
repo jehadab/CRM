@@ -1,11 +1,24 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, Renderer2  } from "@angular/core";
+import { tap } from "rxjs/operators";
 import { Statics } from "src/app/shered/statics.component";
 
 
 @Injectable()
 export class NewComplaintService {
     constructor(private http : HttpClient){}
+
+    fetchInputs(formId ){
+      return this.http.get(Statics.API_HOST + "form/"+formId);
+    }
+    fetchForms(forms : {id : number , name : string}[]){
+      return this.http.get(Statics.API_HOST + 'form/employee/all').pipe(tap((res : any)=>{
+        res.forEach(form => {
+          forms.push({id:  form.id , name : form.name});
+          
+        });
+      }))
+    }
 
     private addInput(input: HTMLElement, parenteElement: HTMLElement, render: Renderer2, element) {        
     

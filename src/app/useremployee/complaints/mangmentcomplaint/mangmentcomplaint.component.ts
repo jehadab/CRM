@@ -36,9 +36,7 @@ export class MangmentcomplaintComponent implements OnInit {
     private route: ActivatedRoute,
     private mangmentComplaintService: MangmentComplaintService,
     private employeeAuth: EmployeeAuth) {     
-    
 
-    
   }
 
   ngOnInit(): void { 
@@ -65,6 +63,8 @@ export class MangmentcomplaintComponent implements OnInit {
       this.isForwarder = true;
 
     }
+    console.log(this.mangmentComplaint);
+    
     if(this.mangmentComplaint.flow.currentstep == this.mangmentComplaint.flow.stepscount){
       this.isDecisionMaker = true ;
     }

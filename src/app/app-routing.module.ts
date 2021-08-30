@@ -22,6 +22,7 @@ import { ServiceComplaintResolver } from './useremployee/complaints/servicecompl
 import { EmployeesinsectionComponent } from './admin/employee/employeesinsection/employeesinsection.component';
 import { EmployeeSectionResolver } from './admin/employee/employeeresolver.service';
 import { Section } from './admin/section/section.model';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
 
 // import { rootCertificates } from 'node:tls';
 
@@ -29,6 +30,7 @@ const routes: Routes = [
     { path: '', component: HomeComponent, },
     {
         path: 'admin', component: admincomponent, children: [
+            { path : 'home', component : DashboardComponent },
             { path : 'addDepartments', component : SectionComponent },
             // { path: 'addEmployee', component : EmployeeComponent, resolve: { sectionNameArray: ServiceResolver } },
             { path : 'addEmployee', component : EmployeeComponent},

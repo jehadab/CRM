@@ -9,6 +9,9 @@
     overflow-x: hidden;
     background-color: rgb(123, 213, 255);
 }
+.nav-link{
+    cursor: pointer;
+}
 
 .profile {
     text-align: center;

@@ -12,7 +12,7 @@
             </div>
             <div class="form-group mt-4">
                 <label for="depSelect">Select Department</label>
-                <select id="depSelect" class="form-control" name="">
+                <select id="depSelect" class="form-control" name="" formControlName="dep">
                     <option *ngFor="let dep of depList" [value]="dep.id">{{dep.name}}</option>
                 </select>
             </div>
@@ -39,7 +39,7 @@
         </div>
         <table class="table table-dark">
             <thead>
-                <th scope="col" style="width: 10%">#</th>
+                <th scope="col" style="width: 5%">#</th>
                 <th scope="col" style="width: 30%">Input Name</th>
                 <th scope="col" style="width: 30%">Input label</th>
                 <th scope="col" style="width: 30%">Input Type</th>
@@ -67,6 +67,7 @@
                             <option *ngFor="let type of inputTypes" [value]="type">{{type}}</option>
                         </select>
                     </td>
+                    <td><i class="fa fa-close close-icon"(click)="removeRow($event.target)"></i></td>
 
                 </tr>
             </tbody>
@@ -102,6 +103,8 @@
                             <option *ngFor="let role of roleList" [value]="role.id">{{role.name}}</option>
                         </select>
                     </td>
+                    <td><i class="fa fa-close close-icon"(click)="removePathRow($event.target)"></i></td>
+
                 </tr>
             </tbody>
 

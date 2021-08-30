@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { ElementRef, Injectable, Renderer2 } from '@angular/core';
+import { tap } from 'rxjs/operators';
 import { Statics } from 'src/app/shered/statics.component';
 import { Complaint } from './complaint.model';
 
@@ -9,6 +10,24 @@ import { Complaint } from './complaint.model';
 export class ComplaintService {
     constructor(private http : HttpClient){}
     generatedInputs : HTMLInputElement[]=[];
+
+    fetchAllSectionsName(sectionName ){
+        return this.http.get(Statics.API_HOST + 'department/all' ).pipe(tap((resault : any) => {
+            resault.forEach(element => {
+                
+                sectionName.push({id : element.id , name : element.name}) ;
+                
+            });
+        }))
+    }
+    fetchAllRoles (rolesArray : {id : number , name : string}[]){
+        return this.http.get(Statics.API_HOST + 'role/all').pipe(tap((roles  : any)=>{
+            roles.forEach(role => {
+                  rolesArray.push({id : role.id , name : role.name})  
+                
+            });
+        }))
+    }
 
     showComplaintPrototypeView(eleRef : ElementRef , complaint:Complaint,render : Renderer2){
         // console.log(complaint.complaintInterfaceObject);
@@ -28,7 +47,7 @@ export class ComplaintService {
                 
                 case 'text':
                     // console.log(eleRef);
-                    console.log("text");
+                    // console.log("text");
                     this.generatedInputs[index].setAttribute('type',input.inputType);
                     this.generatedInputs[index].setAttribute('placeholder',input.label);
                     this.generatedInputs[index].setAttribute("class","form-control")
@@ -57,8 +76,8 @@ export class ComplaintService {
             }
         })
     }
-    sendComplaint(Complaint : {name : string  , type : number , department , form , path }){
-        return this.http.post(Statics.API_HOST + "" , Complaint)
+    sendComplaint(Complaint : {name : string  , type : number , department , cmpform , path }){
+        return this.http.post(Statics.API_HOST + "form/add" , Complaint)
 
     }
 }

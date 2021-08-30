@@ -17,7 +17,7 @@ import { EmployeeService } from './employee.service';
 })
 export class EmployeeComponent implements OnInit , OnDestroy {
 
-  sectionNameArray: string[] = [];
+  sectionNameArray: {id : number , name : string }[] = [];
   employeeArray: Employee[] = [];
   isaddEmployeeHidden: boolean = false;
   orginalEmployeeArray : Employee[]=[];
@@ -123,7 +123,14 @@ export class EmployeeComponent implements OnInit , OnDestroy {
   selectSections(target : HTMLElement){
     
 
-    this.employeeService.selectedSection = target.innerText;
+    
+    this.employeeService.selectedSection =  this.sectionNameArray.find(dep=>{
+      if(target.innerText == dep.name)
+      {
+        return true ;
+
+      }
+    })
     // this.route.data = {}
     // console.log("comp : ",this.employeeService.selectedSection);
     

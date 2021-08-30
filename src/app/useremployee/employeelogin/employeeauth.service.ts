@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { BehaviorSubject, pipe, Subject } from "rxjs";
 import { tap } from "rxjs/operators";
 import { Statics } from "src/app/shered/statics.component";
+import { __values } from "tslib";
 import { EmpUserModel } from "../employeeuser.model";
 @Injectable()
 export class EmployeeAuth {
@@ -32,14 +33,51 @@ export class EmployeeAuth {
             // console.log(resaultData);
             
             const expirationDate = new Date( new Date().getTime()*1000 +100) ;
-            const user = new EmpUserModel(resaultData.user.email , resaultData.user.firstName , resaultData.token )
-            const employeeuser = new EmpUserModel(resaultData.user.email , resaultData.user.firstName  , resaultData.token , resaultData.role )
+            // const user = new EmpUserModel(resaultData.user.email , resaultData.user.firstName , resaultData.token )
+            const employeeuser = new EmpUserModel(resaultData.user.email , resaultData.user.firstName  , resaultData.token , resaultData.user.role )
             this.useremployee.next(employeeuser)
-            this.user.next(user);
-            //    console.log(user);
+            
+            localStorage.setItem("userData" , JSON.stringify(employeeuser))
             
             // add enterceptor for all requests
         }))
+    }
+    onLogout(){
+        localStorage.clear()
+        localStorage.removeItem['userData']
+        this.useremployee.next(null);
+        this.router.navigate(['employeelogin']);
+    }
+    autoLogin(){
+        
+        const savedUser : {
+            email : string , 
+            name : string ,
+            _token : string ,
+            role : number
+        } = JSON.parse(localStorage.getItem('userData'))
+        // console.log('native' , JSON.parse( localStorage.getItem('userData')));
+        // console.log('email' , savedUser);
+        // console.log('autologin' , savedUser);
+
+
+
+        if(!savedUser){
+            // console.log('usernull');
+            
+            return
+        }
+        const loadedUser : EmpUserModel = new EmpUserModel(savedUser.email , savedUser.name , savedUser._token ,savedUser.role );
+        // console.log('loadedUser', loadedUser);
+        
+        if(loadedUser._token)
+        {
+            // console.log('emited');
+            
+            this.useremployee.next(loadedUser);
+        }
+
+
     }
     private setRole(roleNumber : number) {
         switch (roleNumber) {
