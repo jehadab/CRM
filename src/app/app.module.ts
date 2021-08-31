@@ -48,7 +48,9 @@ import {ServiceComplaintService} from './useremployee/complaints/servicecomplain
 import { EmployeeSectionResolver } from './admin/employee/employeeresolver.service';
 import { EmployeesInSectionDirective } from './admin/employee/employeesinsection/employeesinsection.directive'
 import { EmployeesInSectionService } from './admin/employee/employeesinsection/employeesinsection.service';
-import { DashboardComponent } from './admin/dashboard/dashboard.component'
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { ChartsModule } from 'ng2-charts';
+
 
 @NgModule({
   declarations: [
@@ -91,7 +93,8 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component'
     MatSelectModule,
     MatIconModule,
     RoutingModule,
-    CommonModule
+    CommonModule,
+    ChartsModule
     
 
   ],

@@ -235,7 +235,7 @@ export class ComplaintslistComponent implements OnInit {
       return true ;
         
     } )
-    console.log("selected ",selectedCompiant);
+    // console.log("selected ",selectedCompiant);
     
           
       this.complaintListService.setSelectedServiceComplaint(selectedCompiant);

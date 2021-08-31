@@ -34,7 +34,7 @@ export class MangmentcomplaintComponent implements OnInit {
 
   constructor(private router: Router,
     private route: ActivatedRoute,
-    private mangmentComplaintService: MangmentComplaintService,
+    private mangmentComplaintService : MangmentComplaintService,
     private employeeAuth: EmployeeAuth) {     
 
   }
@@ -50,13 +50,14 @@ export class MangmentcomplaintComponent implements OnInit {
       }
 
     })
+    // console.log('applyDate ',this.mangmentComplaint.applyDate);
 
 
     this.employeeAuth.useremployee.pipe(take(1)).subscribe(user => {
-      // this.user.email = user.email
-      // this.user.role = user.role
-      this.user.email = "fof@ss.n"
-      this.user.role = 6
+      this.user.email = user.email
+      this.user.role = user.role
+      // this.user.email = "fof@ss.n"
+      // this.user.role = 6
     })
     if (this.user.role == this.forwardRoleId) {
       this.mangmentComplaintService.fetchSectionsAndRoles(this.roles, this.sectionsNames)
@@ -79,8 +80,8 @@ export class MangmentcomplaintComponent implements OnInit {
 
     // console.log(employeeEmail);
 
-    const reqBody: { id: number, data: string, email: string, status: number } =
-      { id: this.mangmentComplaint.id, data: this.noteText.toString(), email: this.user.email, status: 6 }
+    const reqBody: { id: number, data: string, email: string } =
+      { id: this.mangmentComplaint.id, data: this.noteText.toString(), email: this.user.email }
     // console.log(this.mangmentComplaint);
 
     this.mangmentComplaintService.postAcceptReplay(reqBody).subscribe((resault) => {
@@ -120,10 +121,10 @@ export class MangmentcomplaintComponent implements OnInit {
     })
   }
   deleteComplaint(){
-    const reqBody: { id: number, data: string, email: string, status: number } =
-      { id: this.mangmentComplaint.id, data: this.noteText.toString(), email: this.user.email, status: 5 }
+    // const reqBody: { id: number, data: string, email: string, status: number } =
+    //   { id: this.mangmentComplaint.id, data: this.noteText.toString(), email: this.user.email, status: 5 }
 
-    this.mangmentComplaintService.postAcceptReplay(reqBody).subscribe(resault => {
+    this.mangmentComplaintService.deleteComplaint({id : this.mangmentComplaint.id}).subscribe(resault => {
 
       this.isLoading = false;
       this.router.navigate(['../../'], { relativeTo: this.route })

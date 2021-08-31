@@ -56,9 +56,9 @@
 
             <div class="row" *ngSwitchCase="forwardRoleId">
                 <div class="col-md-6">
-                    <select class="form-select form-group" aria-label="Default select example" [(ngModel)]="sectuinValue">
-                        <option selected>select a section</option>
-                        <option *ngFor="let section of sectionsNames" [value]="section.value">
+                    <select class="form-select form-group" aria-label="Default select example" [(ngModel)]="sectionValue">
+                        <!-- <option selected>select a section</option> -->
+                        <option *ngFor="let section of sectionsNames" [value]="section.id">
                             {{section.name}}
                         </option>
                     </select>
@@ -66,9 +66,7 @@
                 </div>
                 <div class="col-md-4">
                     <select id="role-select" class="form-select form-group" aria-label="Default select example" [(ngModel)]="roleValue">
-                        <option selected>select a role</option>
-                        <option value="0">yo</option>
-                        <option value="1">yo2</option>
+                        <!-- <option selected>select a role</option> -->
                         <option *ngFor="let role of roles" [value]="role.id">
                             {{role.name}}
                         </option>
@@ -90,7 +88,11 @@
                         [(ngModel)]="noteText"></textarea>
                     <button id="accept" class="btn btn-success" (click)="accepted()">Accept</button>
                     <button id="reject" class="btn btn-danger" (click)="rejected()">Reject</button>
-                    <button *ngIf="isDecisionMaker" id="deleteComplaint" class="btn btn-danger" (click)="deleteComplaint()">Delete Complaint</button>
+                    <div id="deleteComplaint">
+                        <button *ngIf="isDecisionMaker" id="" class="btn btn-danger" 
+                        (click)="deleteComplaint()">Delete Complaint</button>
+
+                    </div>
                     
                 </div>
             </div>

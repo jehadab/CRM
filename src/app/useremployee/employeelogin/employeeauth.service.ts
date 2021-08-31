@@ -30,7 +30,7 @@ export class EmployeeAuth {
             }
             
         ).pipe(tap(resaultData =>{
-            // console.log(resaultData);
+             console.log('login role : ',resaultData);
             
             const expirationDate = new Date( new Date().getTime()*1000 +100) ;
             // const user = new EmpUserModel(resaultData.user.email , resaultData.user.firstName , resaultData.token )
@@ -39,6 +39,7 @@ export class EmployeeAuth {
             
             localStorage.setItem("userData" , JSON.stringify(employeeuser))
             
+            
             // add enterceptor for all requests
         }))
     }
@@ -46,7 +47,7 @@ export class EmployeeAuth {
         localStorage.clear()
         localStorage.removeItem['userData']
         this.useremployee.next(null);
-        this.router.navigate(['employeelogin']);
+        this.router.navigate(['/']);
     }
     autoLogin(){
         

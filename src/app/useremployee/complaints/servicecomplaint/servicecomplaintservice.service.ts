@@ -12,6 +12,13 @@ export class ServiceComplaintService {
     postAcceptReplay(mangmentComplaint) {
         return this.http.post(Statics.API_HOST + "complaint/replay", mangmentComplaint)
     }
+
+
+    deleteComplaint(id){
+        return this.http.post(Statics.API_HOST + "complaint/remove" , id )
+
+    }
+
     fetchSectionsAndRoles(rolesArray , sectionsNamesArray){
         this.http.get(Statics.API_HOST + "role/all" ).
         subscribe(pipe((resault : any)=>{
@@ -34,7 +41,9 @@ export class ServiceComplaintService {
 
     }
     sendForwardedComplaint(reqBody : {compID, newDep, newRole, employee}){
-        this.http.post(Statics.API_HOST + ' /customer/foreword' , reqBody)
+        console.log(reqBody);
+        
+        return this.http.post(Statics.API_HOST + 'complaint/customer/forward' , reqBody)
     }
 
 }

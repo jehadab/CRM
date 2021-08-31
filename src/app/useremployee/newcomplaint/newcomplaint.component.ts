@@ -86,6 +86,7 @@ export class NewcomplaintComponent implements OnInit {
     })
   }
   onSelectChange(){
+    this.inputsJSON = []
     this.newComplaintService.fetchInputs(this.selectValue).subscribe((res : any)=>{
 
       res.form.forEach(element => {

@@ -23,9 +23,10 @@ export class ServicecomplaintComponent implements OnInit {
   isForwarder = false;
   forwardRoleId = 6;
   roleValue;
-  sectuinValue;
+  sectionValue;
 
   isDecisionMaker = false;
+
   user: { role: number, email: string } = {
     role: 0,
     email: ""
@@ -46,19 +47,28 @@ export class ServicecomplaintComponent implements OnInit {
         id: _data.serviceComplaint.id,
         content: _data.serviceComplaint.content,
         name: _data.serviceComplaint.name,
-        applyDate: _data.serviceComplaint.date,
+        applyDate: _data.serviceComplaint.applyDate,
         flow: _data.serviceComplaint.flow
       }
-      console.log("data : ", _data);
+      // console.log("date : ", _data);
       // console.log("flow : " ,this.serviceComplaint);
       this.employeeAuth.useremployee.pipe(take(1)).subscribe(user => {
-        // this.user.email = user.email
-        // this.user.role = user.role
-        this.user.email = "fof@ss.n"
-        this.user.role = 6
+        this.user.email = user.email
+        this.user.role = user.role
+        // console.log(user.role);
+        
+        // this.user.email = "fof@ss.n"
+        // this.user.role = 6
       })
-      if (this.user.role == this.forwardRoleId) {
+      
+      
+      // console.log("data" , _data);
+      // console.log("data2" , this.serviceComplaint);
+      
+      if (this.user.role  == this.forwardRoleId) {
         this.serviceComplaintService.fetchSectionsAndRoles(this.roles, this.sectionsNames)
+        console.log(this.sectionsNames);
+        
         this.isForwarder = true;
 
       }
@@ -67,8 +77,6 @@ export class ServicecomplaintComponent implements OnInit {
       if (this.serviceComplaint.flow.currentstep == this.serviceComplaint.flow.stepscount) {
         this.isDecisionMaker = true;
       }
-
-
 
       // console.log(_data.serviceComplaint);
 
@@ -84,7 +92,15 @@ export class ServicecomplaintComponent implements OnInit {
   forward() {
 
     this.serviceComplaintService.sendForwardedComplaint(
-      { compID: this.serviceComplaint.id, newDep: this.sectuinValue, newRole: this.roleValue, employee: this.user.email });
+      { compID: this.serviceComplaint.id, newDep: this.sectionValue, newRole: this.roleValue, employee: this.user.email })
+      .subscribe(res=>{
+        this.isLoading = false;
+      this.router.navigate(['../../'], { relativeTo: this.route })
+        
+
+      },err=>{
+
+      });
 
 
   }
@@ -122,8 +138,8 @@ export class ServicecomplaintComponent implements OnInit {
     this.employeeAuth.useremployee.pipe(take(1)).subscribe(user => {
       employeeEmail = user.email
     })
-    const reqBody: { id: number, data: string, email: string, status: number } =
-      { id: this.serviceComplaint.id, data: this.noteText.toString(), email: employeeEmail, status: 5 }
+    const reqBody: { id: number, data: string, email: string} =
+      { id: this.serviceComplaint.id, data: this.noteText.toString(), email: employeeEmail }
 
     this.serviceComplaintService.postAcceptReplay(reqBody).subscribe(resault => {
 
@@ -139,10 +155,10 @@ export class ServicecomplaintComponent implements OnInit {
     })
   }
   deleteComplaint(){
-    const reqBody: { id: number, data: string, email: string, status: number } =
-      { id: this.serviceComplaint.id, data: this.noteText.toString(), email: this.user.email, status: 5 }
+    // const reqBody: { id: number, data: string, email: string, status: number } =
+    //   { id: this.serviceComplaint.id, data: this.noteText.toString(), email: this.user.email, status: 5 }
 
-    this.serviceComplaintService.postAcceptReplay(reqBody).subscribe(resault => {
+    this.serviceComplaintService.deleteComplaint( { id : this.serviceComplaint.id } ).subscribe(resault => {
 
       this.isLoading = false;
       this.router.navigate(['../../'], { relativeTo: this.route })

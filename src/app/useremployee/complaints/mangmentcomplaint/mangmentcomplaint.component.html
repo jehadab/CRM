@@ -2,7 +2,7 @@
     <div class="row">
         <ul class="timeline mt-4 pr-md-5">
             <li>
-                <div class="title bg-darkblue">{{mangmentComplaint.applyDate | date : "yyyy/mm/dd "}}</div>
+                <div class="title bg-darkblue">{{mangmentComplaint.applyDate | date : "yyyy/mm/dd"}}</div>
                 <div class="details">
                     <!-- <h5>Specialize of course</h5> -->
                     <small class="fg-theme">{{mangmentComplaint.name}}</small>
@@ -50,14 +50,13 @@
 
         </ul>
 
-        <div  [ngSwitch]="user.role">  
+        <div  >  
 
             <wait-speener [showSpeener]="isLoading"></wait-speener>
 
-            <div class="row" *ngSwitchCase="forwardRoleId">
+            <!-- <div class="row" *ngSwitchCase="forwardRoleId">
                 <div class="col-md-6">
                     <select class="form-select form-group" aria-label="Default select example" [(ngModel)]="sectuinValue">
-                        <option selected>select a section</option>
                         <option *ngFor="let section of sectionsNames" [value]="section.value">
                             {{section.name}}
                         </option>
@@ -66,9 +65,6 @@
                 </div>
                 <div class="col-md-4">
                     <select id="role-select" class="form-select form-group" aria-label="Default select example" [(ngModel)]="roleValue">
-                        <option selected>select a role</option>
-                        <option value="0">yo</option>
-                        <option value="1">yo2</option>
                         <option *ngFor="let role of roles" [value]="role.id">
                             {{role.name}}
                         </option>
@@ -81,8 +77,8 @@
                     </div>
                 </div>
 
-            </div>
-            <div *ngSwitchDefault>
+            </div> -->
+            <div >
                 
                 <div class="adding-resolve" *ngIf="!isLoading"  >
                     <label for="complaint-solve">Add your view to the complaint</label>
@@ -90,7 +86,9 @@
                         [(ngModel)]="noteText"></textarea>
                     <button id="accept" class="btn btn-success" (click)="accepted()">Accept</button>
                     <button id="reject" class="btn btn-danger" (click)="rejected()">Reject</button>
-                    <button *ngIf="isDecisionMaker" id="deleteComplaint" class="btn btn-danger" (click)="deleteComplaint()">Delete Complaint</button>
+                    <div id="deleteComplaint">
+                        <button *ngIf="isDecisionMaker" class="btn btn-danger" (click)="deleteComplaint()">Delete Complaint</button>
+                    </div>
                     
                 </div>
             </div>

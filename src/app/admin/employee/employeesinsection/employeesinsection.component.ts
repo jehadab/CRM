@@ -169,12 +169,14 @@ export class EmployeesinsectionComponent implements OnInit {
         this.employeesForm.controls['lastName'].value,
         this.employeesForm.controls['email'].value,
         this.employeesForm.controls['employeeSection'].value,
+        this.employeesForm.controls['password'].value ,
         this.employeesForm.controls['employeRole'].value ,
         this.employeesForm.controls['phoneNumber'].value ,
-        this.employeesForm.controls['password'].value ,
         )
         // console.log(emp);
         
+        // console.log('password',this.employeesForm.controls['password'].value);
+        // console.log(emp);
         
         this.employeeService.sendEmployee(emp).subscribe(res=>{
         this.employeeArray.push(emp)

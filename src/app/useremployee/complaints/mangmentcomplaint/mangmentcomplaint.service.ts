@@ -7,6 +7,8 @@ import { Statics } from "../../../shered/statics.component";
      constructor(private http:HttpClient){
 
      }
+
+     
     fetchSectionsAndRoles(rolesArray , sectionsNamesArray){
         this.http.get(Statics.API_HOST + "role/all" ).
         subscribe(pipe((resault : any)=>{
@@ -34,6 +36,10 @@ import { Statics } from "../../../shered/statics.component";
 
     postAcceptReplay(mangmentComplaint){
         return this.http.post( Statics.API_HOST + "complaint/replay",mangmentComplaint)
+    }
+    deleteComplaint(id){
+        return this.http.post(Statics.API_HOST + "complaint/remove" , id )
+
     }
 
 

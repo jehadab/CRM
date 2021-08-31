@@ -14,7 +14,7 @@ implements Resolve<ServiceComplaint>{
       
           resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ServiceComplaint> | Promise<ServiceComplaint> | ServiceComplaint{
       
-                 console.log("resolver : " ,this.complaintsListService.getSelectedServiceComplaint());
+                //  console.log("resolver : " ,this.complaintsListService.getSelectedServiceComplaint());
                 // console.log("resolver : " ,route.data);
                  
             

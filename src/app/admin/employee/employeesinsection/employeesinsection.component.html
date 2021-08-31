@@ -28,7 +28,8 @@
                 </div>
                 <div class="col-5 offset-1">
                     <label for="employeeSection">Employee Section</label>
-                    <select id="employeeSection" class="form-control" formControlName='employeeSection'>
+                    <select id="employeeSection" class="form-control"
+                     formControlName='employeeSection'>
 
                         <option *ngFor="let section of sectionNameArray" [value]="section.id">
                             {{ section.name }}
@@ -39,7 +40,8 @@
             <div class="row">
                 <div class="col-5">
                     <label for="employeRole">Employee Role</label>
-                    <select id="employeRole" class="form-control" formControlName='employeRole'>
+                    <select id="employeRole" class="form-control" 
+                    formControlName='employeRole'>
                         <option *ngFor="let role of rolesArray" [value]="role.id">
                             {{ role.name }}
                         </option>
@@ -47,14 +49,16 @@
                 </div>
                 <div class="col-5 offset-1">
                         <label for="phoneNumber">Phone Number</label>
-                        <input id="phoneNumber" class="form-control" type="text" name="" formControlName="phoneNumber">
+                        <input id="phoneNumber" class="form-control" type="text" name="" 
+                        formControlName="phoneNumber">
                 </div>
             </div>
             <div class="row">
                 <div class="col-5">
                     <div class="form-group">
                         <label for="pssword">Password</label>
-                        <input id="pssword" class="form-control" type="text" name="" formControlName="password">
+                        <input id="pssword" class="form-control" type="text" name="" 
+                        formControlName="password">
                     </div>
                     
                 </div>

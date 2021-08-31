@@ -29,8 +29,9 @@ export class ComplaintsListService {
             Statics.API_HOST + "complaint/" + complaintType + "/get").pipe(tap(resault => {
 
                 for (let complaint in resault) {
+                    
                     const complaintData = resault[parseInt(complaint)];
-                    // console.log(complaintData);
+                    //  console.log(complaintData);
 
 
                     const complaintObject: Complaint = {
@@ -47,7 +48,7 @@ export class ComplaintsListService {
                     }
                     let flow: FlowSteps = {
                         stepscount: complaintData.flow.step,
-                        currentstep: complaintData.currentstep,
+                        currentstep: complaintData.flow.currentStep,
 
                     }
 
@@ -60,8 +61,8 @@ export class ComplaintsListService {
                                 employeeinfo: flowData.employee,
                                 date: flowData.date,
                                 status: flowData.status,
-                                note: flowData.note,
-                                valid: flowData.valid = "true" ? true : false
+                                note: flowData.data ,
+                                valid: flowData.valid == "true" ? true : false
 
                             }]
                         }

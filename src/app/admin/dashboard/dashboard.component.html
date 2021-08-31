@@ -2,3 +2,55 @@
     <div class=" ">
         <canvas id="myChart" class="canv1"></canvas>
     </div> -->
+<div class="row">
+    <div class="col-md-6 col-lg-6">
+        <div class="card text-white canves-card mt-3">
+            <div class="card-body">
+                <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+                    [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
+                </canvas>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-6">
+        <div class="card text-white canves-card mt-3">
+            <div class="card-body">
+                <canvas baseChart [data]="pieChartData1" [labels]="pieChartLabels1" [chartType]="pieChartType1"
+                    [options]="pieChartOptions1" [plugins]="pieChartPlugins1" [legend]="pieChartLegend1">
+                </canvas>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-6 col-lg-6">
+        <div class="card text-white canves-card mt-3">
+            <div class="card-body">
+                <div>
+                    <canvas baseChart [data]="polarAreaChartData" [labels]="polarAreaChartLabels"
+                        [legend]="polarAreaLegend" [chartType]="polarAreaChartType">
+                    </canvas>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-6 col-lg-6">
+        <div class="card text-white canves-card mt-3">
+            <div class="card-body">
+                <div>
+                    <canvas baseChart [data]="polarAreaChartData1" [labels]="polarAreaChartLabels1"
+                        [legend]="polarAreaLegend1" [chartType]="polarAreaChartType1">
+                    </canvas>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
